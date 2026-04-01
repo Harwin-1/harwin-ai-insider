@@ -85,33 +85,38 @@
   /* === STICKY NAV === */
   .toc-wrapper {
     position: sticky; top: 0; z-index: 100;
-    background: var(--navy);
-    border-bottom: 2px solid var(--teal);
-    box-shadow: 0 2px 12px rgba(10,22,40,0.2);
+    background: linear-gradient(135deg, var(--navy) 0%, #0D2240 100%);
+    border-bottom: 3px solid var(--teal);
+    box-shadow: 0 4px 20px rgba(10,22,40,0.35);
   }
   .toc-inner {
-    max-width: 760px; margin: 0 auto;
-    padding: 10px 20px;
-    display: flex; align-items: center; gap: 6px;
+    max-width: 100%; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; align-items: center; gap: 8px;
     overflow-x: auto; scrollbar-width: none;
+    justify-content: center;
   }
   .toc-inner::-webkit-scrollbar { display: none; }
   .toc-label {
     font-family: 'Outfit', sans-serif;
-    font-size: 11px; font-weight: 700;
+    font-size: 13px; font-weight: 700;
     color: var(--teal); text-transform: uppercase;
-    letter-spacing: 1.5px; white-space: nowrap; margin-right: 8px;
+    letter-spacing: 2px; white-space: nowrap; margin-right: 12px;
+    background: rgba(0,165,181,0.1);
+    padding: 4px 14px; border-radius: 6px;
   }
   .toc-link {
-    font-size: 12px; font-weight: 500; color: #8899AA;
-    text-decoration: none; padding: 5px 12px;
-    border-radius: 20px; white-space: nowrap;
-    transition: all 0.2s ease; border: 1px solid transparent;
+    font-size: 13px; font-weight: 600; color: #A0B0C0;
+    text-decoration: none; padding: 8px 18px;
+    border-radius: 24px; white-space: nowrap;
+    transition: all 0.2s ease; border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
   }
   .toc-link:hover {
     color: var(--white);
-    background: rgba(0,165,181,0.12);
-    border-color: rgba(0,165,181,0.25);
+    background: rgba(0,165,181,0.18);
+    border-color: rgba(0,165,181,0.4);
+    box-shadow: 0 0 12px rgba(0,165,181,0.15);
   }
 
   /* === CARDS === */
@@ -391,7 +396,7 @@
 
 <!-- HERO HEADER -->
 <div class="hero">
-  <div class="hero-label">Weekly Newsletter</div>
+  <div class="hero-label">Monthly Newsletter</div>
   <h1>Harwin AI Insider</h1>
   <div class="hero-tagline">Smarter prompts. Sharper work. Every week.</div>
   <div class="hero-meta">Issue #1 &bull; Week commencing 31 March 2026</div>
@@ -928,22 +933,37 @@ Keep it under 120 words. Tone: empathetic and solution-focused.</div>
 <div class="container">
   <div class="feedback-section" id="feedback">
     <div class="feedback-title">&#128236; Your Feedback Shapes This Newsletter</div>
-    <p style="font-size:14px;font-weight:600;color:var(--dark-blue);margin-bottom:4px;">How useful was this issue?</p>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;">Click a star to rate this issue &mdash; it opens the feedback form with your rating ready to go.</p>
+    <p style="font-size:14px;font-weight:600;color:var(--dark-blue);margin-bottom:8px;">How useful was this issue?</p>
     <div class="feedback-stars">
-      <button class="star-btn" onclick="rateStar(1)" title="1 &mdash; Not useful"><span>&#11088;</span></button>
-      <button class="star-btn" onclick="rateStar(2)" title="2"><span>&#11088;</span></button>
-      <button class="star-btn" onclick="rateStar(3)" title="3"><span>&#11088;</span></button>
-      <button class="star-btn" onclick="rateStar(4)" title="4"><span>&#11088;</span></button>
-      <button class="star-btn" onclick="rateStar(5)" title="5 &mdash; Loved it!"><span>&#11088;</span></button>
+      <button class="star-btn" onclick="submitRating(1)" title="1 &mdash; Not useful"><span>&#11088;</span></button>
+      <button class="star-btn" onclick="submitRating(2)" title="2 &mdash; Somewhat useful"><span>&#11088;</span></button>
+      <button class="star-btn" onclick="submitRating(3)" title="3 &mdash; Useful"><span>&#11088;</span></button>
+      <button class="star-btn" onclick="submitRating(4)" title="4 &mdash; Very useful"><span>&#11088;</span></button>
+      <button class="star-btn" onclick="submitRating(5)" title="5 &mdash; Loved it!"><span>&#11088;</span></button>
+      <span id="rating-label" style="font-size:14px;font-weight:600;color:var(--teal);margin-left:12px;opacity:0;transition:opacity 0.3s ease;"></span>
     </div>
-    <hr style="border:none;border-top:1px solid #B8E6E8;margin:16px 0;">
-    <div class="feedback-action">&#128221; <strong>Submit a prompt:</strong> Share your best AI prompt and we'll feature it in Reader Spotlight (anonymously, by department only)</div>
-    <div class="feedback-action">&#9995; <strong>Request a prompt:</strong> Tell us a task you'd like a prompt for (e.g. "I need a prompt for writing supplier audit summaries")</div>
-    <div class="feedback-action">&#128202; <strong>General feedback:</strong> Any suggestions on topics, format, or improvements you'd like to see</div>
-    <div style="text-align:center;margin:18px 0 8px;">
-      <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" style="display:inline-block;background:var(--teal);color:#fff;padding:12px 32px;border-radius:8px;font-weight:700;font-size:15px;text-decoration:none;letter-spacing:0.5px;transition:background 0.2s;">&#128172; Open Feedback Form</a>
+    <p id="rating-confirm" style="font-size:13px;color:var(--teal);margin-top:8px;opacity:0;transition:opacity 0.3s ease;font-weight:500;"></p>
+    <hr style="border:none;border-top:1px solid #B8E6E8;margin:20px 0;">
+    <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;color:var(--dark-blue);margin-bottom:14px;">Want to do more? Pick an option:</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px 20px;background:var(--white);border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--body-text);transition:all 0.2s ease;box-shadow:0 1px 2px rgba(0,0,0,0.04);" onmouseover="this.style.borderColor='#00A5B5';this.style.boxShadow='0 2px 8px rgba(0,165,181,0.15)'" onmouseout="this.style.borderColor='#E2E8F0';this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
+        <span style="font-size:22px;">&#128221;</span>
+        <div><div style="font-size:14px;font-weight:600;color:var(--dark-blue);">Submit a prompt</div><div style="font-size:12px;color:var(--muted);">Share your best ChatGPT prompt &mdash; we'll feature it anonymously</div></div>
+        <span style="margin-left:auto;color:var(--teal);font-size:18px;">&rarr;</span>
+      </a>
+      <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px 20px;background:var(--white);border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--body-text);transition:all 0.2s ease;box-shadow:0 1px 2px rgba(0,0,0,0.04);" onmouseover="this.style.borderColor='#00A5B5';this.style.boxShadow='0 2px 8px rgba(0,165,181,0.15)'" onmouseout="this.style.borderColor='#E2E8F0';this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
+        <span style="font-size:22px;">&#9995;</span>
+        <div><div style="font-size:14px;font-weight:600;color:var(--dark-blue);">Request a prompt</div><div style="font-size:12px;color:var(--muted);">Tell us a task you'd like a ready-made prompt for</div></div>
+        <span style="margin-left:auto;color:var(--teal);font-size:18px;">&rarr;</span>
+      </a>
+      <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px 20px;background:var(--white);border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--body-text);transition:all 0.2s ease;box-shadow:0 1px 2px rgba(0,0,0,0.04);" onmouseover="this.style.borderColor='#00A5B5';this.style.boxShadow='0 2px 8px rgba(0,165,181,0.15)'" onmouseout="this.style.borderColor='#E2E8F0';this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
+        <span style="font-size:22px;">&#128202;</span>
+        <div><div style="font-size:14px;font-weight:600;color:var(--dark-blue);">General feedback</div><div style="font-size:12px;color:var(--muted);">Suggestions on topics, format, or improvements</div></div>
+        <span style="margin-left:auto;color:var(--teal);font-size:18px;">&rarr;</span>
+      </a>
     </div>
-    <hr style="border:none;border-top:1px solid #B8E6E8;margin:16px 0;">
+    <hr style="border:none;border-top:1px solid #B8E6E8;margin:20px 0;">
     <p style="font-size:13px;color:var(--muted);font-style:italic;">Every response helps shape next week's issue. Takes less than 2 minutes! &#128172;</p>
   </div>
 </div>
@@ -1012,11 +1032,35 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
-// === STAR RATING ===
-function rateStar(n) {
+// === STAR RATING → OPENS FEEDBACK FORM ===
+const FORM_BASE_URL = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u";
+const ratingLabels = {1:"Not useful",2:"Somewhat useful",3:"Useful",4:"Very useful",5:"Loved it!"};
+
+function submitRating(n) {
   const stars = document.querySelectorAll('.star-btn');
-  stars.forEach((s, i) => s.classList.toggle('active', i < n));
-  showToast('Thanks! You rated this issue ' + n + '/5');
+  const label = document.getElementById('rating-label');
+  const cnf = document.getElementById('rating-confirm');
+
+  stars.forEach((s, i) => {
+    if (i < n) {
+      s.classList.add('active');
+      s.style.transform = 'scale(1.1)';
+    } else {
+      s.classList.remove('active');
+      s.style.transform = 'scale(1)';
+    }
+  });
+
+  label.textContent = ratingLabels[n];
+  label.style.opacity = '1';
+  cnf.textContent = 'Thanks for rating! Opening the feedback form...';
+  cnf.style.opacity = '1';
+  showToast('Rated ' + n + '/5 — Opening feedback form...');
+
+  setTimeout(function() {
+    window.open(FORM_BASE_URL, '_blank');
+    cnf.textContent = 'Rated ' + n + '/5 — Thank you! The feedback form is open in a new tab.';
+  }, 800);
 }
 </script>
 </body>
