@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harwin AI Insider ‚Äî Issue #2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --dark-blue: #0F2B4C;
+    --teal: #00A5B5;
+    --teal-light: #00C4D6;
+    --teal-bg: #E6F7F8;
+    --teal-glow: rgba(0,165,181,0.15);
+    --orange: #E87722;
+    --orange-light: #FFF3E8;
+    --grey-bg: #F4F6F8;
+    --white: #FFFFFF;
+    --body-text: #2D3748;
+    --muted: #6B7280;
+    --border: #E2E8F0;
+    --card-shadow: 0 1px 3px rgba(10,22,40,0.06), 0 4px 12px rgba(10,22,40,0.04);
+    --card-hover: 0 4px 16px rgba(10,22,40,0.1), 0 8px 24px rgba(10,22,40,0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', 'Segoe UI', Tahoma, Geneva, sans-serif;
+    background: var(--grey-bg);
+    color: var(--body-text);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === HERO === */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--dark-blue) 60%, #123a5c 100%);
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, var(--teal-glow) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -40px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(232,119,34,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 12px; position: relative;
+  }
+  .hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px, 5vw, 42px); font-weight: 800;
+    color: var(--white); letter-spacing: 1px;
+    margin-bottom: 10px; position: relative;
+  }
+  .hero-tagline {
+    font-size: 16px; color: var(--teal-light);
+    font-style: italic; margin-bottom: 16px; position: relative;
+  }
+  .hero-meta {
+    font-size: 13px; color: #7A8FA6; position: relative;
+  }
+
+  /* === LAYOUT === */
+  .container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* === STICKY NAV === */
+  .toc-wrapper {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, var(--navy) 0%, #0D2240 100%);
+    border-bottom: 3px solid var(--teal);
+    box-shadow: 0 4px 20px rgba(10,22,40,0.35);
+  }
+  .toc-inner {
+    max-width: 100%; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; align-items: center; gap: 8px;
+    overflow-x: auto; scrollbar-width: none;
+    justify-content: center;
+  }
+  .toc-inner::-webkit-scrollbar { display: none; }
+  .toc-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--teal); text-transform: uppercase;
+    letter-spacing: 2px; white-space: nowrap; margin-right: 12px;
+    background: rgba(0,165,181,0.1);
+    padding: 4px 14px; border-radius: 6px;
+  }
+  .toc-link {
+    font-size: 13px; font-weight: 600; color: #A0B0C0;
+    text-decoration: none; padding: 8px 18px;
+    border-radius: 24px; white-space: nowrap;
+    transition: all 0.2s ease; border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+  }
+  .toc-link:hover {
+    color: var(--white);
+    background: rgba(0,165,181,0.18);
+    border-color: rgba(0,165,181,0.4);
+    box-shadow: 0 0 12px rgba(0,165,181,0.15);
+  }
+
+  /* === CARDS === */
+  .section { margin: 24px auto; }
+  .card {
+    background: var(--white); border-radius: 12px;
+    box-shadow: var(--card-shadow); overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+  .card:hover { box-shadow: var(--card-hover); }
+  .card-body { padding: 28px 32px; }
+
+  /* === SECTION HEADERS === */
+  .section-header {
+    background: var(--dark-blue); padding: 16px 32px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--white);
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* === POTW === */
+  .potw-banner {
+    background: linear-gradient(135deg, var(--orange) 0%, #F59542 100%);
+    padding: 16px 32px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--white);
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .potw-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px; font-weight: 700; color: var(--dark-blue);
+    margin-bottom: 8px;
+  }
+  .why-box {
+    background: var(--orange-light); border-radius: 8px;
+    padding: 14px 18px; margin-top: 16px;
+  }
+  .why-label { font-weight: 700; color: var(--orange); font-size: 13px; }
+
+  /* === DEPARTMENT SECTIONS === */
+  .dept-header {
+    background: var(--dark-blue); padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; user-select: none; transition: background 0.2s ease;
+  }
+  .dept-header:hover { background: #133357; }
+  .dept-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--white);
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .dept-toggle {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+  }
+  .dept-toggle svg {
+    width: 14px; height: 14px; fill: none;
+    stroke: var(--teal-light); stroke-width: 2.5;
+    stroke-linecap: round; stroke-linejoin: round;
+    transition: transform 0.3s ease;
+  }
+  .dept-header.open .dept-toggle svg { transform: rotate(180deg); }
+  .dept-header.open .dept-toggle { background: rgba(0,196,214,0.2); }
+  .dept-content {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .dept-content.open { max-height: 5000px; }
+  .dept-content-inner { padding: 24px 32px 28px; }
+
+  /* === PROMPT BLOCKS === */
+  .prompt-item { margin-bottom: 28px; }
+  .prompt-item:last-child { margin-bottom: 0; }
+  .prompt-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--dark-blue);
+    margin-bottom: 10px;
+  }
+  .prompt-block-wrapper { position: relative; }
+  .prompt-block {
+    background: var(--teal-bg);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 52px 16px 18px;
+    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+    font-size: 12.5px; line-height: 1.6;
+    color: var(--dark-blue);
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .copy-btn {
+    position: absolute; top: 8px; right: 8px;
+    width: 34px; height: 34px; border: none; border-radius: 8px;
+    background: var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease; z-index: 2;
+  }
+  .copy-btn:hover {
+    background: var(--teal);
+    box-shadow: 0 2px 8px rgba(0,165,181,0.3);
+  }
+  .copy-btn:hover svg { stroke: var(--white); }
+  .copy-btn svg {
+    width: 16px; height: 16px; fill: none;
+    stroke: var(--teal); stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
+    transition: stroke 0.2s ease;
+  }
+  .copy-btn.copied { background: var(--teal); }
+  .copy-btn.copied svg { stroke: var(--white); }
+  .prompt-tip {
+    font-size: 13px; color: var(--muted);
+    margin-top: 10px; padding-left: 4px;
+  }
+  .prompt-tip strong { color: var(--body-text); }
+
+  /* === DO'S & DON'TS === */
+  .do-dont-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  @media (max-width: 600px) { .do-dont-grid { grid-template-columns: 1fr; } }
+  .do-col-label, .dont-col-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 2px solid;
+  }
+  .do-col-label { color: var(--teal); border-color: var(--teal); }
+  .dont-col-label { color: var(--orange); border-color: var(--orange); }
+  .dd-item {
+    font-size: 14px; margin-bottom: 12px;
+    padding-left: 4px; line-height: 1.55;
+  }
+  .dd-item strong { color: var(--dark-blue); }
+
+  /* === TIPS === */
+  .tip-item {
+    padding: 14px 18px; border-radius: 8px;
+    background: var(--grey-bg); margin-bottom: 12px;
+    font-size: 14px; line-height: 1.6;
+    border-left: 3px solid var(--teal);
+  }
+  .tip-item:last-child { margin-bottom: 0; }
+  .tip-num {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700; color: var(--teal); margin-right: 4px;
+  }
+
+  /* === USE CASE === */
+  .usecase-dept {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--teal); margin-bottom: 10px;
+  }
+
+  /* === SPOTLIGHT === */
+  .spotlight-card {
+    border-left: 6px solid var(--teal);
+    background: #F8FDFD; border-radius: 0 10px 10px 0;
+    padding: 24px 28px;
+  }
+  .spotlight-card h4 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px; color: var(--dark-blue); margin-bottom: 12px;
+  }
+
+  /* === FEEDBACK === */
+  .feedback-section {
+    background: linear-gradient(135deg, var(--teal-bg) 0%, #DFF5F7 100%);
+    border-radius: 12px; padding: 28px 32px;
+    margin: 24px auto; max-width: 760px;
+  }
+  .feedback-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px; font-weight: 700; color: var(--dark-blue);
+    margin-bottom: 18px;
+  }
+  .feedback-stars { display: flex; gap: 6px; margin: 12px 0 18px; }
+  .star-btn {
+    width: 44px; height: 44px; border-radius: 10px;
+    border: 2px solid var(--border); background: var(--white);
+    font-size: 20px; cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .star-btn:hover, .star-btn.active {
+    border-color: var(--orange); background: var(--orange-light);
+    transform: scale(1.1);
+  }
+  .star-btn.active {
+    background: var(--orange); border-color: var(--orange);
+  }
+  .feedback-action {
+    font-size: 14px; margin-bottom: 10px; line-height: 1.55;
+  }
+  .feedback-action strong { color: var(--dark-blue); }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 500; color: var(--teal);
+    background: rgba(0,165,181,0.1);
+    padding: 2px 8px; border-radius: 4px;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    background: var(--navy); padding: 36px 24px;
+    text-align: center; margin-top: 32px;
+  }
+  .footer-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px; font-weight: 700; color: var(--white);
+    margin-bottom: 6px;
+  }
+  .footer-byline { font-size: 13px; color: var(--teal); margin-bottom: 12px; }
+  .footer-note { font-size: 12px; color: #5A6A7A; margin-bottom: 4px; }
+  .footer-disclaimer {
+    font-size: 11px; color: #4A5A6A;
+    font-style: italic; margin-top: 8px;
+  }
+
+  /* === TOAST === */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--dark-blue); color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    padding: 12px 24px; border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(10,22,40,0.25);
+    z-index: 999; opacity: 0;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    border: 1px solid rgba(0,165,181,0.3);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section { animation: fadeUp 0.5s ease both; }
+  .section:nth-child(2) { animation-delay: 0.05s; }
+  .section:nth-child(3) { animation-delay: 0.1s; }
+  .section:nth-child(4) { animation-delay: 0.15s; }
+
+  /* === EXPAND ALL BUTTON === */
+  .expand-all-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px; font-weight: 600; color: var(--teal);
+    background: rgba(0,165,181,0.08); border: 1px solid rgba(0,165,181,0.2);
+    padding: 6px 16px; border-radius: 20px;
+    cursor: pointer; transition: all 0.2s ease;
+    margin-bottom: 8px;
+  }
+  .expand-all-btn:hover {
+    background: rgba(0,165,181,0.15);
+    border-color: rgba(0,165,181,0.4);
+  }
+
+  /* === PRINT STYLES === */
+  @media print {
+    .toc-wrapper, .copy-btn, .dept-toggle, .expand-all-btn,
+    .feedback-stars, .toast { display: none !important; }
+    .dept-content { max-height: none !important; }
+    .hero { padding: 24px; }
+    .card { box-shadow: none; border: 1px solid #ddd; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO HEADER -->
+<div class="hero">
+  <div class="hero-label">Monthly Newsletter</div>
+  <h1>Harwin AI Insider</h1>
+  <div class="hero-tagline">Smarter prompts. Sharper work. Every month.</div>
+  <div class="hero-meta">Issue #2</div>
+</div>
+
+<!-- STICKY NAV -->
+<div class="toc-wrapper">
+  <div class="toc-inner">
+    <span class="toc-label">Jump to:</span>
+    <a href="#welcome" class="toc-link">Welcome</a>
+    <a href="#potw" class="toc-link">&#127942; Prompt of the Month</a>
+    <a href="#dept-sections" class="toc-link">Department Prompts</a>
+    <a href="#dodont" class="toc-link">Do's &amp; Don'ts</a>
+    <a href="#tips" class="toc-link">Tips</a>
+    <a href="#usecase" class="toc-link">Use Case</a>
+    <a href="#spotlight" class="toc-link">Spotlight</a>
+    <a href="#feedback" class="toc-link">Feedback</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===================== WELCOME ===================== -->
+  <div class="section" id="welcome">
+    <div class="card">
+      <div class="card-body">
+        <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:var(--dark-blue);margin-bottom:14px;">Welcome back! &#128075;</h2>
+        <div style="font-size:15px;line-height:1.7;">
+          Thanks for the brilliant response to Issue #1 &mdash; great to see so many of you trying the prompts. This month we're diving into a technique called <strong style="color:var(--teal);">chain-of-thought prompting</strong> &mdash; basically, asking ChatGPT to think through a problem step by step before giving you a final answer. You'll see it in this month's Prompt of the Month and sprinkled through the department prompts.
+          <br><br>
+          Same rules as last month: every prompt has <strong style="color:var(--teal);">[SQUARE BRACKETS]</strong> for customisation, a copy button, and a <strong>"Why this works"</strong> tip underneath. Let's go. &#128640;
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PROMPT OF THE WEEK ===================== -->
+  <div class="section" id="potw">
+    <div class="card">
+      <div class="potw-banner">&#127942; Prompt of the Month</div>
+      <div class="card-body">
+        <div class="potw-title">The Decision Matrix Builder</div>
+        <p style="font-size:14px;color:var(--body-text);margin-bottom:16px;">Stuck choosing between options? Whether it's picking a supplier, selecting a software tool, or deciding between design approaches, this prompt builds a weighted scoring matrix for you in seconds.</p>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">You are a business analyst helping me make a structured decision. I need to choose between [NUMBER] options for [DESCRIBE THE DECISION e.g. selecting a new ERP system, choosing a PCB supplier, picking a trade show to attend].
+
+The options are:
+1. [OPTION 1]
+2. [OPTION 2]
+3. [OPTION 3]
+
+Please:
+1. Suggest 5-6 relevant evaluation criteria for this type of decision
+2. Assign a weight (1-5) to each criterion based on typical importance
+3. Score each option against each criterion (1-10)
+4. Calculate weighted totals and rank the options
+5. Summarise which option wins and why in 2-3 sentences
+
+Format the scoring as a clear table.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+        </div>
+        <p style="font-size:14px;color:var(--body-text);margin-top:14px;"><strong>What you'll get back:</strong> A professional weighted decision matrix with criteria, scores, totals, and a clear recommendation &mdash; perfect for board papers, procurement decisions, or any time you need to justify a choice.</p>
+        <div class="why-box">
+          <span class="why-label">&#128161; Why this works:</span>
+          <span style="font-size:13px;color:var(--body-text);"> This uses <strong>step-by-step instructions</strong> (numbered 1-5) so ChatGPT works through the problem methodically rather than jumping straight to an answer. It also requests a <strong>specific output format</strong> (table), which means less reformatting for you.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== DEPARTMENT PROMPTS ===================== -->
+  <div id="dept-sections" style="padding-top:8px;">
+    <div class="section" style="margin-bottom:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:0 4px;">
+        <h2 style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:var(--dark-blue);">Department Prompts</h2>
+        <button class="expand-all-btn" id="expandAllBtn" onclick="toggleAll()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          <span id="expandAllLabel">Expand all</span>
+        </button>
+      </div>
+      <p style="font-size:13px;color:var(--muted);padding:0 4px;">Click any department header to expand. Copy, paste, customise the [PLACEHOLDERS], and go.</p>
+    </div>
+
+    <!-- ===== 1. SALES & MARKETING ===== -->
+    <div class="section" id="sales">
+      <div class="card">
+        <div class="dept-header open" onclick="toggleDept(this)">
+          <span class="dept-name">&#128200; 1. Sales &amp; Marketing</span>
+          <div class="dept-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="dept-content open">
+          <div class="dept-content-inner">
+
+            <div class="prompt-item">
+              <div class="prompt-title">Customer Objection Response Prep</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Act as a senior sales engineer at Harwin, a UK manufacturer of high-reliability connectors. A prospect has raised this objection: "[OBJECTION e.g. Your connectors cost more than the competition, We've always used our current supplier, Lead times are too long]."
+
+Write 3 different responses I could use:
+1. A short, confident response for a live call (2-3 sentences)
+2. A detailed email response with supporting evidence (under 150 words)
+3. A one-line reframe that turns the objection into a selling point
+
+For each, reference Harwin's strengths in [RELEVANT AREA e.g. reliability testing, AS9100 certification, UK-based manufacturing].</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> Asking for <strong>three different formats</strong> of the same answer gives you options for different situations &mdash; phone, email, and quick reframe &mdash; all from one prompt.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Trade Show Stand Talking Points</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">You are preparing the Harwin sales team for [TRADE SHOW e.g. Embedded World, DSEI, Space Tech Expo]. Create a one-page cheat sheet with:
+1. A 30-second elevator pitch for Harwin (for visitors who say "So what do you do?")
+2. 3 opening questions to qualify visitors quickly
+3. Key talking points for our [PRODUCT FAMILY e.g. Gecko, M300, Datamate] range
+4. 2 competitor differentiators we should mention
+5. A smooth close to book a follow-up meeting
+
+Keep it conversational &mdash; this is for real conversations, not a brochure.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> The <strong>numbered structure</strong> creates a practical cheat sheet your team can print out and carry to the stand. "Keep it conversational" stops ChatGPT writing stiff marketing copy.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Quarterly Sales Email to Dormant Accounts</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Act as a Harwin account manager. Write a re-engagement email to a customer we haven't heard from in [TIMEFRAME e.g. 6 months, 1 year]. Their last order was for [PRODUCT e.g. Datamate connectors for a defence project]. The email should:
+- Feel personal, not automated
+- Reference something relevant in their industry (e.g. a recent regulation change, trade show, or technology trend)
+- Mention one new Harwin product or capability that might interest them
+- End with a soft call to action (not pushy)
+
+Keep it under 120 words.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> Asking ChatGPT to "reference something relevant in their industry" forces it to think about <strong>context</strong>, making the email feel researched rather than mass-mailed.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 2. ENGINEERING / R&D ===== -->
+    <div class="section" id="engineering">
+      <div class="card">
+        <div class="dept-header" onclick="toggleDept(this)">
+          <span class="dept-name">&#9881;&#65039; 2. Engineering / R&amp;D</span>
+          <div class="dept-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="dept-content">
+          <div class="dept-content-inner">
+
+            <div class="prompt-item">
+              <div class="prompt-title">Material Selection Trade-Off Analysis</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">You are a materials engineer specialising in electronic connectors. I need to choose between [MATERIAL A e.g. phosphor bronze] and [MATERIAL B e.g. beryllium copper] for the contact elements in a [CONNECTOR TYPE e.g. 1.25mm-pitch board-to-board connector] used in [APPLICATION e.g. satellite communications].
+
+Compare them across these criteria:
+- Electrical conductivity
+- Spring-back / fatigue resistance
+- Operating temperature range
+- Corrosion resistance
+- Cost and availability
+- Compliance considerations (RoHS, REACH)
+
+Present as a comparison table, then give a 3-sentence recommendation explaining which you'd choose and why.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> Listing the <strong>exact criteria</strong> you care about stops ChatGPT from giving you an irrelevant essay. The table + recommendation structure gives you both data and a conclusion.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Test Report Executive Summary</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">I'm going to paste the results from a [TEST TYPE e.g. vibration, thermal cycling, salt spray] test on [PRODUCT e.g. Gecko SL connector]. Write an executive summary (5-6 sentences) that a non-technical manager could understand. Include: what was tested, the pass/fail criteria, the result, and any notable observations. End with a one-sentence recommendation for next steps.
+
+[PASTE YOUR TEST DATA OR NOTES HERE]</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> Specifying "a non-technical manager" as the audience automatically adjusts the language. The "recommendation for next steps" makes the summary <strong>actionable</strong>, not just informational.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Patent Search Preparation Brief</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Act as a patent research assistant. I'm developing a [DESCRIBE INVENTION e.g. new locking mechanism for a high-density PCB connector]. Before I approach the patent team, help me prepare:
+
+1. Suggest 10 key search terms and phrases I should use in a patent database
+2. Identify 3-4 patent classification codes (IPC/CPC) most likely relevant
+3. List the types of prior art I should look for (not just patents &mdash; think papers, products, standards)
+4. Draft a 1-paragraph invention summary I can give to the patent attorney
+
+Note: this is for research preparation only, not legal advice.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> The disclaimer "for research preparation only, not legal advice" is a good habit &mdash; it reminds you (and ChatGPT) of the <strong>boundary</strong> of what AI should and shouldn't do.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 3. FINANCE / ACCOUNTS ===== -->
+    <div class="section" id="finance">
+      <div class="card">
+        <div class="dept-header" onclick="toggleDept(this)">
+          <span class="dept-name">&#128176; 3. Finance / Accounts</span>
+          <div class="dept-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="dept-content">
+          <div class="dept-content-inner">
+
+            <div class="prompt-item">
+              <div class="prompt-title">Month-End Commentary Generator</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">You are a management accountant at a UK electronics manufacturer. Write month-end commentary for [MONTH/YEAR] using the following data:
+
+- Revenue: &pound;[ACTUAL] vs budget &pound;[BUDGET]
+- Gross margin: [ACTUAL]% vs budget [BUDGET]%
+- Key cost variance: [DESCRIBE e.g. raw materials up 8% due to copper price rises]
+- Headcount: [ACTUAL] vs budget [BUDGET]
+- Cash position: &pound;[AMOUNT]
+
+Write 2 short paragraphs: one covering revenue and margin performance, one covering costs and cash. Use a professional tone suitable for a board pack. Avoid adjectives like "impressive" or "disappointing" &mdash; stick to factual language.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> The instruction to "avoid adjectives like impressive or disappointing" stops ChatGPT from editorialising. Finance commentary should let the <strong>numbers do the talking</strong>.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">FX Impact Explanation</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Explain the following FX impact in simple terms for a non-finance audience:
+
+- We invoiced [CURRENCY e.g. USD] [AMOUNT] at a rate of [RATE]
+- Budget rate was [BUDGET RATE]
+- This created a [FAVOURABLE/ADVERSE] variance of &pound;[AMOUNT]
+
+Write 3-4 sentences explaining what happened, why it matters, and whether this is a one-off or a trend. Use an analogy if it helps. This is for a presentation to department heads who don't work in finance.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> Asking for an <strong>analogy</strong> is a brilliant way to make financial concepts land with non-finance colleagues. ChatGPT is surprisingly good at this.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Travel Expense Policy Q&amp;A</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">I'm going to paste our company travel expense policy. Based on this policy, answer the following question clearly and concisely:
+
+"[QUESTION e.g. Can I claim for a business dinner with a supplier if I'm not staying overnight? What's the limit?]"
+
+Quote the specific section of the policy that applies. If the policy doesn't clearly cover this scenario, say so and suggest what clarification might be needed.
+
+[PASTE POLICY TEXT HERE]</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> Asking ChatGPT to "quote the specific section" keeps it <strong>grounded in the source material</strong> instead of making up rules. The fallback instruction ("if the policy doesn't cover this, say so") prevents hallucination.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 4. OPERATIONS / SUPPLY CHAIN ===== -->
+    <div class="section" id="operations">
+      <div class="card">
+        <div class="dept-header" onclick="toggleDept(this)">
+          <span class="dept-name">&#128666; 4. Operations / Supply Chain</span>
+          <div class="dept-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="dept-content">
+          <div class="dept-content-inner">
+
+            <div class="prompt-item">
+              <div class="prompt-title">Supplier Scorecard Builder</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Act as a procurement manager at an electronics connector manufacturer. Create a supplier performance scorecard for [SUPPLIER NAME] based on the following data:
+
+- On-time delivery rate: [PERCENTAGE]%
+- Quality reject rate: [PERCENTAGE]%
+- Price competitiveness: [RATING e.g. competitive, above market, below market]
+- Responsiveness: [DESCRIPTION e.g. replies within 24 hours, often delayed]
+- Number of NCRs in the last 12 months: [NUMBER]
+
+Rate each criterion as Green/Amber/Red with a short justification. Add an overall recommendation: Continue, Monitor, or Escalate. Format as a professional scorecard table.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> The <strong>traffic-light rating</strong> (Green/Amber/Red) is a universal business language. It instantly communicates status without requiring explanation.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Root Cause Analysis (5 Whys)</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">You are a lean manufacturing specialist. Help me run a 5 Whys root cause analysis on this problem:
+
+Problem: [DESCRIBE THE PROBLEM e.g. Line 3 had 2 hours unplanned downtime on Tuesday due to a tooling jam]
+
+For each "Why", suggest the most likely answer based on common manufacturing issues, then ask the next "Why." After the 5th Why, suggest:
+1. The root cause
+2. A short-term containment action
+3. A long-term corrective action
+
+Format clearly with numbered Whys.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> The 5 Whys technique is a proven lean methodology. Getting ChatGPT to <strong>walk through it step by step</strong> gives you a structured analysis you can paste into a CAPA report.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Shift Handover Note</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">I'm going to paste my rough notes from today's shift. Please rewrite them as a clear, professional shift handover note with these sections:
+- Completed: what was finished today
+- In Progress: what's running and its status
+- Issues: any problems encountered and current status
+- Handover Actions: specific things the next shift needs to do
+
+Keep it factual and concise. Use bullet points under each section.
+
+[PASTE YOUR ROUGH NOTES HERE]</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> Turning rough notes into structured handover documents is one of the <strong>highest-ROI uses of ChatGPT in operations</strong>. You save 15 minutes and the next shift gets clear information.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 5. HR / PEOPLE ===== -->
+    <div class="section" id="hr">
+      <div class="card">
+        <div class="dept-header" onclick="toggleDept(this)">
+          <span class="dept-name">&#128101; 5. HR / People</span>
+          <div class="dept-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="dept-content">
+          <div class="dept-content-inner">
+
+            <div class="prompt-item">
+              <div class="prompt-title">Performance Review Sentence Starter</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Act as an HR professional. I need to write performance review comments for an employee. Here's the context:
+
+- Role: [JOB TITLE]
+- Key achievement: [DESCRIBE e.g. reduced scrap rate by 12% through a new inspection process]
+- Area for development: [DESCRIBE e.g. needs to improve delegation and trust the team more]
+- Overall rating: [e.g. Meets expectations, Exceeds expectations]
+
+Write:
+1. A 3-sentence summary of their performance this period
+2. Two specific strengths with examples
+3. One development area framed constructively (not negatively)
+4. A suggested development goal for the next review period
+
+Use professional language that's supportive and motivating.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> "Framed constructively (not negatively)" is a key instruction. ChatGPT will write "Sarah could benefit from delegating more" instead of "Sara fails to delegate" &mdash; <strong>tone control at its best</strong>.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">New Starter Onboarding Checklist</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Create a first-week onboarding checklist for a new [JOB TITLE] joining the [DEPARTMENT] team at Harwin, a UK electronics manufacturer. Include:
+- Pre-arrival tasks (IT setup, desk, etc.)
+- Day 1 activities (welcome, tour, key introductions)
+- Week 1 learning goals and key meetings to attend
+- Key systems they need access to: [LIST e.g. SAP, SharePoint, Power BI]
+- A buddy or go-to person structure
+
+Format as a checklist with tick boxes (use checkbox characters). Group by day/timeframe.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> "Group by day/timeframe" creates a <strong>timeline-based checklist</strong> instead of a flat list. This makes it practical for both HR and the new starter's manager to follow.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Difficult Conversation Script</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Act as an experienced HR business partner. Help me prepare for a difficult conversation with an employee about [TOPIC e.g. persistent lateness, underperformance, attitude concerns].
+
+Write:
+1. An opening statement (how to start the conversation &mdash; 2-3 sentences)
+2. 3 key points I need to cover, with suggested phrasing
+3. 2 likely pushbacks the employee might give, with suggested responses
+4. A closing statement that's firm but fair
+
+Use language that is direct, empathetic, and legally safe for a UK workplace. Avoid accusatory phrasing.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> "Legally safe for a UK workplace" gives ChatGPT <strong>jurisdiction context</strong>. UK employment law is different from US law, and this instruction helps keep the language appropriate.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 6. DATA & ANALYTICS ===== -->
+    <div class="section" id="data">
+      <div class="card">
+        <div class="dept-header" onclick="toggleDept(this)">
+          <span class="dept-name">&#128202; 6. Data &amp; Analytics</span>
+          <div class="dept-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="dept-content">
+          <div class="dept-content-inner">
+
+            <div class="prompt-item">
+              <div class="prompt-title">DAX Measure Builder</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">You are a Power BI developer. I need a DAX measure that calculates [DESCRIBE WHAT YOU NEED e.g. "year-over-year growth percentage for revenue, handling cases where last year's value is zero"].
+
+My data model has these relevant tables and columns:
+- [TABLE1]: [COLUMN1, COLUMN2, ...]
+- [TABLE2]: [COLUMN1, COLUMN2, ...]
+- Date table: Date, Year, Month, Quarter
+
+Write the DAX measure with:
+1. The complete measure formula
+2. A line-by-line explanation of what each part does
+3. One common mistake to avoid when using this measure
+4. A suggested name following best practices (e.g. "Revenue YoY %")</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> Including your <strong>actual table and column names</strong> means the DAX formula works immediately in your model. The "common mistake" section saves you debugging time.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Data Cleaning Steps Generator</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">I have a messy dataset that I need to clean before analysis. Here's what I know about it:
+
+- Source: [e.g. Excel export from SAP, CSV from a supplier portal]
+- Rows: approximately [NUMBER]
+- Known issues: [LIST e.g. duplicate customer names with different spellings, dates in mixed formats, blank fields in the region column, negative values in the quantity column]
+
+Create a step-by-step data cleaning plan with:
+1. The order I should tackle the issues (most impactful first)
+2. For each step, the specific action and a sample [TOOL e.g. Excel formula, Power Query step, Python/pandas code]
+3. A validation check after each step to confirm it worked
+
+Format as a numbered checklist.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> The "validation check after each step" instruction is gold &mdash; it turns a plan into a <strong>testable workflow</strong>. You know exactly when something's gone wrong.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Stakeholder Requirements to Report Spec</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">I've been asked to build a report. Here's what the stakeholder said (their exact words):
+
+"[PASTE THEIR REQUEST e.g. I need to see how our bookings are trending versus last year, broken down by region, and I want to spot which product families are growing]"
+
+Translate this into a structured report specification with:
+1. Report title suggestion
+2. Key metrics / KPIs to include (with calculation definitions)
+3. Dimensions / filters needed
+4. Suggested visualisation types for each metric
+5. Refresh frequency recommendation
+6. Questions I should go back and ask the stakeholder before building</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> The final section &mdash; "questions I should go back and ask" &mdash; is the secret weapon. ChatGPT identifies the <strong>gaps in the brief</strong> so you don't build the wrong thing.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 7. QUALITY / COMPLIANCE ===== -->
+    <div class="section" id="quality">
+      <div class="card">
+        <div class="dept-header" onclick="toggleDept(this)">
+          <span class="dept-name">&#9989; 7. Quality / Compliance</span>
+          <div class="dept-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="dept-content">
+          <div class="dept-content-inner">
+
+            <div class="prompt-item">
+              <div class="prompt-title">CAPA (Corrective Action) Draft</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Act as a quality engineer at an aerospace connector manufacturer (AS9100D certified). Draft a Corrective Action report for the following issue:
+
+- NCR/CAPA number: [NUMBER]
+- Problem description: [DESCRIBE e.g. 3 out of 500 connectors failed contact resistance testing at incoming inspection]
+- Root cause identified: [DESCRIBE e.g. plating bath chemistry out of specification during third shift]
+
+Write sections for:
+1. Problem Statement (3 sentences, factual)
+2. Root Cause Analysis (reference the 5 Whys or fishbone as appropriate)
+3. Containment Action (immediate steps taken)
+4. Corrective Action (permanent fix)
+5. Verification Plan (how we'll confirm the fix works)
+6. Preventive Action (stop it happening elsewhere)
+
+Keep each section to 2-4 sentences. Use formal quality language.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> The six-section structure mirrors a real CAPA form. ChatGPT gives you a <strong>professionally structured first draft</strong> that you then refine with your specific knowledge.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Regulation Change Impact Summary</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Summarise the impact of [REGULATION CHANGE e.g. the updated EU RoHS exemption list, new REACH SVHC additions, updated IPC-A-610 revision] on a UK-based electronics connector manufacturer. Structure your response as:
+
+1. What changed (2-3 sentences, plain English)
+2. Who it affects at Harwin (which departments/processes)
+3. What we need to do (specific actions, prioritised)
+4. Deadline or timeline
+5. Risk if we do nothing
+
+Important: flag if any of your information might be outdated and suggest I verify with [RELEVANT BODY e.g. HSE, BSI, ECHA].</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> The "flag if information might be outdated" instruction adds a <strong>built-in safety net</strong>. For compliance work, knowing what ChatGPT is unsure about is just as valuable as what it knows.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Internal Audit Finding Write-Up</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">I conducted an internal audit and found the following issue:
+
+- Area audited: [e.g. goods-in inspection, document control, calibration]
+- Standard clause: [e.g. AS9100D clause 8.5.1, ISO 9001 clause 7.1.5]
+- What I observed: [DESCRIBE e.g. 3 out of 10 calibration certificates were expired]
+- Classification: [Minor / Major / Observation]
+
+Write a formal audit finding that includes:
+1. Finding statement (factual, objective, referencing the clause)
+2. Objective evidence (what I observed, stated clearly)
+3. Requirement (what the standard says should happen)
+4. Suggested corrective action timeframe
+
+Write in third person, formal audit language.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> "Third person, formal audit language" is a precise <strong>style instruction</strong>. Audit findings that read like personal opinions get challenged; ones that read like professional observations get actioned.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 8. IT / DIGITAL ===== -->
+    <div class="section" id="it">
+      <div class="card">
+        <div class="dept-header" onclick="toggleDept(this)">
+          <span class="dept-name">&#128187; 8. IT / Digital</span>
+          <div class="dept-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="dept-content">
+          <div class="dept-content-inner">
+
+            <div class="prompt-item">
+              <div class="prompt-title">IT Change Request Summary</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Write a change request summary for the Change Advisory Board (CAB) using these details:
+
+- Change title: [e.g. Upgrade SAP ECC to S/4HANA, Migrate file server to SharePoint Online]
+- Requested by: [NAME / DEPARTMENT]
+- Business justification: [2-3 SENTENCES]
+- Systems affected: [LIST]
+- Downtime required: [ESTIMATE]
+- Rollback plan: [BRIEF DESCRIPTION]
+- Risk level: [Low / Medium / High]
+
+Format as a professional one-page summary with clear sections. Include a recommendation (Approve / Approve with conditions / Defer).</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> Providing <strong>all the data upfront in bullet points</strong> means ChatGPT can focus on structuring and polishing rather than asking you questions. The recommendation forces a clear conclusion.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">User Training Guide from Technical Docs</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">I'm going to paste the technical documentation for [SYSTEM/FEATURE e.g. the new SharePoint leave request workflow, SAP purchase order approval process]. Rewrite it as a step-by-step user guide for non-technical staff.
+
+Requirements:
+- Use numbered steps with simple language
+- Include "what you'll see" descriptions for each screen
+- Add a "Troubleshooting" section for the 3 most common issues
+- Start with a "Before you begin" checklist
+- Keep it under 1 page when printed
+
+[PASTE TECHNICAL DOCS HERE]</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> "What you'll see" descriptions are the secret to great user guides. They let the user <strong>confirm they're on the right screen</strong> before taking the next action &mdash; reducing support tickets dramatically.</div>
+            </div>
+
+            <div class="prompt-item">
+              <div class="prompt-title">Phishing Email Awareness Quiz</div>
+              <div class="prompt-block-wrapper">
+                <div class="prompt-block">Create a short phishing awareness quiz for employees at a UK manufacturing company. Write 5 realistic email scenarios &mdash; some legitimate, some phishing. For each:
+
+1. Show the email (From, Subject, Body &mdash; keep it realistic and relevant to our industry)
+2. Ask: "Phishing or legitimate? What clues gave it away?"
+3. Provide the answer with an explanation of the red flags
+
+Make the phishing examples convincing (not obvious) and relevant to [INDUSTRY CONTEXT e.g. electronics manufacturing, supplier communications, delivery notifications]. End with 3 quick tips for spotting phishing attempts.</div>
+                <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+              </div>
+              <div class="prompt-tip">&#128161; <strong>Why this works:</strong> "Make the phishing examples convincing, not obvious" is the critical instruction here. Easy-to-spot phishing doesn't train anyone &mdash; <strong>realistic examples build real skills</strong>.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /dept-sections -->
+
+  <!-- ===================== DO'S & DON'TS ===================== -->
+  <div class="section" id="dodont">
+    <div class="card">
+      <div class="section-header">&#9989; Do's and Don'ts &mdash; Getting Better Results</div>
+      <div class="card-body">
+        <div class="do-dont-grid">
+          <div>
+            <div class="do-col-label">Do</div>
+            <div class="dd-item">&#9989; <strong>Give ChatGPT context about your audience.</strong> "Write this for a board meeting" produces very different output from "Write this for a team stand-up." Always say who's going to read it.</div>
+            <div class="dd-item">&#9989; <strong>Use "Think step by step" for complex problems.</strong> Adding this phrase to analysis or decision-making prompts forces ChatGPT to show its reasoning rather than jumping to conclusions.</div>
+            <div class="dd-item">&#9989; <strong>Provide examples of what good looks like.</strong> If you want a specific tone or format, paste a sample and say "Write in this style." ChatGPT mimics examples beautifully.</div>
+            <div class="dd-item">&#9989; <strong>Break big tasks into smaller steps.</strong> Instead of "Write me a business case," try "First, outline the problem. Then write the proposed solution. Then list the costs and benefits." Sequential instructions give sequential output.</div>
+            <div class="dd-item">&#9989; <strong>Save your best prompts.</strong> When a prompt works well, save it somewhere. Building a personal prompt library means you're getting faster every month, not starting from scratch.</div>
+          </div>
+          <div>
+            <div class="dont-col-label">Don't</div>
+            <div class="dd-item">&#10060; <strong>Don't accept the first response as final.</strong> The first answer is a draft. Say "Make it shorter," "Add more detail on the risk," or "Rewrite in a more formal tone." The best results come from iteration.</div>
+            <div class="dd-item">&#10060; <strong>Don't forget to set the tone.</strong> Without a tone instruction, ChatGPT defaults to generic professional. Add "Use a warm, approachable tone" or "Keep it formal and concise" for much better results.</div>
+            <div class="dd-item">&#10060; <strong>Don't paste entire spreadsheets without guidance.</strong> ChatGPT can handle data, but it needs to know what you want. "Here's a spreadsheet &mdash; analyse it" is too vague. "Calculate the monthly trend and flag any anomalies" is much better.</div>
+            <div class="dd-item">&#10060; <strong>Don't use AI output for safety-critical decisions without expert review.</strong> ChatGPT is excellent for drafting, brainstorming, and structuring &mdash; but engineering specifications, regulatory declarations, and safety assessments must always be verified by qualified professionals.</div>
+            <div class="dd-item">&#10060; <strong>Don't assume ChatGPT remembers previous conversations.</strong> Each new chat starts fresh. If you need context from a previous session, paste the key information in again.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIPS & TRICKS ===================== -->
+  <div class="section" id="tips">
+    <div class="card">
+      <div class="section-header">&#128161; Tips &amp; Tricks</div>
+      <div class="card-body">
+        <div class="tip-item"><span class="tip-num">Tip #1:</span> <strong>The "Before and After" technique.</strong> Paste your rough draft and ask "Improve this while keeping the same meaning and length." You'll get a polished version in seconds. This works brilliantly for emails, reports, and internal comms &mdash; it's like having an editor on call.</div>
+        <div class="tip-item"><span class="tip-num">Tip #2:</span> <strong>Use "What questions should I be asking?"</strong> When you're starting a new project or investigation, ask ChatGPT this before diving in. It'll often surface angles you hadn't considered. Think of it as a brainstorming partner that doesn't get tired.</div>
+        <div class="tip-item"><span class="tip-num">Tip #3:</span> <strong>The "Explain it to a 12-year-old" test.</strong> If ChatGPT gives you something too complex, say "Explain this as if I'm 12 years old." This strips away jargon and forces clarity. It's also a great way to check whether you truly understand a concept yourself.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== REAL HARWIN USE CASE ===================== -->
+  <div class="section" id="usecase">
+    <div class="card">
+      <div class="section-header">&#127981; Real Harwin Use Case</div>
+      <div class="card-body">
+        <div class="usecase-dept">This month: Operations / Supply Chain</div>
+        <p style="margin-bottom:14px;">A member of the Operations team needed to write a response to a customer asking why their order was delayed. The delay was caused by a raw material shortage from a tier-2 supplier, but explaining the full supply chain issue without alarming the customer was tricky. They used this prompt:</p>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">Act as a professional operations coordinator at Harwin. A customer has asked why their order for Datamate connectors is 2 weeks behind schedule. The real reason is a raw material delivery delay from our gold plating supplier. Write a transparent but reassuring email that explains the situation without oversharing internal details. Include a revised timeline and a gesture of goodwill. Keep it under 120 words.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+        </div>
+        <p style="margin-top:14px;">The result was a professional, empathetic email that acknowledged the delay, gave a credible explanation ("a temporary disruption in our specialist materials supply chain"), provided a firm revised date, and offered priority shipping at no extra cost. The customer replied positively within an hour. Total time from blank screen to sent email: 4 minutes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== READER SPOTLIGHT ===================== -->
+  <div class="section" id="spotlight">
+    <div class="card">
+      <div class="section-header">&#127908; Reader Spotlight</div>
+      <div class="card-body">
+        <div class="spotlight-card">
+          <h4>Submitted by: Engineering / R&amp;D &#128736;&#65039;</h4>
+          <p style="margin-bottom:8px;font-weight:600;color:var(--dark-blue);">Original prompt:</p>
+          <div class="prompt-block-wrapper" style="margin-bottom:16px;">
+            <div class="prompt-block">Explain what outgassing means and if it matters for our connectors in space</div>
+          </div>
+          <p style="margin-bottom:8px;font-weight:600;color:var(--dark-blue);">What's great about this:</p>
+          <p style="margin-bottom:12px;">It's simple, direct, and asks a genuinely useful question. ChatGPT gave a solid explanation of outgassing, referenced NASA standards, and correctly noted that material selection matters for vacuum environments. The answer was 90% right.</p>
+          <p style="margin-bottom:8px;font-weight:600;color:var(--teal);">Improved version:</p>
+          <div class="prompt-block-wrapper">
+            <div class="prompt-block">You are a space-grade materials engineer. Explain outgassing in the context of electronic connectors used in low-Earth orbit satellites. Cover:
+1. What it is and why it matters for spacecraft
+2. The key standard (NASA ASTM E595)
+3. What materials in a connector are most at risk
+4. How Harwin's design choices mitigate outgassing
+
+Keep it under 200 words. I'm preparing a technical note for a customer.</div>
+            <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+          </div>
+          <p style="margin-top:12px;">The improved version adds a <strong>role</strong>, a <strong>specific context</strong> (LEO satellites), <strong>numbered structure</strong>, a <strong>word limit</strong>, and a <strong>purpose</strong> (customer technical note). Same question, dramatically better answer.</p>
+          <p style="margin-top:16px;color:var(--teal);font-weight:600;">Got a prompt to share? Use the <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" style="color:var(--teal);">feedback form</a> and we'll feature you next month!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- ===================== FEEDBACK ===================== -->
+<div class="container">
+  <div class="feedback-section" id="feedback">
+    <div class="feedback-title">&#128236; Your Feedback Shapes This Newsletter</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;">Click a star to rate this issue &mdash; it opens the feedback form with your rating ready to go.</p>
+
+    <p style="font-size:14px;font-weight:600;color:var(--dark-blue);margin-bottom:8px;">How useful was this issue?</p>
+    <div class="feedback-stars">
+      <button class="star-btn" onclick="submitRating(1)" title="1 &mdash; Not useful"><span>&#11088;</span></button>
+      <button class="star-btn" onclick="submitRating(2)" title="2 &mdash; Somewhat useful"><span>&#11088;</span></button>
+      <button class="star-btn" onclick="submitRating(3)" title="3 &mdash; Useful"><span>&#11088;</span></button>
+      <button class="star-btn" onclick="submitRating(4)" title="4 &mdash; Very useful"><span>&#11088;</span></button>
+      <button class="star-btn" onclick="submitRating(5)" title="5 &mdash; Loved it!"><span>&#11088;</span></button>
+      <span id="rating-label" style="font-size:14px;font-weight:600;color:var(--teal);margin-left:12px;opacity:0;transition:opacity 0.3s ease;"></span>
+    </div>
+    <p id="rating-confirm" style="font-size:13px;color:var(--teal);margin-top:8px;opacity:0;transition:opacity 0.3s ease;font-weight:500;"></p>
+
+    <hr style="border:none;border-top:1px solid #B8E6E8;margin:20px 0;">
+
+    <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;color:var(--dark-blue);margin-bottom:14px;">Want to do more? Pick an option:</p>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <!-- Submit a prompt -->
+      <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px 20px;background:var(--white);border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--body-text);transition:all 0.2s ease;box-shadow:0 1px 2px rgba(0,0,0,0.04);" onmouseover="this.style.borderColor='#00A5B5';this.style.boxShadow='0 2px 8px rgba(0,165,181,0.15)'" onmouseout="this.style.borderColor='#E2E8F0';this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
+        <span style="font-size:22px;">&#128221;</span>
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--dark-blue);">Submit a prompt</div>
+          <div style="font-size:12px;color:var(--muted);">Share your best ChatGPT prompt &mdash; we'll feature it anonymously</div>
+        </div>
+        <span style="margin-left:auto;color:var(--teal);font-size:18px;">&rarr;</span>
+      </a>
+      <!-- Request a prompt -->
+      <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px 20px;background:var(--white);border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--body-text);transition:all 0.2s ease;box-shadow:0 1px 2px rgba(0,0,0,0.04);" onmouseover="this.style.borderColor='#00A5B5';this.style.boxShadow='0 2px 8px rgba(0,165,181,0.15)'" onmouseout="this.style.borderColor='#E2E8F0';this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
+        <span style="font-size:22px;">&#9995;</span>
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--dark-blue);">Request a prompt</div>
+          <div style="font-size:12px;color:var(--muted);">Tell us a task you'd like a ready-made prompt for</div>
+        </div>
+        <span style="margin-left:auto;color:var(--teal);font-size:18px;">&rarr;</span>
+      </a>
+      <!-- General feedback -->
+      <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px 20px;background:var(--white);border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--body-text);transition:all 0.2s ease;box-shadow:0 1px 2px rgba(0,0,0,0.04);" onmouseover="this.style.borderColor='#00A5B5';this.style.boxShadow='0 2px 8px rgba(0,165,181,0.15)'" onmouseout="this.style.borderColor='#E2E8F0';this.style.boxShadow='0 1px 2px rgba(0,0,0,0.04)'">
+        <span style="font-size:22px;">&#128202;</span>
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--dark-blue);">General feedback</div>
+          <div style="font-size:12px;color:var(--muted);">Suggestions on topics, format, or improvements</div>
+        </div>
+        <span style="margin-left:auto;color:var(--teal);font-size:18px;">&rarr;</span>
+      </a>
+    </div>
+
+    <hr style="border:none;border-top:1px solid #B8E6E8;margin:20px 0;">
+    <p style="font-size:13px;color:var(--muted);font-style:italic;">Every response helps shape next month's issue. Takes less than 2 minutes! &#128172;</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-title">Harwin AI Insider &mdash; Issue #2</div>
+  <div class="footer-byline">Curated by Nav &nbsp;|&nbsp; Data &amp; Analytics</div>
+  <div class="footer-note">Questions or prompt ideas? Use the <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" style="color:var(--teal);text-decoration:underline;">feedback form</a> &mdash; Nav reads every one.</div>
+  <div class="footer-note">&copy; Harwin plc 2026 &nbsp;|&nbsp; Internal use only</div>
+  <div class="footer-disclaimer">This newsletter is AI-assisted and reviewed by humans. Always verify critical information.</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+// === COLLAPSIBLE DEPARTMENTS ===
+function toggleDept(header) {
+  const content = header.nextElementSibling;
+  header.classList.toggle('open');
+  content.classList.toggle('open');
+}
+
+// === EXPAND/COLLAPSE ALL ===
+function toggleAll() {
+  const headers = document.querySelectorAll('.dept-header');
+  const anyCollapsed = Array.from(headers).some(h => !h.classList.contains('open'));
+
+  headers.forEach(h => {
+    const content = h.nextElementSibling;
+    if (anyCollapsed) {
+      h.classList.add('open');
+      content.classList.add('open');
+    } else {
+      h.classList.remove('open');
+      content.classList.remove('open');
+    }
+  });
+
+  document.getElementById('expandAllLabel').textContent = anyCollapsed ? 'Collapse all' : 'Expand all';
+}
+
+// === COPY TO CLIPBOARD ===
+function copyPrompt(btn) {
+  const block = btn.parentElement.querySelector('.prompt-block');
+  const text = block.innerText;
+
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" style="fill:none;stroke:white;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;"/></svg>';
+    showToast('Copied to clipboard!');
+
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" style="fill:none;stroke:#00A5B5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" style="fill:none;stroke:#00A5B5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"/></svg>';
+    }, 2000);
+  });
+}
+
+// === TOAST ===
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+// === STAR RATING ‚Üí OPENS FEEDBACK FORM ===
+const FORM_BASE_URL = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u";
+const ratingLabels = {1:"Not useful",2:"Somewhat useful",3:"Useful",4:"Very useful",5:"Loved it!"};
+
+function submitRating(n) {
+  const stars = document.querySelectorAll('.star-btn');
+  const label = document.getElementById('rating-label');
+  const confirm = document.getElementById('rating-confirm');
+
+  // Highlight stars up to selected
+  stars.forEach((s, i) => {
+    if (i < n) {
+      s.classList.add('active');
+      s.style.transform = 'scale(1.1)';
+    } else {
+      s.classList.remove('active');
+      s.style.transform = 'scale(1)';
+    }
+  });
+
+  // Show label and confirmation
+  label.textContent = ratingLabels[n];
+  label.style.opacity = '1';
+  confirm.textContent = 'Thanks for rating! Opening the feedback form...';
+  confirm.style.opacity = '1';
+  showToast('Rated ' + n + '/5 ‚Äî Opening feedback form...');
+
+  // Open the form after a brief visual delay
+  setTimeout(function() {
+    window.open(FORM_BASE_URL, '_blank');
+    confirm.textContent = 'Rated ' + n + '/5 ‚Äî Thank you! The feedback form is open in a new tab.';
+  }, 800);
+}
+</script>
+</body>
+</html>
