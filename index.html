@@ -411,6 +411,7 @@
     <a href="#dept-sections" class="toc-link">Department Prompts</a>
     <a href="#dodont" class="toc-link">Do's &amp; Don'ts</a>
     <a href="#tips" class="toc-link">Tips</a>
+    <a href="#agent" class="toc-link">&#129302; Agent</a>
     <a href="#usecase" class="toc-link">Use Case</a>
     <a href="#spotlight" class="toc-link">Spotlight</a>
     <a href="#feedback" class="toc-link">Feedback</a>
@@ -892,6 +893,29 @@ Keep it under 120 words. Tone: empathetic and solution-focused.</div>
         <div class="tip-item"><span class="tip-num">Tip #2:</span> End your prompt with <strong>"Format your response as..."</strong> to control the output structure. Try "...as a table", "...as numbered steps", or "...as a bullet-point summary." This one trick eliminates most reformatting work.</div>
         <div class="tip-item"><span class="tip-num">Tip #3:</span> You can <strong>paste text in and ask ChatGPT to do things with it</strong>. Paste a long email and say "Summarise this in 3 bullet points." Think of it as handing something to a clever assistant and saying "sort this out for me."</div>
         <div class="tip-item"><span class="tip-num">Tip #4:</span> If the response is too long, too formal, or not quite right, <strong>just tell it</strong>. Say "Make this shorter", "Use a warmer tone", or "Focus more on the cost impact." You don't need a new prompt &mdash; just keep the conversation going, like you would with a colleague.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== FEATURE SPOTLIGHT: AGENT ===================== -->
+  <div class="section" id="agent">
+    <div class="card">
+      <div class="section-header">&#129302; Feature You're Missing: ChatGPT Agent</div>
+      <div class="card-body">
+        <p style="margin-bottom:14px;">Most of us use ChatGPT by typing prompts and reading responses. But there's a powerful feature hiding in plain sight that almost nobody at Harwin has discovered yet: <strong style="color:var(--teal);">Agent mode</strong>.</p>
+        <p style="margin-bottom:14px;">Instead of just answering questions, Agent can <strong>actually do things for you</strong> &mdash; it browses the web, clicks through pages, fills in forms, reads documents, and completes multi-step tasks autonomously. Think of it as handing a task to a virtual assistant who can use a computer.</p>
+
+        <div style="background:var(--grey-bg);border-radius:10px;padding:20px 24px;margin:18px 0;">
+          <p style="font-weight:700;color:var(--dark-blue);margin-bottom:10px;">&#127775; Best Use Case: Deep Web Research</p>
+          <p style="margin-bottom:12px;">Need to find supplier datasheets, compare competitor specs across multiple websites, or pull together information scattered across different pages? Agent will visit each site, extract the relevant data, and compile it into a structured summary &mdash; without you copying and pasting between tabs.</p>
+          <div class="prompt-block-wrapper">
+            <div class="prompt-block">Use Agent to visit the websites of [COMPETITOR 1], [COMPETITOR 2], and [COMPETITOR 3]. Find their [PRODUCT TYPE e.g. 2mm-pitch board-to-board connectors] and create a comparison table covering: pin count options, current rating, operating temperature range, mating cycles, and pricing if publicly listed.</div>
+            <button class="copy-btn" onclick="copyPrompt(this)" title="Copy to clipboard"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+          </div>
+        </div>
+
+        <p style="margin-top:14px;"><strong>How to try it:</strong> In any ChatGPT conversation, look for the <strong style="color:var(--teal);">Agent</strong> option in the model picker dropdown (bottom-left). Select it, then describe what you want done as if you were briefing a colleague. Be specific about the websites to visit and the information to collect.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--muted);font-style:italic;">&#128202; Fun fact: Out of 116 active ChatGPT users at Harwin, only 2 people have tried Agent so far. Be one of the early adopters!</p>
       </div>
     </div>
   </div>
