@@ -1103,8 +1103,8 @@ function submitRating(n) {
   showToast('Rated ' + n + '/5 ‚Äî Opening feedback form...');
 
   setTimeout(function() {
-    window.open(FORM_BASE_URL, '_blank');
-    confirm.textContent = 'Rated ' + n + '/5 ‚Äî Thank you! The feedback form is open in a new tab.';
+    window.open(FORM_BASE_URL + '&r5fe33aaf06634b7e98d966ea7d5a8f64=' + n, '_blank');
+    confirm.textContent = 'Rated ' + n + '/5 (' + ratingLabels[n] + ') ‚Äî Please select the same rating on the form. Thank you!';
   }, 800);
 }
 </script>
