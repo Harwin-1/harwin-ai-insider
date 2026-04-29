@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harwin AI Insider — Issue #2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --dark-blue: #0F2B4C;
+    --teal: #00A5B5;
+    --teal-light: #00C4D6;
+    --teal-bg: #E6F7F8;
+    --teal-glow: rgba(0,165,181,0.15);
+    --orange: #E87722;
+    --orange-light: #FFF3E8;
+    --amber: #F5B014;
+    --amber-light: #FFF8E1;
+    --grey-bg: #F4F6F8;
+    --white: #FFFFFF;
+    --body-text: #2D3748;
+    --muted: #6B7280;
+    --border: #E2E8F0;
+    --card-shadow: 0 1px 3px rgba(10,22,40,0.06), 0 4px 12px rgba(10,22,40,0.04);
+    --card-hover: 0 4px 16px rgba(10,22,40,0.1), 0 8px 24px rgba(10,22,40,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--grey-bg);
+    color: var(--body-text);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === HERO === */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--dark-blue) 60%, #123a5c 100%);
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, var(--teal-glow) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -40px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(232,119,34,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero-tagline {
+    font-size: 16px;
+    color: var(--teal-light);
+    font-style: italic;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .hero-meta {
+    font-size: 13px;
+    color: #7A8FA6;
+    position: relative;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* === STICKY TOC === */
+  .toc-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    border-bottom: 2px solid var(--teal);
+    box-shadow: 0 2px 12px rgba(10,22,40,0.2);
+  }
+  .toc-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .toc-inner::-webkit-scrollbar { display: none; }
+  .toc-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+    margin-right: 8px;
+  }
+  .toc-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: #8899AA;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+  .toc-link:hover {
+    color: var(--white);
+    background: rgba(0,165,181,0.12);
+    border-color: rgba(0,165,181,0.25);
+  }
+
+  /* === SECTIONS === */
+  .section { margin: 24px auto; }
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+  .card:hover { box-shadow: var(--card-hover); }
+  .card-body { padding: 28px 32px; }
+
+  .section-header {
+    background: var(--dark-blue);
+    padding: 16px 32px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .welcome-text { font-size: 15px; line-height: 1.7; }
+  .welcome-text strong { color: var(--dark-blue); }
+
+  /* === SPOTLIGHT === */
+  .spotlight-banner {
+    background: linear-gradient(135deg, var(--orange) 0%, #F59542 100%);
+    padding: 18px 32px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .spotlight-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--dark-blue);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .spotlight-intro {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--body-text);
+    margin-bottom: 20px;
+  }
+  .spotlight-intro strong { color: var(--dark-blue); }
+
+  .platform-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  @media (max-width: 600px) {
+    .platform-row { grid-template-columns: 1fr; }
+  }
+  .platform-pill {
+    background: linear-gradient(135deg, #F8FDFD 0%, #E6F7F8 100%);
+    border: 1px solid rgba(0,165,181,0.2);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .platform-pill.cowork {
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFEFD9 100%);
+    border-color: rgba(232,119,34,0.25);
+  }
+  .platform-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark-blue);
+    margin-bottom: 4px;
+  }
+  .platform-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* === DEPARTMENT AGENT CARDS === */
+  .agent-card {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .agent-header {
+    background: linear-gradient(135deg, var(--dark-blue) 0%, #1a3d6b 100%);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+  }
+  .agent-header:hover {
+    background: linear-gradient(135deg, #133357 0%, #20467e 100%);
+  }
+  .agent-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 200px;
+  }
+  .agent-toggle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0,196,214,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+  .agent-toggle svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: var(--teal-light);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.3s ease;
+  }
+  .agent-header.open .agent-toggle {
+    background: rgba(0,196,214,0.3);
+  }
+  .agent-header.open .agent-toggle svg {
+    transform: rotate(180deg);
+  }
+  .agent-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .agent-content.open {
+    max-height: 3000px;
+  }
+  .agent-dept {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--teal-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .agent-tool-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,196,214,0.15);
+    color: var(--teal-light);
+    border: 1px solid rgba(0,196,214,0.3);
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .agent-tool-badge.orange {
+    background: rgba(232,119,34,0.15);
+    color: #FFB87A;
+    border-color: rgba(232,119,34,0.4);
+  }
+  .agent-body {
+    padding: 22px 28px;
+  }
+  .agent-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--dark-blue);
+    margin-bottom: 4px;
+  }
+  .agent-tagline {
+    font-size: 14px;
+    color: var(--orange);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .agent-section-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin: 14px 0 8px;
+  }
+  .agent-what {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--body-text);
+  }
+  .agent-what strong { color: var(--dark-blue); }
+  .agent-steps {
+    list-style: none;
+    counter-reset: step-counter;
+    padding: 0;
+    margin: 6px 0;
+  }
+  .agent-steps li {
+    counter-increment: step-counter;
+    padding: 8px 0 8px 36px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .agent-steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 24px;
+    height: 24px;
+    background: var(--teal);
+    color: white;
+    border-radius: 50%;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .prompt-block-wrapper { position: relative; margin-top: 10px; }
+  .prompt-block {
+    background: var(--teal-bg);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    padding-right: 52px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--dark-blue);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 8px;
+    background: var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 2;
+  }
+  .copy-btn:hover {
+    background: var(--teal);
+    box-shadow: 0 2px 8px rgba(0,165,181,0.3);
+  }
+  .copy-btn:hover svg { stroke: var(--white); }
+  .copy-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: var(--teal);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s ease;
+  }
+
+  .time-saved {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--orange-light);
+    color: var(--orange);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 14px;
+  }
+
+  /* === WHAT'S NEW === */
+  .feature-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .feature-item:last-child { border-bottom: none; }
+  .feature-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark-blue);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .feature-pill {
+    display: inline-block;
+    background: var(--teal-bg);
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+  }
+  .feature-pill.new {
+    background: var(--orange-light);
+    color: var(--orange);
+  }
+  .feature-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--body-text);
+  }
+  .feature-desc strong { color: var(--dark-blue); }
+  .feature-howto {
+    background: var(--grey-bg);
+    border-left: 3px solid var(--teal);
+    padding: 12px 16px;
+    margin-top: 10px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--body-text);
+  }
+  .feature-howto strong {
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  /* === COMPARISON TABLE === */
+  .comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .comparison-table thead th {
+    background: var(--dark-blue);
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 14px;
+    text-align: left;
+  }
+  .comparison-table tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .comparison-table tbody tr:nth-child(even) td {
+    background: #F8FAFC;
+  }
+  .comparison-table tbody tr:last-child td { border-bottom: none; }
+  .comparison-table .tool-tag {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: var(--dark-blue);
+  }
+  .comparison-table .why {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* === SECURITY === */
+  .security-callout {
+    background: linear-gradient(135deg, var(--amber-light) 0%, #FFF3D6 100%);
+    border-left: 5px solid var(--amber);
+    border-radius: 0 12px 12px 0;
+    padding: 24px 28px;
+    margin: 24px auto;
+    max-width: 760px;
+  }
+  .security-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .security-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--dark-blue);
+  }
+  .security-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--body-text);
+  }
+  .security-text strong { color: var(--dark-blue); }
+  .approved-tools {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 14px 0;
+  }
+  .approved-tag {
+    background: white;
+    color: var(--dark-blue);
+    border: 2px solid var(--amber);
+    border-radius: 24px;
+    padding: 8px 18px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .security-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  .security-list li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .security-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--amber);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* === READER SPOTLIGHT === */
+  .reader-spotlight-card {
+    border-left: 6px solid var(--teal);
+    background: #F8FDFD;
+    border-radius: 0 10px 10px 0;
+    padding: 24px 28px;
+  }
+  .reader-spotlight-card h4 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px;
+    color: var(--dark-blue);
+    margin-bottom: 12px;
+  }
+
+  /* === FEEDBACK === */
+  .feedback-section {
+    background: linear-gradient(135deg, var(--teal-bg) 0%, #DFF5F7 100%);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 24px auto;
+    max-width: 760px;
+  }
+  .feedback-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark-blue);
+    margin-bottom: 8px;
+  }
+  .feedback-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .star-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .star-rate-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    background: var(--white);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .star-rate-btn:hover {
+    border-color: var(--orange);
+    background: var(--orange-light);
+    transform: scale(1.05);
+  }
+  #rating-confirm {
+    font-size: 13px;
+    color: var(--teal);
+    margin: 8px 0 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-weight: 600;
+  }
+  .feedback-divider {
+    border-top: 1px solid #C8E6E8;
+    margin: 22px 0;
+  }
+  .action-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--body-text);
+    transition: all 0.2s ease;
+    margin-bottom: 10px;
+  }
+  .action-link:hover {
+    border-color: var(--teal);
+    box-shadow: 0 2px 8px rgba(0,165,181,0.15);
+    transform: translateX(2px);
+  }
+  .action-icon { font-size: 22px; }
+  .action-text-main {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark-blue);
+  }
+  .action-text-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .action-arrow {
+    margin-left: auto;
+    color: var(--teal);
+    font-size: 18px;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    background: var(--navy);
+    padding: 36px 24px;
+    text-align: center;
+    margin-top: 32px;
+  }
+  .footer-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .footer-byline {
+    font-size: 13px;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .footer-note {
+    font-size: 12px;
+    color: #5A6A7A;
+    margin-bottom: 4px;
+  }
+  .footer-disclaimer {
+    font-size: 11px;
+    color: #4A5A6A;
+    font-style: italic;
+    margin-top: 8px;
+  }
+  .footer-cadence {
+    font-size: 13px;
+    color: var(--teal-light);
+    font-weight: 600;
+    margin-top: 14px;
+    padding: 8px 16px;
+    background: rgba(0,165,181,0.1);
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section { animation: fadeUp 0.5s ease both; }
+
+  /* === TOAST === */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--dark-blue);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(10,22,40,0.25);
+    z-index: 999;
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    border: 1px solid rgba(0,165,181,0.3);
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  @media (max-width: 600px) {
+    .card-body { padding: 20px 22px; }
+    .agent-body { padding: 18px 22px; }
+    .agent-header { padding: 14px 22px; }
+    .approved-tools { flex-direction: column; }
+    .comparison-table thead th,
+    .comparison-table tbody td { padding: 10px 8px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Monthly Newsletter</div>
+  <h1>Harwin AI Insider</h1>
+  <div class="hero-tagline">Smarter prompts. Sharper work. Every month.</div>
+  <div class="hero-meta">Issue #2 &nbsp;&bull;&nbsp; 1 May 2026</div>
+</div>
+
+<!-- STICKY TOC -->
+<div class="toc-wrapper">
+  <div class="toc-inner">
+    <span class="toc-label">Jump to:</span>
+    <a href="#welcome" class="toc-link">Welcome</a>
+    <a href="#sales" class="toc-link">Sales</a>
+    <a href="#engineering" class="toc-link">Engineering</a>
+    <a href="#finance" class="toc-link">Finance</a>
+    <a href="#operations" class="toc-link">Operations</a>
+    <a href="#hr" class="toc-link">HR</a>
+    <a href="#data" class="toc-link">Data</a>
+    <a href="#quality" class="toc-link">Quality</a>
+    <a href="#customer" class="toc-link">Customer Svc</a>
+    <a href="#new" class="toc-link">🆕 What's New</a>
+    <a href="#tools" class="toc-link">🎯 Best App</a>
+    <a href="#tips" class="toc-link">💡 Tips</a>
+    <a href="#security" class="toc-link">🔒 Security</a>
+    <a href="#feedback" class="toc-link">📬 Feedback</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- WELCOME -->
+  <div class="section" id="welcome">
+    <div class="card">
+      <div class="card-body">
+        <div class="welcome-text">
+          Last month was about <strong>prompts</strong> — telling AI what to do. This month is about <strong>agents</strong> — getting AI to actually <em>do the work</em>, autonomously, in the background. We've built one for every department at Harwin.
+          <br><br>
+          Pick the agent for your team, follow the steps, and you'll have it running within 15 minutes. 🚀
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- WHAT'S NEW -->
+  <!-- ============================================ -->
+  <div class="section" id="new">
+    <div class="card">
+      <div class="section-header">🆕 What's New This Month</div>
+      <div class="card-body">
+
+        <!-- ChatGPT Extended Thinking -->
+        <div class="feature-item">
+          <div class="feature-title">
+            ChatGPT Extended Thinking Mode
+            <span class="feature-pill new">Game Changer</span>
+          </div>
+          <div class="feature-desc">
+            ChatGPT has a new mode that takes longer to respond but produces <strong>noticeably better results</strong>. It now mimics Claude's style — showing its thinking, considering options, and refining the answer before giving it to you. Particularly good for legal documents, complex analysis, and anything that needs care and accuracy.
+          </div>
+          <div class="feature-howto">
+            <strong>How to find it:</strong> Click your name (bottom-left) → <strong>Settings</strong> → <strong>Personalisation</strong>. Switch to <strong>Extended</strong> mode. Yes, it's slower — but the quality difference is significant for important work.
+          </div>
+        </div>
+
+        <!-- ChatGPT Notifications -->
+        <div class="feature-item">
+          <div class="feature-title">
+            Daily Notifications from ChatGPT
+            <span class="feature-pill">Useful</span>
+          </div>
+          <div class="feature-desc">
+            ChatGPT can now send you <strong>scheduled daily notifications</strong> — gold prices, share prices, market data, currency rates, anything you'd otherwise have to check manually. Treat it like a partner that updates you proactively rather than waiting to be asked.
+          </div>
+          <div class="feature-howto">
+            <strong>Try it:</strong> Tell ChatGPT something like <em>"Send me the FTSE 100 closing price every weekday at 5pm"</em> and follow its setup prompts. Great for anyone tracking metrics that change daily.
+          </div>
+        </div>
+
+        <!-- Claude PowerPoint -->
+        <div class="feature-item">
+          <div class="feature-title">
+            Claude Now Builds PowerPoint Decks
+            <span class="feature-pill new">New</span>
+          </div>
+          <div class="feature-desc">
+            Claude has native <strong>PowerPoint integration</strong>. Hand it your content, give it some direction on style, and it produces a finished deck you can edit. Faster than starting from a blank slide, and the formatting is genuinely good.
+          </div>
+        </div>
+
+        <!-- Claude Live Dashboards -->
+        <div class="feature-item">
+          <div class="feature-title">
+            Claude Live Dashboards
+            <span class="feature-pill new">Big News</span>
+          </div>
+          <div class="feature-desc">
+            Connect Claude to a database, and it'll produce a <strong>live dashboard that refreshes 24/7</strong> — sitting on a webpage just like our existing KPI dashboards, but built entirely through conversation. This has the potential to be a real alternative to Power BI for some use cases. Worth keeping an eye on.
+          </div>
+        </div>
+
+        <!-- Vibe Coding -->
+        <div class="feature-item">
+          <div class="feature-title">
+            "Vibe Coding" — Live Python in Spreadsheets
+            <span class="feature-pill">For the Curious</span>
+          </div>
+          <div class="feature-desc">
+            One of our colleagues has been using AI to <strong>write Python live inside Excel</strong> — describing what they want in plain English and watching the AI produce working code right there in the spreadsheet. You don't need a development background; the AI handles the syntax. A good reminder that "code" doesn't have to mean "for developers" anymore.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- BEST APP TO USE WHERE / COMPARISON TABLE -->
+  <!-- ============================================ -->
+  <div class="section" id="tools">
+    <div class="card">
+      <div class="section-header">🎯 Best App to Use Where</div>
+      <div class="card-body">
+        <p style="font-size:15px;line-height:1.65;margin-bottom:16px;">
+          Not every AI tool is good at every task. Here's a quick guide to which tool to reach for, depending on what you're trying to do.
+        </p>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Best Tool</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Excel work</strong></td>
+              <td><span class="tool-tag">Claude</span> (in-app add-on)</td>
+              <td class="why">ChatGPT struggles with Excel; Claude's add-on is significantly better</td>
+            </tr>
+            <tr>
+              <td><strong>Deep research</strong></td>
+              <td><span class="tool-tag">ChatGPT</span> (Deep Research)</td>
+              <td class="why">Slower, but produces much more thorough, well-cited answers</td>
+            </tr>
+            <tr>
+              <td><strong>PowerPoint decks</strong></td>
+              <td><span class="tool-tag">Claude</span></td>
+              <td class="why">Native PowerPoint integration with strong formatting</td>
+            </tr>
+            <tr>
+              <td><strong>Coding (VS Code)</strong></td>
+              <td><span class="tool-tag">Claude</span></td>
+              <td class="why">Now built directly into VS Code — no setup needed</td>
+            </tr>
+            <tr>
+              <td><strong>Quick general queries</strong></td>
+              <td><span class="tool-tag">Any of the three</span></td>
+              <td class="why">All three handle everyday questions well</td>
+            </tr>
+            <tr>
+              <td><strong>Live dashboards</strong></td>
+              <td><span class="tool-tag">Claude</span></td>
+              <td class="why">Connect to a database; refreshes 24/7</td>
+            </tr>
+            <tr>
+              <td><strong>Agentic / multi-step tasks</strong></td>
+              <td><span class="tool-tag">ChatGPT Agents / Cowork</span></td>
+              <td class="why">Built specifically for autonomous, multi-step work</td>
+            </tr>
+            <tr>
+              <td><strong>Microsoft 365 docs &amp; emails</strong></td>
+              <td><span class="tool-tag">Copilot</span></td>
+              <td class="why">Deepest integration with Outlook, Word, and Teams</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SALES & MARKETING -->
+  <!-- ============================================ -->
+  <div class="section" id="sales">
+    <div class="agent-card">
+      <div class="agent-header open" onclick="toggleAgent(this)">
+        <div class="agent-header-left">
+          <div class="agent-dept">📈 Sales &amp; Marketing</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="agent-tool-badge">🤖 ChatGPT Agents</div>
+          <div class="agent-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="agent-content open">
+        <div class="agent-body">
+        <div class="agent-name">The Lead Researcher</div>
+        <div class="agent-tagline">Turn a list of names into a stack of briefing notes</div>
+
+        <div class="agent-section-label">What it does</div>
+        <div class="agent-what">
+          Give it a list of prospects (names + companies) and the agent <strong>researches each one online</strong> — finding their LinkedIn role, what their company does, recent news, and likely pain points. It produces a one-page briefing for every prospect, ready for your call or follow-up email.
+        </div>
+
+        <div class="agent-section-label">How to set it up</div>
+        <ol class="agent-steps">
+          <li>Open ChatGPT, click the tool menu, and select <strong>Agent</strong></li>
+          <li>Paste the prompt below</li>
+          <li>Attach a CSV or paste a list with: name, company, job title</li>
+          <li>Let it run — comes back in 5–10 mins with a clean briefing pack</li>
+        </ol>
+
+        <div class="agent-section-label">Starter prompt</div>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">Act as a Harwin sales researcher. For each contact below, produce a 1-page briefing including:
+- Their current role and 2-3 sentences on responsibilities
+- Their company's main products/markets
+- Any recent news (last 6 months) — funding, product launches, leadership changes
+- Likely pain points relevant to high-reliability connectors
+- 2 conversation starters tailored to them
+- Suggested Harwin product family (Gecko, Datamate, Kona, Archer) most relevant
+
+Output as one briefing per contact, separated by horizontal rules.
+
+Contacts:
+[PASTE YOUR LIST HERE]</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+        </div>
+        <div class="time-saved">⏱ Saves ~3-4 hours per 20-prospect list</div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- ENGINEERING / R&D -->
+  <!-- ============================================ -->
+  <div class="section" id="engineering">
+    <div class="agent-card">
+      <div class="agent-header" onclick="toggleAgent(this)">
+        <div class="agent-header-left">
+          <div class="agent-dept">⚙️ Engineering / R&amp;D</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="agent-tool-badge">🤖 ChatGPT Agents</div>
+          <div class="agent-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="agent-content">
+        <div class="agent-body">
+        <div class="agent-name">The Standards Watcher</div>
+        <div class="agent-tagline">Monitors aerospace &amp; defence standards so you don't have to</div>
+
+        <div class="agent-section-label">What it does</div>
+        <div class="agent-what">
+          Set up once, and the agent <strong>monitors the relevant standards bodies</strong> (AS9100, MIL-STD, DEF STAN, IPC) for updates. When a change drops that affects connector design or qualification, you get an email summary explaining what changed, who it affects, and whether Harwin needs to respond.
+        </div>
+
+        <div class="agent-section-label">How to set it up</div>
+        <ol class="agent-steps">
+          <li>Open ChatGPT and start a new <strong>Scheduled Agent</strong> (set to run weekly)</li>
+          <li>Paste the prompt below — list the standards relevant to your work</li>
+          <li>Set output to email; tell it to skip the week if nothing's changed</li>
+          <li>Review the digest each Monday morning over coffee</li>
+        </ol>
+
+        <div class="agent-section-label">Starter prompt</div>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">Act as an aerospace and defence standards analyst. Once a week, check for updates to the following standards:
+- [LIST YOUR STANDARDS e.g. AS9100D, MIL-STD-1344, DEF STAN 59-411, IPC-A-610]
+
+For each update, produce a short summary including:
+1. Standard reference and revision number
+2. Date of change
+3. Plain-English summary of what changed (3-4 sentences)
+4. Whether this affects connector design, qualification testing, or material compliance
+5. Suggested action for Harwin (if any)
+
+If no relevant changes, simply reply "No relevant standards updates this week."
+
+Send results by email at 8am every Monday.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+        </div>
+        <div class="time-saved">⏱ Saves ~2-3 hours/week of manual standards-checking</div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FINANCE / ACCOUNTS -->
+  <!-- ============================================ -->
+  <div class="section" id="finance">
+    <div class="agent-card">
+      <div class="agent-header" onclick="toggleAgent(this)">
+        <div class="agent-header-left">
+          <div class="agent-dept">💰 Finance / Accounts</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="agent-tool-badge">🧠 Claude (Excel add-on)</div>
+          <div class="agent-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="agent-content">
+        <div class="agent-body">
+        <div class="agent-name">The Variance Spotter</div>
+        <div class="agent-tagline">Flags what matters in your month-end pack before you do</div>
+
+        <div class="agent-section-label">What it does</div>
+        <div class="agent-what">
+          Drop your month-end Excel file into the Claude add-on and the agent <strong>scans every line</strong>, flags variances over a threshold you set (e.g. ±5% or ±£10k), explains each one in plain English, and drafts your commentary section. You review and tweak — much faster than starting from a blank cell.
+        </div>
+
+        <div class="agent-section-label">How to set it up</div>
+        <ol class="agent-steps">
+          <li>Open your month-end file in Excel</li>
+          <li>Open the <strong>Claude for Excel add-on</strong> from the ribbon</li>
+          <li>Paste the prompt below into the chat panel</li>
+          <li>Claude reads the workbook directly — no copy-paste needed</li>
+        </ol>
+
+        <div class="agent-section-label">Starter prompt</div>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">Act as a Harwin management accountant. Review the open workbook and produce:
+
+1. A list of all variances above ±5% OR above ±£10,000 (whichever is larger), sorted by absolute value
+2. For each, the most likely driver based on the data (FX, volume, mix, one-offs, etc.)
+3. A draft commentary paragraph (3-4 sentences) explaining the overall month, suitable for the board pack
+4. 3 questions I should ask the budget holder before signing off
+
+Use British English. Round figures sensibly. Flag anything that looks like a data entry error rather than a real variance.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+        </div>
+        <div class="time-saved">⏱ Saves ~half a day at month-end</div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- OPERATIONS / SUPPLY CHAIN -->
+  <!-- ============================================ -->
+  <div class="section" id="operations">
+    <div class="agent-card">
+      <div class="agent-header" onclick="toggleAgent(this)">
+        <div class="agent-header-left">
+          <div class="agent-dept">🏭 Operations / Supply Chain</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="agent-tool-badge">🤖 ChatGPT Agents</div>
+          <div class="agent-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="agent-content">
+        <div class="agent-body">
+        <div class="agent-name">The Supplier Watchdog</div>
+        <div class="agent-tagline">Catches supplier risks early — before they bite your production line</div>
+
+        <div class="agent-section-label">What it does</div>
+        <div class="agent-what">
+          The agent <strong>monitors news, financial filings, and industry sources</strong> for your key suppliers daily. It alerts you to things that could disrupt supply: factory issues, M&amp;A activity, raw material shortages, financial distress, geographic risks. You get a heads-up days before it shows up as a late delivery.
+        </div>
+
+        <div class="agent-section-label">How to set it up</div>
+        <ol class="agent-steps">
+          <li>Open ChatGPT, start a <strong>Scheduled Agent</strong> (daily at 7am)</li>
+          <li>List your top 10 critical suppliers</li>
+          <li>Paste the prompt and let it run for a week</li>
+          <li>Tune the threshold based on signal-to-noise after week 1</li>
+        </ol>
+
+        <div class="agent-section-label">Starter prompt</div>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">Act as a supply chain risk analyst at Harwin (a UK precision connector manufacturer). Each weekday morning, scan the news for risks affecting these suppliers:
+
+[LIST YOUR TOP 10 SUPPLIERS HERE]
+
+Flag any of the following:
+- Factory fires, strikes, or production stoppages
+- Major M&A activity or ownership changes
+- Financial distress (profit warnings, debt issues, layoffs)
+- Raw material shortages affecting their inputs
+- Geopolitical risks (sanctions, trade restrictions)
+- Quality issues or recalls
+
+Output as a brief email digest. For each item: supplier, source URL, 2-sentence summary, recommended action (monitor / contact supplier / source alternative). If no risks detected, reply "All quiet on the supplier front today."</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+        </div>
+        <div class="time-saved">⏱ Catches issues 3-5 days earlier than reactive monitoring</div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- HR / PEOPLE -->
+  <!-- ============================================ -->
+  <div class="section" id="hr">
+    <div class="agent-card">
+      <div class="agent-header" onclick="toggleAgent(this)">
+        <div class="agent-header-left">
+          <div class="agent-dept">👥 HR / People</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="agent-tool-badge">🧠 Claude</div>
+          <div class="agent-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="agent-content">
+        <div class="agent-body">
+        <div class="agent-name">The CV Sifter</div>
+        <div class="agent-tagline">First-pass screening that's faster, fairer, and more consistent</div>
+
+        <div class="agent-section-label">What it does</div>
+        <div class="agent-what">
+          Drop a folder of CVs into Claude with your job spec, and the agent <strong>scores each one against your essential and desirable criteria</strong>. You get a ranked shortlist with reasoning for each score — and crucially, the agent applies the same criteria to every CV, removing the inconsistency of first-pass human screening on a Friday afternoon.
+        </div>
+
+        <div class="agent-section-label">How to set it up</div>
+        <ol class="agent-steps">
+          <li>Open Claude (web or desktop app)</li>
+          <li>Upload your job description and all candidate CVs</li>
+          <li>Paste the prompt below, listing your essential and desirable criteria</li>
+          <li>Review the ranked output — and importantly, do your <strong>own</strong> review of the top 5</li>
+        </ol>
+
+        <div class="agent-section-label">Starter prompt</div>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">Act as an HR screening assistant for Harwin. I have uploaded a job description and [N] candidate CVs.
+
+For each CV, score against:
+- Essential criteria: [LIST 3-5 ESSENTIAL REQUIREMENTS]
+- Desirable criteria: [LIST 3-5 NICE-TO-HAVES]
+
+Output as a ranked table:
+| Rank | Candidate (initials only) | Essential score /5 | Desirable score /5 | Total /10 | Key strengths | Concerns/gaps |
+
+Do NOT consider name, age, gender, ethnicity, or anything that could introduce bias. Score only on demonstrated experience and skills mentioned in the CV.
+
+Flag any candidate whose CV mentions safeguarding red flags or unexplained gaps over 12 months.
+
+This is a first-pass screen only — final shortlist decisions remain with the hiring manager.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+        </div>
+        <div class="time-saved">⏱ Saves ~2 hours per role; improves consistency</div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- DATA & ANALYTICS -->
+  <!-- ============================================ -->
+  <div class="section" id="data">
+    <div class="agent-card">
+      <div class="agent-header" onclick="toggleAgent(this)">
+        <div class="agent-header-left">
+          <div class="agent-dept">📊 Data &amp; Analytics</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="agent-tool-badge">🧠 Claude</div>
+          <div class="agent-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="agent-content">
+        <div class="agent-body">
+        <div class="agent-name">The Daily KPI Briefing</div>
+        <div class="agent-tagline">Pulls the dashboard, spots anomalies, posts to Teams — at 8am sharp</div>
+
+        <div class="agent-section-label">What it does</div>
+        <div class="agent-what">
+          The agent <strong>connects to our database</strong>, pulls overnight KPIs (bookings, billings, backlog, OTD), <strong>compares to last week and last year</strong>, flags anomalies above 2 standard deviations, and posts a tidy summary to a Teams channel before anyone arrives. Senior leaders read it on their phone with their first coffee. No more "where are we today?" questions in your inbox.
+        </div>
+
+        <div class="agent-section-label">How to set it up</div>
+        <ol class="agent-steps">
+          <li>In Claude, set up a <strong>scheduled task</strong> to run weekdays at 7:45am</li>
+          <li>Connect Claude to the relevant SQL database (read-only)</li>
+          <li>Paste the prompt below — adjust KPI names to match your tables</li>
+          <li>Set output to a Teams webhook for your SLT channel</li>
+        </ol>
+
+        <div class="agent-section-label">Starter prompt</div>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">Act as Harwin's daily KPI analyst. Each weekday at 7:45am, run the following:
+
+1. Query yesterday's totals for: Bookings, Billings, Backlog, OTD%, Open NCRs
+2. Compare each to:
+   - Same day last week (% change)
+   - Same day last year (% change)
+   - Month-to-date vs forecast
+3. Flag any metric outside ±2 standard deviations of its trailing 30-day average
+4. Identify the top 3 customers/products driving the biggest movement
+
+Format the output for Microsoft Teams (use markdown headings, bullets, and emoji indicators 🟢🟡🔴 for green/amber/red). Keep it under 250 words — readable on a phone in 60 seconds.
+
+If a metric can't be calculated (data missing, system down), say so explicitly rather than skipping it.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+        </div>
+        <div class="time-saved">⏱ Saves ~45 mins/day; SLT gets visibility 2 hours earlier</div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- QUALITY / COMPLIANCE -->
+  <!-- ============================================ -->
+  <div class="section" id="quality">
+    <div class="agent-card">
+      <div class="agent-header" onclick="toggleAgent(this)">
+        <div class="agent-header-left">
+          <div class="agent-dept">✅ Quality / Compliance</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="agent-tool-badge orange">⚙️ Cowork</div>
+          <div class="agent-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="agent-content">
+        <div class="agent-body">
+        <div class="agent-name">The NCR Pattern Finder</div>
+        <div class="agent-tagline">Reads every NCR, spots the recurring stories you can't see line-by-line</div>
+
+        <div class="agent-section-label">What it does</div>
+        <div class="agent-what">
+          Point Cowork at the folder where NCRs are stored, and the agent <strong>reads every one</strong>, extracts structured data (defect type, product family, root cause, customer impact), and produces a monthly trend report. The patterns that emerge — "we keep seeing the same plating issue from one supplier" — are the ones that drive real CAPA wins.
+        </div>
+
+        <div class="agent-section-label">How to set it up</div>
+        <ol class="agent-steps">
+          <li>Open Cowork on your desktop</li>
+          <li>Point it at the NCR folder (typically a SharePoint or shared drive location)</li>
+          <li>Paste the prompt below</li>
+          <li>Schedule it to run on the 1st of each month and email you the report</li>
+        </ol>
+
+        <div class="agent-section-label">Starter prompt</div>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">Act as Harwin's quality data analyst. Read every NCR in the specified folder from the last 30 days. For each NCR, extract:
+
+- NCR number and date
+- Product family (Gecko, Datamate, Kona, Archer, other)
+- Defect category (mechanical, electrical, plating/finish, packaging, documentation)
+- Stage detected (incoming, in-process, final test, customer)
+- Quantity affected
+- Suspected root cause (if recorded)
+- Supplier involved (if applicable)
+
+Output a monthly trend report with:
+1. Total NCRs vs previous month and 12-month average
+2. Top 5 defect categories by frequency and by quantity
+3. Any defect-supplier or defect-product combination appearing 3+ times
+4. New defect types not seen in the previous quarter
+5. Three suggested CAPA priorities based on the patterns
+
+Save the report to /Quality/Monthly Trends/ as a PDF.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+        </div>
+        <div class="time-saved">⏱ Saves ~1 day/month; surfaces patterns humans miss</div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- CUSTOMER SERVICE -->
+  <!-- ============================================ -->
+  <div class="section" id="customer">
+    <div class="agent-card">
+      <div class="agent-header" onclick="toggleAgent(this)">
+        <div class="agent-header-left">
+          <div class="agent-dept">💬 Customer Service</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="agent-tool-badge orange">⚙️ Cowork</div>
+          <div class="agent-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="agent-content">
+        <div class="agent-body">
+        <div class="agent-name">The Inbox Triage Agent</div>
+        <div class="agent-tagline">Sorts the urgent from the not-so-urgent before you even open Outlook</div>
+
+        <div class="agent-section-label">What it does</div>
+        <div class="agent-what">
+          Cowork reads new messages in your shared customer inbox, <strong>categorises them by urgency and type</strong>, drafts a first-pass response for routine queries, and flags anything urgent for immediate attention. You walk in to a sorted, prioritised inbox with draft replies waiting for review — not a pile of 80 unread.
+        </div>
+
+        <div class="agent-section-label">How to set it up</div>
+        <ol class="agent-steps">
+          <li>In Cowork, connect your shared customer service mailbox (Outlook)</li>
+          <li>Paste the prompt below</li>
+          <li>Set it to run every 30 mins during business hours</li>
+          <li>For week 1, review every draft before sending — tune as needed</li>
+        </ol>
+
+        <div class="agent-section-label">Starter prompt</div>
+        <div class="prompt-block-wrapper">
+          <div class="prompt-block">Act as a customer service triage assistant for Harwin. For each new email in the shared customer service mailbox:
+
+1. Categorise by type: Order status / Technical query / Quality complaint / Pricing or quote / Returns/RMA / Other
+2. Categorise by urgency: 🔴 Urgent (customer line down, escalation, complaint) / 🟡 Standard (response needed today) / 🟢 Low (FYI, acknowledged)
+3. For Standard and Low priority, draft a reply using Harwin's tone (professional, empathetic, helpful) with placeholders [LIKE THIS] for any specific data I need to check
+4. For Urgent, do NOT draft a reply — flag with a Teams notification to the on-duty rep
+5. Move emails into Outlook folders matching the type categories
+
+NEVER auto-send. All drafts await human review. Do NOT make up technical specifications, pricing, or delivery commitments. If a query asks for those, the draft should say "checking with [team] and will respond by [time]" instead.</div>
+          <button class="copy-btn" onclick="copyPrompt(this)" title="Copy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+        </div>
+        <div class="time-saved">⏱ Saves ~1.5 hours/day; nothing urgent slips through the cracks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- TIPS & TRICKS -->
+  <!-- ============================================ -->
+  <div class="section" id="tips">
+    <div class="card">
+      <div class="section-header">💡 Tips &amp; Tricks for Running Agents</div>
+      <div class="card-body">
+        <div class="tip-item"><span class="tip-num">Tip #1:</span> <strong>Start small and supervised.</strong> For the first week of any agent, review every output before acting on it. You'll catch quirks early and can refine the prompt before the agent takes on real responsibility.</div>
+        <div class="tip-item"><span class="tip-num">Tip #2:</span> <strong>Always include a "do NOT" instruction.</strong> Agents are eager to help — sometimes too eager. Tell yours what it must NOT do (e.g. "do not auto-send emails", "do not invent figures", "do not commit changes without my approval").</div>
+        <div class="tip-item"><span class="tip-num">Tip #3:</span> <strong>Schedule wisely.</strong> Agents that run too often create noise; too rarely and they miss things. Daily for monitoring, weekly for digests, on-demand for one-off jobs is a good rule of thumb.</div>
+        <div class="tip-item"><span class="tip-num">Tip #4:</span> <strong>Treat agents as colleagues, not magic.</strong> The output is only as good as the brief. If you'd struggle to explain the task to a new starter on day one, the agent will struggle too. Be specific about what "good" looks like.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- SECURITY -->
+<div class="container">
+  <div class="security-callout" id="security">
+    <div class="security-header">
+      <span style="font-size:28px;">🔒</span>
+      <h3>Approved AI Tools at Harwin — and Why It Matters</h3>
+    </div>
+    <div class="security-text">
+      All eight agents above use one of three <strong>approved AI tools</strong>. Sticking to these protects you and the business. Don't run agents on personal accounts — agents handle data autonomously and unsupervised, so security matters more than ever.
+    </div>
+
+    <div class="approved-tools">
+      <span class="approved-tag">✓ ChatGPT</span>
+      <span class="approved-tag">✓ Microsoft Copilot</span>
+      <span class="approved-tag">✓ Claude</span>
+    </div>
+
+    <div class="security-text">
+      <strong>The golden rule:</strong> always use your <strong>Harwin enterprise account</strong>, never a personal one — especially for agents.
+    </div>
+
+    <ul class="security-list">
+      <li><strong>Enterprise tenants are ring-fenced</strong> — Harwin data isn't used to train external models</li>
+      <li><strong>Personal accounts aren't</strong> — and agents process much more data than chat sessions</li>
+      <li><strong>Already on a personal account?</strong> The Data &amp; Analytics team can help you migrate</li>
+      <li><strong>Need a specialist tool</strong> (e.g. Cursor, Perplexity, niche AI products)? <strong>Email IT to get a subscription</strong> — we're unlikely to say no, but want visibility and proper licensing rather than tools appearing on personal credit cards</li>
+    </ul>
+
+    <div class="security-text" style="margin-top:14px;font-style:italic;color:var(--muted);font-size:13px;">
+      The three approved tools cover 95% of what most teams need. For anything else, just email IT to request a subscription — easier than expensing it later.
+    </div>
+  </div>
+</div>
+
+<!-- READER SPOTLIGHT -->
+<div class="container">
+  <div class="section">
+    <div class="card">
+      <div class="section-header">🎤 Reader Spotlight</div>
+      <div class="card-body">
+        <div class="reader-spotlight-card">
+          <h4>Built an agent that's saving you time? 🙋</h4>
+          <p>From next month, this section will feature a real agent built by a Harwin colleague — anonymously, by department only. We'll show how it was set up, what it does, and the prompt behind it so the rest of the company can copy and adapt.</p>
+          <p style="margin-top:12px;"><strong>Want to be featured?</strong> Reply to this email or use the form below to tell us what you've built. Even a half-working prototype counts — we love a work-in-progress.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEEDBACK -->
+<div class="container">
+  <div class="feedback-section" id="feedback">
+    <div class="feedback-title">📬 Your Feedback Shapes This Newsletter</div>
+    <div class="feedback-sub">A quick star rating takes one tap — that's all we need. If you've got more to share, the form's right below.</div>
+
+    <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;color:var(--dark-blue);margin-bottom:8px;">How useful was this issue?</p>
+    <div class="star-row">
+      <button class="star-rate-btn" onclick="submitRating(1)" title="1 — Not useful">⭐</button>
+      <button class="star-rate-btn" onclick="submitRating(2)" title="2 — Somewhat useful">⭐</button>
+      <button class="star-rate-btn" onclick="submitRating(3)" title="3 — Useful">⭐</button>
+      <button class="star-rate-btn" onclick="submitRating(4)" title="4 — Very useful">⭐</button>
+      <button class="star-rate-btn" onclick="submitRating(5)" title="5 — Loved it!">⭐</button>
+    </div>
+    <p id="rating-confirm"></p>
+
+    <div class="feedback-divider"></div>
+
+    <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;color:var(--dark-blue);margin-bottom:14px;">Want to do more? Pick an option:</p>
+
+    <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" class="action-link">
+      <span class="action-icon">🤖</span>
+      <div>
+        <div class="action-text-main">Share your agent</div>
+        <div class="action-text-sub">Tell us what you've built — we'll feature the best ones anonymously</div>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+
+    <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" class="action-link">
+      <span class="action-icon">✋</span>
+      <div>
+        <div class="action-text-main">Request an agent</div>
+        <div class="action-text-sub">Tell us a task you'd like an agent for — we'll build a recipe</div>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+
+    <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" class="action-link">
+      <span class="action-icon">📊</span>
+      <div>
+        <div class="action-text-main">General feedback</div>
+        <div class="action-text-sub">Suggestions on topics, format, or what you'd like to see next month</div>
+      </div>
+      <span class="action-arrow">→</span>
+    </a>
+
+    <p style="font-size:13px;color:var(--muted);font-style:italic;margin:20px 0 0;">
+      Every response helps shape next month's issue. Takes less than 2 minutes! 💬
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-title">Harwin AI Insider — Issue #2</div>
+  <div class="footer-byline">Curated by Nav &nbsp;|&nbsp; Data &amp; Analytics</div>
+  <div class="footer-note">Questions or prompt ideas? Just hit reply — Nav reads every one.</div>
+  <div class="footer-note">© Harwin plc 2026 &nbsp;|&nbsp; Internal use only</div>
+  <div class="footer-disclaimer">This newsletter is AI-assisted and reviewed by humans. Always verify critical information.</div>
+  <div class="footer-cadence">📅 See you on 1 June for the next issue!</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+// === COLLAPSIBLE AGENT CARDS ===
+function toggleAgent(header) {
+  const content = header.nextElementSibling;
+  const isOpen = header.classList.contains('open');
+  if (isOpen) {
+    header.classList.remove('open');
+    content.classList.remove('open');
+  } else {
+    header.classList.add('open');
+    content.classList.add('open');
+  }
+}
+
+// === AUTO-OPEN AGENT WHEN JUMPING TO IT VIA TOC ===
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.toc-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const targetId = link.getAttribute('href');
+      if (!targetId || !targetId.startsWith('#')) return;
+      const target = document.querySelector(targetId);
+      if (!target) return;
+      // If the target is an agent card, open it
+      const agentHeader = target.querySelector('.agent-header');
+      const agentContent = target.querySelector('.agent-content');
+      if (agentHeader && agentContent) {
+        agentHeader.classList.add('open');
+        agentContent.classList.add('open');
+      }
+    });
+  });
+});
+
+// === FEEDBACK CONFIG ===
+const FORM_BASE_URL = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u";
+// Paste your Power Automate URL here once the flow is set up
+const POWER_AUTOMATE_URL = "";
+const ISSUE_NUMBER = "Issue #2";
+
+const ratingLabels = {
+  1: "Not useful", 2: "Somewhat useful", 3: "Useful", 4: "Very useful", 5: "Loved it! 🎉"
+};
+
+let currentRating = null;
+
+async function submitRating(n) {
+  const stars = document.querySelectorAll('.star-rate-btn');
+  const confirmEl = document.getElementById('rating-confirm');
+
+  stars.forEach((s, i) => {
+    if (i < n) {
+      s.style.borderColor = '#E87722';
+      s.style.background = '#FFF3E8';
+      s.style.transform = 'scale(1.05)';
+    } else {
+      s.style.borderColor = '#E2E8F0';
+      s.style.background = '#FFFFFF';
+      s.style.transform = 'scale(1)';
+    }
+  });
+
+  currentRating = n;
+
+  try {
+    localStorage.setItem('harwin_ai_insider_rating_' + ISSUE_NUMBER, JSON.stringify({
+      rating: n, label: ratingLabels[n], timestamp: new Date().toISOString()
+    }));
+  } catch (e) {}
+
+  if (POWER_AUTOMATE_URL && POWER_AUTOMATE_URL.length > 0) {
+    confirmEl.innerHTML = '⏳ Saving your rating...';
+    confirmEl.style.opacity = '1';
+    try {
+      await fetch(POWER_AUTOMATE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          issue: ISSUE_NUMBER, rating: n, label: ratingLabels[n], userAgent: navigator.userAgent
+        })
+      });
+      confirmEl.innerHTML = '✅ Thanks! You rated this issue <strong>' + n + '/5</strong> — ' + ratingLabels[n] + '. Your rating has been saved.';
+    } catch (err) {
+      confirmEl.innerHTML = '✅ Thanks for rating <strong>' + n + '/5</strong> — ' + ratingLabels[n] + '!';
+    }
+  } else {
+    confirmEl.innerHTML = '✅ Thanks! You rated this issue <strong>' + n + '/5</strong> — ' + ratingLabels[n] + '. Your rating has been recorded.';
+    confirmEl.style.opacity = '1';
+  }
+  showToast('Rating saved: ' + n + '/5 ⭐');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.action-link').forEach(link => {
+    link.addEventListener('click', function() {
+      if (currentRating) {
+        const baseUrl = link.getAttribute('href');
+        if (!baseUrl.includes('rating=')) {
+          link.setAttribute('href', baseUrl + (baseUrl.includes('?') ? '&' : '?') + 'rating=' + currentRating);
+        }
+      }
+    });
+  });
+});
+
+function copyPrompt(btn) {
+  const block = btn.previousElementSibling || btn.parentElement.querySelector('.prompt-block');
+  const text = block.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" style="fill:none;stroke:#00A5B5;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;"/></svg>';
+    showToast('Prompt copied!');
+    setTimeout(() => {
+      btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" style="fill:none;stroke:#00A5B5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" style="fill:none;stroke:#00A5B5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"/></svg>';
+    }, 2000);
+  });
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2200);
+}
+</script>
+
+</body>
+</html>
