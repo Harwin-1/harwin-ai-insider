@@ -941,9 +941,7 @@
           <li>Anything where the AI would replace a human decision, not support one</li>
         </ul>
 
-        <div style="background:#FFF8E1;border-left:4px solid #F5B014;border-radius:0 8px 8px 0;padding:14px 18px;font-size:14px;line-height:1.6;color:var(--body-text);">
-          <strong>A note on last month's CV Sifter:</strong> It was a starter pattern to show what's possible &mdash; not yet an approved Harwin tool. Before any team uses it on real CVs, there'll be the proper governance work in place.
-        </div>
+        
 
       </div>
     </div>
@@ -1104,12 +1102,12 @@
   <!-- TIPS & TRICKS (refreshed) -->
   <div class="section" id="tips">
     <div class="card">
-      <div class="section-header">💡 Tips &amp; Tricks (updated for June)</div>
+      <div class="section-header">💡 Tips &amp; Tricks</div>
       <div class="card-body">
         <div class="tip-item"><span class="tip-num">Tip #1:</span> <strong>Always have a kill switch.</strong> Write into every agent prompt: "If you receive output &gt;5MB, hit an error condition, or process more than 50 items in a run — stop and notify [you]." Otherwise schedules fail silently for weeks.</div>
         <div class="tip-item"><span class="tip-num">Tip #2:</span> <strong>Review schedules monthly.</strong> Open the Power Automate run history. Anything not opened or read by anyone in 30 days? Kill the schedule. Agents nobody reads are noise tax.</div>
         <div class="tip-item"><span class="tip-num">Tip #3:</span> <strong>No personal Claude Pro / ChatGPT Plus for work data.</strong> They don't have the right DPA. Corporate accounts only. (Yes, even just for "a quick thing".)</div>
-        <div class="tip-item"><span class="tip-num">Tip #4:</span> <strong>Hard spend caps on every API key.</strong> Anthropic and OpenAI both let you set a monthly cap in the console. Set it conservatively — a runaway loop can burn £1,000 overnight.</div>
+        <div class="tip-item"><span class="tip-num">Tip #4:</span> <strong>Keep a shared prompt library.</strong> When someone writes a prompt that works well, paste it into a shared doc with a one-line description. Two months in, you have an institutional asset instead of seven people rewriting the same prompt.</div>
         <div class="tip-item"><span class="tip-num">Tip #5:</span> <strong>Drafts only, humans send.</strong> Anything that touches a customer, candidate, or external party — agent produces a draft, a human reviews, a human sends. Always.</div>
         <div class="tip-item"><span class="tip-num">Tip #6:</span> <strong>Redact before upload.</strong> Strip names, addresses, ID numbers, anything that could reveal a protected characteristic. The model doesn't need it; you don't need the risk.</div>
         <div class="tip-item"><span class="tip-num">Tip #7:</span> <strong>Record the reasoning, not just the output.</strong> When a human accepts an agent's recommendation, they write a sentence saying why. That sentence is your audit trail. Without it, you have AI output you can't defend.</div>
@@ -1135,7 +1133,7 @@
         <li>⚠️ <strong>Anything else (Gemini, Perplexity, local LLMs, browser-extension AIs)</strong> &mdash; check with IT before using on Harwin data</li>
         <li>❌ <strong>Personal Claude Pro / ChatGPT Plus / free Copilot</strong> &mdash; not approved for any Harwin data, no matter how small the task</li>
       </ul>
-      <p style="margin-top:12px;"><em>The line is simple: if it's the company's data, it goes in the company's AI account. Same as we wouldn't store customer data in your personal Dropbox.</em></p>
+      
     </div>
   </div>
 </div>
