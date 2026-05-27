@@ -910,86 +910,40 @@
       <div class="welcome-banner-inline"><span class="welcome-banner-emoji">🤖</span><span>Agents Bite Back</span></div>
       <div class="card-body">
         <div class="welcome-text">
-          Hi everyone, Nav here. Last month we celebrated 8 AI agents &mdash; one for every department at Harwin.
+          Hi everyone, Nav here. Last month we shared 8 AI agents.
           <br><br>
-           <em>""</em> 
-          <br><br>
-          Less hype. More durability. We're going to cover:
-          <br><br>
-          📋 The <strong>governance bit</strong> &mdash; what makes an AI use case safe at Harwin.<br>
-          🚨 <strong>7 ways agents bite back</strong> when they're not properly leashed.<br>
-          💬 The quiet, underrated <strong>power of plain chatbots</strong> &mdash; sometimes the right answer is the boring one.
+          This month: how to use them safely. The basics every team should know, what goes wrong when those basics get skipped, and when a simple chatbot beats a full-blown agent.
           <br><br>
           Hit reply with questions, prompts to share, or pushback. I read every one. 💬
         </div>
       </div>
     </div>
   </div>
+  </div>
 
   <!-- GOVERNANCE -->
   <div class="section" id="governance">
     <div class="card">
-      <div class="section-header">📋 The Governance Bit <span style="font-weight:400;color:var(--muted);font-size:14px;">(because we're grown-ups)</span></div>
+      <div class="section-header">📋 Using AI Safely at Harwin &mdash; the basics</div>
       <div class="card-body">
 
-        <p style="margin:0 0 14px 0;">Last issue was about <em>what you can do</em>. This one earns its credibility by being clear about <em>what you shouldn't do without a few guardrails in place</em>.</p>
+        <p style="margin:0 0 18px 0;font-size:15px;line-height:1.7;">AI is powerful when used well and risky when it isn't. Three rules cover most of it:</p>
 
-        <div class="agent-section-label">Why this matters now</div>
-        <div class="agent-what">
-          Personal data + cloud AI + automated decisions = three regulators on your shoulder (UK GDPR, the Equality Act 2010, the ICO), plus a fourth (the vendor's own terms of service). Get the setup wrong once and you're explaining yourself to your DPO. Get it wrong twice and you're explaining yourself to a tribunal.
-        </div>
-
-        <div class="agent-section-label">What Harwin already has in place</div>
-        <ul style="margin:0 0 18px 0;padding-left:22px;line-height:1.7;font-size:15px;">
-          <li>✅ <strong>Enterprise accounts</strong> for ChatGPT, Microsoft Copilot, and Claude &mdash; with DPAs, Standard Contractual Clauses, and "no training on our inputs" by default</li>
-          <li>✅ <strong>Single Sign-On (SSO)</strong> through Harwin identity</li>
-          <li>✅ <strong>Conditional Access</strong> controlling which third-party apps can touch Microsoft 365 data</li>
-          <li>✅ A clear rule of thumb going forward: <strong>personal AI accounts are for personal stuff; Harwin work stays in Harwin's corporate AI tenants</strong></li>
-        </ul>
-
-        <div class="agent-section-label">The 6 pillars of safe AI use</div>
-        <table style="width:100%;border-collapse:collapse;margin:8px 0 20px 0;font-size:14px;line-height:1.6;">
-          <thead>
-            <tr style="background:var(--teal-bg);">
-              <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--teal);width:30%;">Pillar</th>
-              <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--teal);">In practice</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);"><strong>1. Right tier, right vendor</strong></td><td style="padding:10px 12px;border-bottom:1px solid var(--border);">Enterprise / Team / Business accounts only for any work data. Never consumer.</td></tr>
-            <tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);"><strong>2. Lawful basis</strong></td><td style="padding:10px 12px;border-bottom:1px solid var(--border);">Be clear on why you're allowed to process this data. Sensitive info (health, religion, ethnicity, etc.) needs extra justification.</td></tr>
-            <tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);"><strong>3. Transparency</strong></td><td style="padding:10px 12px;border-bottom:1px solid var(--border);">If you process personal data, the privacy notice says AI is used, and how to request human-only review.</td></tr>
-            <tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);"><strong>4. Human in the loop</strong></td><td style="padding:10px 12px;border-bottom:1px solid var(--border);">No fully automated decisions where rights are affected. AI drafts; humans decide.</td></tr>
-            <tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);"><strong>5. Audit trail</strong></td><td style="padding:10px 12px;border-bottom:1px solid var(--border);">A recorded reason for every consequential decision. Defensible if challenged.</td></tr>
-            <tr><td style="padding:10px 12px;"><strong>6. Data minimisation</strong></td><td style="padding:10px 12px;">Redact what the model doesn't need. Keep only what's necessary, only as long as it's necessary.</td></tr>
-          </tbody>
-        </table>
-
-        <div class="agent-section-label">Pre-flight checklist</div>
-        <div style="background:var(--grey-bg);border-radius:10px;padding:18px 22px;margin:8px 0 20px 0;font-size:14.5px;line-height:1.9;">
-          <div>☐ Am I using an approved tier? (ChatGPT Enterprise / Copilot in M365 / Claude Team or Enterprise &mdash; not consumer)</div>
-          <div>☐ Have I redacted personal data that isn't strictly needed?</div>
-          <div>☐ Is there a privacy notice in place for the people whose data this is?</div>
-          <div>☐ Does a human review every consequential output, in writing?</div>
-          <div>☐ Could I produce an audit trail tomorrow if the DPO asked?</div>
-          <div>☐ Have I told my team's data owner what I'm doing?</div>
-          <div>☐ Has anything here triggered the need for a DPIA?</div>
-        </div>
-
-        <div class="agent-section-label">When to stop and talk to the DPO</div>
-        <div class="agent-what">
-          You don't need DPO sign-off to draft an email. You <strong>do</strong> for any of these: first-time processing of any candidate / customer / supplier / employee personal data, automated decisions that could affect someone's rights, anything involving special category data (health, religion, ethnicity, trade union, sexual orientation), or anything you wouldn't want to read about in the Sunday Times.
-        </div>
-
-        <div class="agent-section-label">Three rules that cover 80% of the risk</div>
-        <ol style="margin:0 0 18px 0;padding-left:22px;line-height:1.8;font-size:15px;">
-          <li><strong>No personal accounts for work data.</strong> Personal Claude Pro / ChatGPT Plus / free Copilot — they don't have the right paperwork. Corporate, every time.</li>
-          <li><strong>Redact before upload.</strong> Strip names, addresses, contacts, anything that could indirectly reveal a protected characteristic. The model can still do the job.</li>
-          <li><strong>Drafts only, humans send.</strong> Whatever the agent produces — emails, scores, summaries, recommendations — gets reviewed before it touches the real world.</li>
+        <ol style="margin:0 0 22px 0;padding-left:22px;line-height:1.8;font-size:15px;">
+          <li><strong>Use the approved accounts.</strong> Harwin has corporate versions of ChatGPT, Microsoft Copilot, and Claude with the right paperwork in place. Use those for any work data &mdash; never the free or personal versions.</li>
+          <li><strong>Strip out what the AI doesn't need.</strong> Names, addresses, photos, anything identifying &mdash; remove before upload. The model still does the job.</li>
+          <li><strong>A human reviews every consequential output.</strong> AI drafts, you decide. Especially anything that touches a customer, candidate, or external party.</li>
         </ol>
 
+        <div class="agent-section-label">When to talk to the DPO first</div>
+        <ul style="margin:0 0 20px 0;padding-left:22px;line-height:1.7;font-size:14.5px;">
+          <li>First time you're using AI on someone's personal data &mdash; candidate, customer, supplier, employee</li>
+          <li>Anything sensitive: health, religion, ethnicity, trade union, sexual orientation</li>
+          <li>Anything where the AI would replace a human decision, not support one</li>
+        </ul>
+
         <div style="background:#FFF8E1;border-left:4px solid #F5B014;border-radius:0 8px 8px 0;padding:14px 18px;font-size:14px;line-height:1.6;color:var(--body-text);">
-          <strong>A note on Issue #2:</strong> The CV Sifter in last month's issue was a <em>starter pattern</em> to show what's possible — not an approved Harwin tool. Before any team uses it on real candidate CVs, we'll have a DPIA, an updated privacy notice, a redaction process, and a bias audit in place.
+          <strong>A note on last month's CV Sifter:</strong> It was a starter pattern to show what's possible &mdash; not yet an approved Harwin tool. Before any team uses it on real CVs, there'll be the proper governance work in place.
         </div>
 
       </div>
