@@ -171,7 +171,7 @@
   }
 
   .welcome-text { font-size: 15px; line-height: 1.7; }
-  .welcome-text strong { color: var(--dark-blue); } .welcome-banner-inline { background: var(--dark-blue); margin: -28px -32px 20px -32px; padding: 16px 32px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; border-radius: 12px 12px 0 0; } .welcome-banner-emoji { font-size: 17px; }
+  .welcome-text strong { color: var(--dark-blue); } .welcome-banner-inline { background: var(--dark-blue); margin: -28px -32px 20px -32px; padding: 16px 32px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; border-radius: 12px 12px 0 0; } .welcome-banner-emoji { font-size: 17px; } .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; } @media (max-width: 600px) { .tips-grid { grid-template-columns: 1fr; } } .tip-card { background: var(--teal-bg); border-left: 4px solid var(--teal); border-radius: 8px; padding: 16px 18px; position: relative; min-height: 70px; } .tip-num { position: absolute; top: 8px; right: 14px; font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 800; color: var(--teal); opacity: 0.22; line-height: 1; } .tip-title { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--dark-blue); margin-bottom: 6px; padding-right: 38px; line-height: 1.3; } .tip-body { font-size: 13.5px; line-height: 1.55; color: var(--body-text); }
 
   /* === SPOTLIGHT === */
   .spotlight-banner {
@@ -1103,13 +1103,13 @@
     <div class="card">
       <div class="section-header">💡 Tips &amp; Tricks</div>
       <div class="card-body">
-        <div class="tip-item"><span class="tip-num">Tip #1:</span> <strong>Always have a kill switch.</strong> Write into every agent prompt: "If you receive output &gt;5MB, hit an error condition, or process more than 50 items in a run — stop and notify [you]." Otherwise schedules fail silently for weeks.</div>
-        <div class="tip-item"><span class="tip-num">Tip #2:</span> <strong>Review schedules monthly.</strong> Open the Power Automate run history. Anything not opened or read by anyone in 30 days? Kill the schedule. Agents nobody reads are noise tax.</div>
-        <div class="tip-item"><span class="tip-num">Tip #3:</span> <strong>No personal Claude Pro / ChatGPT Plus for work data.</strong> They don't have the right DPA. Corporate accounts only. (Yes, even just for "a quick thing".)</div>
-        <div class="tip-item"><span class="tip-num">Tip #4:</span> <strong>Keep a shared prompt library.</strong> When someone writes a prompt that works well, paste it into a shared doc with a one-line description. Two months in, you have an institutional asset instead of seven people rewriting the same prompt.</div>
-        <div class="tip-item"><span class="tip-num">Tip #5:</span> <strong>Drafts only, humans send.</strong> Anything that touches a customer, candidate, or external party — agent produces a draft, a human reviews, a human sends. Always.</div>
-        <div class="tip-item"><span class="tip-num">Tip #6:</span> <strong>Redact before upload.</strong> Strip names, addresses, ID numbers, anything that could reveal a protected characteristic. The model doesn't need it; you don't need the risk.</div>
-        <div class="tip-item"><span class="tip-num">Tip #7:</span> <strong>Record the reasoning, not just the output.</strong> When a human accepts an agent's recommendation, they write a sentence saying why. That sentence is your audit trail. Without it, you have AI output you can't defend.</div>
+        <div class="tips-grid"><div class="tip-card"><div class="tip-num">1</div><div class="tip-title">Always have a kill switch</div><div class="tip-body">Write into every agent prompt: "If you receive output &gt;5MB, hit an error condition, or process more than 50 items in a run — stop and notify [you]." Otherwise schedules fail silently for weeks.</div></div>
+        <div class="tip-card"><div class="tip-num">2</div><div class="tip-title">Review schedules monthly</div><div class="tip-body">Open the Power Automate run history. Anything not opened or read by anyone in 30 days? Kill the schedule. Agents nobody reads are noise tax.</div></div>
+        <div class="tip-card"><div class="tip-num">3</div><div class="tip-title">No personal Claude Pro / ChatGPT Plus for work data</div><div class="tip-body">They don't have the right DPA. Corporate accounts only. (Yes, even just for "a quick thing".)</div></div>
+        <div class="tip-card"><div class="tip-num">4</div><div class="tip-title">Keep a shared prompt library</div><div class="tip-body">When someone writes a prompt that works well, paste it into a shared doc with a one-line description. Two months in, you have an institutional asset instead of seven people rewriting the same prompt.</div></div>
+        <div class="tip-card"><div class="tip-num">5</div><div class="tip-title">Drafts only, humans send</div><div class="tip-body">Anything that touches a customer, candidate, or external party — agent produces a draft, a human reviews, a human sends. Always.</div></div>
+        <div class="tip-card"><div class="tip-num">6</div><div class="tip-title">Redact before upload</div><div class="tip-body">Strip names, addresses, ID numbers, anything that could reveal a protected characteristic. The model doesn't need it; you don't need the risk.</div></div>
+        <div class="tip-card"><div class="tip-num">7</div><div class="tip-title">Record the reasoning, not just the output</div><div class="tip-body">When a human accepts an agent's recommendation, they write a sentence saying why. That sentence is your audit trail. Without it, you have AI output you can't defend.</div></div></div>
       </div>
     </div>
   </div>
