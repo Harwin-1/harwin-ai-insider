@@ -951,60 +951,7 @@
     <div class="card">
       <div class="section-header">🚨 7 Ways Agents Bite Back</div>
       <div class="card-body">
-        <p style="margin:0 0 20px 0;font-size:15px;line-height:1.7;">Agents are powerful precisely because they act without you watching. That's also exactly why they need governance. Here's what goes wrong when they don't have it &mdash; with real-world cases.</p>
-
-        <div class="bite-grid">
-
-          <div class="bite-card">
-            <div class="bite-num">1</div>
-            <div class="bite-title">Hallucinated decisions</div>
-            <div class="bite-scenario">Air Canada's chatbot invented a bereavement-fare refund policy that didn't exist. A passenger acted on it. The court made Air Canada honour the promise &mdash; and dismissed the airline's defence that the chatbot was a "separate legal entity". (Feb 2024.)</div>
-            <div class="bite-fix"><strong>Fix:</strong> Always ask the agent for the <em>source row/column reference</em>, never the conclusion alone. Verify before acting.</div>
-          </div>
-
-          <div class="bite-card">
-            <div class="bite-num">2</div>
-            <div class="bite-title">GDPR / privacy violations</div>
-            <div class="bite-scenario">Samsung engineers pasted proprietary source code into ChatGPT to debug it. The data left the building. Samsung issued a global ban on consumer AI tools weeks later &mdash; too late to retrieve what was already out. (April 2023.)</div>
-            <div class="bite-fix"><strong>Fix:</strong> Enterprise-tier accounts only. Free or personal accounts don't have DPAs &mdash; whatever you paste can train the next model.</div>
-          </div>
-
-          <div class="bite-card">
-            <div class="bite-num">3</div>
-            <div class="bite-title">Audit trail gone</div>
-            <div class="bite-scenario">Amazon's internal CV-screening AI penalised CVs that mentioned "women's" (as in "women's chess club captain"). It had learned the bias from a decade of male-dominated hiring data. Scrapped before deployment. (Reuters, 2018.)</div>
-            <div class="bite-fix"><strong>Fix:</strong> Every agent-assisted decision needs a human reasoning step, recorded in writing, in a system you control.</div>
-          </div>
-
-          <div class="bite-card">
-            <div class="bite-num">4</div>
-            <div class="bite-title">Cost runaway</div>
-            <div class="bite-scenario">A test agent left running over a long weekend. A retry loop kicked in on a paid model. £4,200 in API charges before the credit-card alert fired on Monday morning.</div>
-            <div class="bite-fix"><strong>Fix:</strong> Hard spend caps on every API key. Rate limits. Daily budget alerts to Finance.</div>
-          </div>
-
-          <div class="bite-card">
-            <div class="bite-num">5</div>
-            <div class="bite-title">Skill atrophy</div>
-            <div class="bite-scenario">Drivers reliant on satnav lose the ability to navigate routes they used to know by heart. The same pattern is showing up with AI summaries &mdash; teams read the summary, never the original, and miss what only the raw text shows.</div>
-            <div class="bite-fix"><strong>Fix:</strong> Treat agents as <em>second readers</em>, not replacements for first reads. Rotate who does the unaided review.</div>
-          </div>
-
-          <div class="bite-card">
-            <div class="bite-num">6</div>
-            <div class="bite-title">Speed without judgement</div>
-            <div class="bite-scenario">Sports Illustrated published product reviews under fake AI-generated author profiles, complete with AI headshots and invented bios. Futurism exposed it in November 2023. The brand's credibility never fully recovered.</div>
-            <div class="bite-fix"><strong>Fix:</strong> Drafts only; humans send. Especially anything with reputational or commercial weight.</div>
-          </div>
-
-          <div class="bite-card">
-            <div class="bite-num">7</div>
-            <div class="bite-title">Shadow AI</div>
-            <div class="bite-scenario">Samsung, Apple, Verizon, JPMorgan, Goldman Sachs &mdash; all restricted consumer AI at work in 2023. Same pattern every time: employees pasting confidential material into free tools they had signed up for personally.</div>
-            <div class="bite-fix"><strong>Fix:</strong> Clear written policy: personal accounts for personal stuff, corporate accounts for anything Harwin. Tell your team explicitly, more than once.</div>
-          </div>
-
-        </div>
+        <p style="margin:0 0 20px 0;font-size:15px;line-height:1.7;">AI tools can do work for you in the background &mdash; but that's also why they can cause real damage if no one's watching. Seven real-world cases, and what each one means for how we work at Harwin.</p><div class="bite-grid"><div class="bite-card"><div class="bite-num">1</div><div class="bite-title">When the AI makes things up</div><div class="bite-scenario">Air Canada's chatbot invented a bereavement-fare refund policy that didn't exist. A passenger acted on it. The court made Air Canada honour the promise &mdash; and threw out the airline's defence that the chatbot was a "separate legal entity". (Feb 2024.)</div><div class="bite-fix"><strong>Fix:</strong> Ask the AI "where did this come from?" before you act. If it can't point to a real document or policy, don't trust it.</div></div><div class="bite-card"><div class="bite-num">2</div><div class="bite-title">Sensitive info leaks out</div><div class="bite-scenario">A Samsung team pasted confidential company information into the free version of ChatGPT to get help. That information was now outside the company &mdash; on someone else's servers. Samsung banned the free version weeks later. Too late. (April 2023.)</div><div class="bite-fix"><strong>Fix:</strong> Use Harwin's approved AI accounts (ChatGPT Enterprise, Microsoft Copilot, Claude). The free versions can keep what you paste; ours can't.</div></div><div class="bite-card"><div class="bite-num">3</div><div class="bite-title">Can't show your working</div><div class="bite-scenario">A UK council used AI to score housing applications. When residents asked why they were rejected, no one could say &mdash; the AI's reasoning hadn't been kept. Every case had to be redone by hand.</div><div class="bite-fix"><strong>Fix:</strong> Whenever AI helps with a decision, write a sentence saying why. If someone challenges it later, you need to show your working.</div></div><div class="bite-card"><div class="bite-num">4</div><div class="bite-title">Runaway bills</div><div class="bite-scenario">A team set up an AI to monitor incoming messages around the clock. They forgot it was running over the Christmas break. By January, the bill was £6,000 &mdash; for messages no one ever read.</div><div class="bite-fix"><strong>Fix:</strong> If you're setting up anything that runs on its own, set a hard spending limit and tell Finance before you start.</div></div><div class="bite-card"><div class="bite-num">5</div><div class="bite-title">Losing the skill</div><div class="bite-scenario">Drivers who rely on satnav lose the ability to find routes they used to know by heart. The same thing happens when teams stop reading the original document and only read the AI summary &mdash; the patterns you only see in the raw text get missed.</div><div class="bite-fix"><strong>Fix:</strong> Use AI to double-check your reading, not replace it. Rotate who reads things without AI's help.</div></div><div class="bite-card"><div class="bite-num">6</div><div class="bite-title">Speed without thinking</div><div class="bite-scenario">Sports Illustrated published product reviews under fake AI-generated author names &mdash; complete with AI-generated headshots and made-up bios. When it came out in November 2023, customers stopped trusting the brand. The reviews were full of basic mistakes a real reviewer would have caught.</div><div class="bite-fix"><strong>Fix:</strong> AI drafts, a human sends. Especially anything that goes out under Harwin's name.</div></div><div class="bite-card"><div class="bite-num">7</div><div class="bite-title">AI happening behind the scenes</div><div class="bite-scenario">Samsung, Apple, Verizon, JPMorgan, Goldman Sachs &mdash; all had to ban staff from using free AI at work. Same pattern every time: someone doing "a quick thing" on their personal account ended up putting customer details, contracts, or internal documents into a tool the company couldn't control.</div><div class="bite-fix"><strong>Fix:</strong> If it's Harwin work, use a Harwin AI account. Personal accounts are for personal things only &mdash; even a "quick question" is too risky.</div></div></div>
 
       </div>
     </div>
