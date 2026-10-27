@@ -8,7 +8,7 @@
      {
        title: "Short name of the prompt",
        department: "Sales & Marketing",        // must match one in DEPARTMENTS, or "Everyone"
-       type: "Prompt",                         // "Prompt" or "Agent recipe"
+       type: "Prompt",                         // always "Prompt" (agent recipes are not published here)
        tool: "Any approved tool",              // e.g. "ChatGPT", "Claude", "Copilot", "Cowork"
        purpose: "One line on what it is for.",
        prompt: `The prompt text, with [PLACEHOLDERS] in square brackets.`,
@@ -59,7 +59,6 @@ window.HARWIN_LIBRARY = {
      ------------------------------------------------------------------------ */
   prompts: [
 
-    /* ---------- Everyday prompts for everyone ---------- */
     {
       title: "The Universal Summariser",
       department: "Everyone",
@@ -77,6 +76,7 @@ Here is the document:
       why: "It gives the AI a role so it knows what standard to aim for, and numbers the requests so you get structured output instead of a wall of text.",
       source: "Issue #1"
     },
+
     {
       title: "Ask for the decisions, not just a summary",
       department: "Everyone",
@@ -87,6 +87,7 @@ Here is the document:
       why: "A plain summary is useful. One that pulls out deadlines and decisions is far more useful.",
       source: "Issue #6, Oct 2026"
     },
+
     {
       title: "Summarise a meeting",
       department: "Everyone",
@@ -97,6 +98,7 @@ Here is the document:
       why: "Three explicit asks plus a length cap. No waffle, no missed actions.",
       source: "Issue #4, Jul 2026"
     },
+
     {
       title: "Make this email shorter",
       department: "Everyone",
@@ -107,6 +109,7 @@ Here is the document:
       why: "It names what to keep, not just what to cut.",
       source: "Issue #4, Jul 2026"
     },
+
     {
       title: "Explain it like I'm a smart non-specialist",
       department: "Everyone",
@@ -118,6 +121,7 @@ Here is the document:
       note: "Still verify with legal for anything that matters.",
       source: "Issue #4, Jul 2026"
     },
+
     {
       title: "Pressure-test my plan",
       department: "Everyone",
@@ -128,6 +132,7 @@ Here is the document:
       why: "It forces a balanced view before you commit.",
       source: "Issue #4, Jul 2026"
     },
+
     {
       title: "Turn messy notes into a report",
       department: "Everyone",
@@ -138,6 +143,7 @@ Here is the document:
       why: "Structure plus a \"don't invent\" guardrail in one prompt.",
       source: "Issue #4, Jul 2026"
     },
+
     {
       title: "Compare two options",
       department: "Everyone",
@@ -148,6 +154,7 @@ Here is the document:
       why: "It forces a recommendation, not a fence-sit.",
       source: "Issue #4, Jul 2026"
     },
+
     {
       title: "Find the holes",
       department: "Everyone",
@@ -158,6 +165,7 @@ Here is the document:
       why: "It catches gaps before they cost you a week.",
       source: "Issue #4, Jul 2026"
     },
+
     {
       title: "Source-check before you act",
       department: "Everyone",
@@ -168,6 +176,7 @@ Here is the document:
       why: "The single best defence against AI making things up.",
       source: "Issue #4, Jul 2026"
     },
+
     {
       title: "Pre-call research",
       department: "Everyone",
@@ -178,6 +187,7 @@ Here is the document:
       why: "Read the briefing, walk in prepared. No scheduling needed.",
       source: "Issue #3, Jun 2026"
     },
+
     {
       title: "Agent kill switch",
       department: "Everyone",
@@ -188,6 +198,7 @@ Here is the document:
       why: "Otherwise schedules fail silently for weeks.",
       source: "Issue #3, Jun 2026"
     },
+
     {
       title: "Competitor research with Agent mode",
       department: "Sales & Marketing",
@@ -203,7 +214,6 @@ Here is the document:
       source: "Issue #1"
     },
 
-    /* ---------- Sales & Marketing ---------- */
     {
       title: "Follow-Up Email After a Meeting or Trade Show",
       department: "Sales & Marketing",
@@ -214,6 +224,7 @@ Here is the document:
       why: "Giving your company name, product names and the customer's industry means the email sounds like it came from someone at Harwin, not a generic template.",
       source: "Issue #1"
     },
+
     {
       title: "Competitor Product Comparison Table",
       department: "Sales & Marketing",
@@ -225,6 +236,7 @@ Here is the document:
       note: "Check every figure against the datasheets before using it.",
       source: "Issue #1"
     },
+
     {
       title: "LinkedIn Post About a Product Launch",
       department: "Sales & Marketing",
@@ -235,35 +247,7 @@ Here is the document:
       why: "A word limit stops the AI rambling. Asking it to end with a question gives you engagement-ready content.",
       source: "Issue #1"
     },
-    {
-      title: "The Lead Researcher",
-      department: "Sales & Marketing",
-      type: "Agent recipe",
-      tool: "ChatGPT",
-      purpose: "Turn a list of names into a stack of one-page briefing notes.",
-      prompt: `Act as a Harwin sales researcher. For each contact below, produce a 1-page briefing including:
-- Their current role and 2-3 sentences on responsibilities
-- Their company's main products/markets
-- Any recent news (last 6 months) — funding, product launches, leadership changes
-- Likely pain points relevant to high-reliability connectors
-- 2 conversation starters tailored to them
-- Suggested Harwin product family (Gecko, Datamate, Kona, Archer) most relevant
 
-Output as one briefing per contact, separated by horizontal rules.
-
-Contacts:
-[PASTE YOUR LIST HERE]`,
-      setup: [
-        "Open ChatGPT, click the tool menu, and select Agent.",
-        "Paste the prompt.",
-        "Attach a CSV or paste a list with: name, company, job title.",
-        "Let it run. It comes back in 5 to 10 minutes with a briefing pack."
-      ],
-      saves: "About 3 to 4 hours per 20-prospect list",
-      source: "Issue #2, May 2026"
-    },
-
-    /* ---------- Engineering / R&D ---------- */
     {
       title: "Design Review Checklist",
       department: "Engineering / R&D",
@@ -274,6 +258,7 @@ Contacts:
       why: "The role makes the AI draw on technical knowledge rather than giving a generic list.",
       source: "Issue #1"
     },
+
     {
       title: "Explain a Specification in Plain English",
       department: "Engineering / R&D",
@@ -287,6 +272,7 @@ Contacts:
       note: "Customer specifications stay out of all AI tools unless IT has approved it.",
       source: "Issue #1"
     },
+
     {
       title: "Failure Mode Brainstorm",
       department: "Engineering / R&D",
@@ -297,36 +283,7 @@ Contacts:
       why: "A specific table format with named columns means the output goes straight into an FMEA worksheet.",
       source: "Issue #1"
     },
-    {
-      title: "The Standards Watcher",
-      department: "Engineering / R&D",
-      type: "Agent recipe",
-      tool: "ChatGPT",
-      purpose: "Monitors aerospace and defence standards so you don't have to.",
-      prompt: `Act as an aerospace and defence standards analyst. Once a week, check for updates to the following standards:
-- [LIST YOUR STANDARDS e.g. AS9100D, MIL-STD-1344, DEF STAN 59-411, IPC-A-610]
 
-For each update, produce a short summary including:
-1. Standard reference and revision number
-2. Date of change
-3. Plain-English summary of what changed (3-4 sentences)
-4. Whether this affects connector design, qualification testing, or material compliance
-5. Suggested action for Harwin (if any)
-
-If no relevant changes, simply reply "No relevant standards updates this week."
-
-Send results by email at 8am every Monday.`,
-      setup: [
-        "Open ChatGPT and start a new Scheduled Agent, set to run weekly.",
-        "Paste the prompt and list the standards relevant to your work.",
-        "Set output to email, and tell it to skip the week if nothing has changed.",
-        "Review the digest each Monday morning."
-      ],
-      saves: "About 2 to 3 hours a week of manual standards-checking",
-      source: "Issue #2, May 2026"
-    },
-
-    /* ---------- Finance / Accounts ---------- */
     {
       title: "Budget Variance Narrative",
       department: "Finance / Accounts",
@@ -344,6 +301,7 @@ Keep the tone factual, professional, and jargon-free.`,
       why: "Providing specific data points upfront means the AI writes the narrative around your actual numbers instead of guessing.",
       source: "Issue #1"
     },
+
     {
       title: "Polite Invoice Chase Email",
       department: "Finance / Accounts",
@@ -360,6 +318,7 @@ Keep it under 100 words. Maintain a positive business relationship tone. Include
       note: "Keep the placeholders in the prompt and fill in the real customer details yourself afterwards.",
       source: "Issue #1"
     },
+
     {
       title: "Explain a Financial Term Simply",
       department: "Finance / Accounts",
@@ -370,31 +329,7 @@ Keep it under 100 words. Maintain a positive business relationship tone. Include
       why: "As simple as prompts get: a direct question with a clear constraint. A good first prompt to try.",
       source: "Issue #1"
     },
-    {
-      title: "The Variance Spotter",
-      department: "Finance / Accounts",
-      type: "Agent recipe",
-      tool: "Claude",
-      purpose: "Flags what matters in your month-end pack and drafts the commentary.",
-      prompt: `Act as a Harwin management accountant. Review the open workbook and produce:
 
-1. A list of all variances above ±5% OR above ±£10,000 (whichever is larger), sorted by absolute value
-2. For each, the most likely driver based on the data (FX, volume, mix, one-offs, etc.)
-3. A draft commentary paragraph (3-4 sentences) explaining the overall month, suitable for the board pack
-4. 3 questions I should ask the budget holder before signing off
-
-Use British English. Round figures sensibly. Flag anything that looks like a data entry error rather than a real variance.`,
-      setup: [
-        "Open your month-end file in Excel.",
-        "Open the Claude for Excel add-on from the ribbon.",
-        "Paste the prompt into the chat panel.",
-        "Claude reads the workbook directly, so no copy-paste is needed."
-      ],
-      saves: "About half a day at month-end",
-      source: "Issue #2, May 2026"
-    },
-
-    /* ---------- Operations / Supply Chain ---------- */
     {
       title: "Supplier Delay Notification",
       department: "Operations / Supply Chain",
@@ -405,6 +340,7 @@ Use British English. Round figures sensibly. Flag anything that looks like a dat
       why: "Specifying the tone is one of the most powerful levers in any prompt.",
       source: "Issue #1"
     },
+
     {
       title: "Process Improvement Brainstorm",
       department: "Operations / Supply Chain",
@@ -419,6 +355,7 @@ For each suggestion, rate the effort as Low/Medium/High and estimate the potenti
       why: "An effort and impact rating turns a brainstorm into a prioritised action list you can take straight to your manager.",
       source: "Issue #1"
     },
+
     {
       title: "Monthly Production Summary",
       department: "Operations / Supply Chain",
@@ -431,36 +368,7 @@ For each suggestion, rate the effort as Low/Medium/High and estimate the potenti
       why: "Defining section headings upfront means the AI organises messy notes into a presentation-ready format.",
       source: "Issue #1"
     },
-    {
-      title: "The Supplier Watchdog",
-      department: "Operations / Supply Chain",
-      type: "Agent recipe",
-      tool: "ChatGPT",
-      purpose: "Catches supplier risks early, before they reach the production line.",
-      prompt: `Act as a supply chain risk analyst at Harwin (a UK precision connector manufacturer). Each weekday morning, scan the news for risks affecting these suppliers:
 
-[LIST YOUR TOP 10 SUPPLIERS HERE]
-
-Flag any of the following:
-- Factory fires, strikes, or production stoppages
-- Major M&A activity or ownership changes
-- Financial distress (profit warnings, debt issues, layoffs)
-- Raw material shortages affecting their inputs
-- Geopolitical risks (sanctions, trade restrictions)
-- Quality issues or recalls
-
-Output as a brief email digest. For each item: supplier, source URL, 2-sentence summary, recommended action (monitor / contact supplier / source alternative). If no risks detected, reply "All quiet on the supplier front today."`,
-      setup: [
-        "Open ChatGPT and start a Scheduled Agent, daily at 7am.",
-        "List your top 10 critical suppliers.",
-        "Paste the prompt and let it run for a week.",
-        "Tune the threshold after week 1, based on how much noise you get."
-      ],
-      saves: "Catches issues 3 to 5 days earlier than reactive monitoring",
-      source: "Issue #2, May 2026"
-    },
-
-    /* ---------- HR / People ---------- */
     {
       title: "Job Description First Draft",
       department: "HR / People",
@@ -471,6 +379,7 @@ Output as a brief email digest. For each item: supplier, source URL, 2-sentence 
       why: "Listing the exact sections you want acts like a template.",
       source: "Issue #1"
     },
+
     {
       title: "Interview Questions Generator",
       department: "HR / People",
@@ -481,6 +390,7 @@ Output as a brief email digest. For each item: supplier, source URL, 2-sentence 
       why: "Asking for a mix with specific numbers (3 + 3 + 2) ensures variety.",
       source: "Issue #1"
     },
+
     {
       title: "Simplify a Policy Document",
       department: "HR / People",
@@ -493,38 +403,7 @@ Output as a brief email digest. For each item: supplier, source URL, 2-sentence 
       why: "\"Keep the meaning exactly the same\" tells the AI to simplify the language without changing what the policy says.",
       source: "Issue #1"
     },
-    {
-      title: "The CV Sifter",
-      department: "HR / People",
-      type: "Agent recipe",
-      tool: "Claude",
-      purpose: "First-pass CV screening against the same criteria every time.",
-      prompt: `Act as an HR screening assistant for Harwin. I have uploaded a job description and [N] candidate CVs.
 
-For each CV, score against:
-- Essential criteria: [LIST 3-5 ESSENTIAL REQUIREMENTS]
-- Desirable criteria: [LIST 3-5 NICE-TO-HAVES]
-
-Output as a ranked table:
-| Rank | Candidate (initials only) | Essential score /5 | Desirable score /5 | Total /10 | Key strengths | Concerns/gaps |
-
-Do NOT consider name, age, gender, ethnicity, or anything that could introduce bias. Score only on demonstrated experience and skills mentioned in the CV.
-
-Flag any candidate whose CV mentions safeguarding red flags or unexplained gaps over 12 months.
-
-This is a first-pass screen only — final shortlist decisions remain with the hiring manager.`,
-      setup: [
-        "Open Claude (web or desktop app) on your Harwin account.",
-        "Upload your job description and all candidate CVs.",
-        "Paste the prompt, listing your essential and desirable criteria.",
-        "Review the ranked output, and do your own review of the top 5."
-      ],
-      saves: "About 2 hours per role, with more consistent screening",
-      note: "This uses candidates' personal data. Check with IT and HR before first use, and redact names and addresses before upload.",
-      source: "Issue #2, May 2026"
-    },
-
-    /* ---------- Data & Analytics ---------- */
     {
       title: "Excel Formula Explainer",
       department: "Data & Analytics",
@@ -537,6 +416,7 @@ This is a first-pass screen only — final shortlist decisions remain with the h
       why: "The simplest prompts often deliver the most value.",
       source: "Issue #1"
     },
+
     {
       title: "SQL Query from Plain English",
       department: "Data & Analytics",
@@ -550,6 +430,7 @@ Write a SQL query that [DESCRIBE WHAT YOU NEED e.g. "shows total sales by custom
       note: "Share column names only, never the data itself.",
       source: "Issue #1"
     },
+
     {
       title: "Dashboard Description for Stakeholders",
       department: "Data & Analytics",
@@ -560,37 +441,7 @@ Write a SQL query that [DESCRIBE WHAT YOU NEED e.g. "shows total sales by custom
       why: "Specifying the audience controls the language level.",
       source: "Issue #1"
     },
-    {
-      title: "The Daily KPI Briefing",
-      department: "Data & Analytics",
-      type: "Agent recipe",
-      tool: "Claude",
-      purpose: "Pulls overnight KPIs, spots anomalies and posts a summary to Teams.",
-      prompt: `Act as Harwin's daily KPI analyst. Each weekday at 7:45am, run the following:
 
-1. Query yesterday's totals for: Bookings, Billings, Backlog, OTD%, Open NCRs
-2. Compare each to:
-- Same day last week (% change)
-- Same day last year (% change)
-- Month-to-date vs forecast
-3. Flag any metric outside ±2 standard deviations of its trailing 30-day average
-4. Identify the top 3 customers/products driving the biggest movement
-
-Format the output for Microsoft Teams (use markdown headings, bullets, and emoji indicators 🟢🟡🔴 for green/amber/red). Keep it under 250 words — readable on a phone in 60 seconds.
-
-If a metric can't be calculated (data missing, system down), say so explicitly rather than skipping it.`,
-      setup: [
-        "In Claude, set up a scheduled task to run weekdays at 7:45am.",
-        "Connect Claude to the relevant SQL database, read-only.",
-        "Paste the prompt and adjust KPI names to match your tables.",
-        "Set output to a Teams webhook for your channel."
-      ],
-      saves: "About 45 minutes a day, and leaders see the numbers 2 hours earlier",
-      note: "Connects to a live database. This must be set up with IT and the data team.",
-      source: "Issue #2, May 2026"
-    },
-
-    /* ---------- Quality / Compliance ---------- */
     {
       title: "Non-Conformance Report Summary",
       department: "Quality / Compliance",
@@ -609,6 +460,7 @@ Include sections for: Description, Root Cause (preliminary), Containment Action,
       why: "Structured data as bullet points plus named sections means the output matches your quality management system format.",
       source: "Issue #1"
     },
+
     {
       title: "Audit Preparation Questions",
       department: "Quality / Compliance",
@@ -619,6 +471,7 @@ Include sections for: Description, Root Cause (preliminary), Containment Action,
       why: "Asking the AI to play the auditor gives you questions from the other side of the table.",
       source: "Issue #1"
     },
+
     {
       title: "Process Document Simplifier",
       department: "Quality / Compliance",
@@ -631,41 +484,7 @@ Include sections for: Description, Root Cause (preliminary), Containment Action,
       why: "\"Flag any steps that seem ambiguous\" turns the AI into a document reviewer as well as a rewriter.",
       source: "Issue #1"
     },
-    {
-      title: "The NCR Pattern Finder",
-      department: "Quality / Compliance",
-      type: "Agent recipe",
-      tool: "Cowork",
-      purpose: "Reads every NCR and produces a monthly trend report.",
-      prompt: `Act as Harwin's quality data analyst. Read every NCR in the specified folder from the last 30 days. For each NCR, extract:
 
-- NCR number and date
-- Product family (Gecko, Datamate, Kona, Archer, other)
-- Defect category (mechanical, electrical, plating/finish, packaging, documentation)
-- Stage detected (incoming, in-process, final test, customer)
-- Quantity affected
-- Suspected root cause (if recorded)
-- Supplier involved (if applicable)
-
-Output a monthly trend report with:
-1. Total NCRs vs previous month and 12-month average
-2. Top 5 defect categories by frequency and by quantity
-3. Any defect-supplier or defect-product combination appearing 3+ times
-4. New defect types not seen in the previous quarter
-5. Three suggested CAPA priorities based on the patterns
-
-Save the report to /Quality/Monthly Trends/ as a PDF.`,
-      setup: [
-        "Open Cowork on your desktop.",
-        "Point it at the NCR folder (typically a SharePoint or shared drive location).",
-        "Paste the prompt.",
-        "Schedule it to run on the 1st of each month and email you the report."
-      ],
-      saves: "About 1 day a month, and it surfaces patterns people miss",
-      source: "Issue #2, May 2026"
-    },
-
-    /* ---------- Customer Service ---------- */
     {
       title: "Customer Complaint Response",
       department: "Customer Service",
@@ -681,6 +500,7 @@ Keep it under 120 words. Tone: empathetic and solution-focused.`,
       why: "The four-part numbered structure follows best-practice complaint handling.",
       source: "Issue #1"
     },
+
     {
       title: "FAQ Answer Drafter",
       department: "Customer Service",
@@ -691,6 +511,7 @@ Keep it under 120 words. Tone: empathetic and solution-focused.`,
       why: "\"Do NOT make up specific technical numbers\" is a safety guardrail. Always verify technical details.",
       source: "Issue #1"
     },
+
     {
       title: "Escalation Summary for Management",
       department: "Customer Service",
@@ -704,33 +525,7 @@ Keep it under 120 words. Tone: empathetic and solution-focused.`,
       note: "Redact customer names and personal details before pasting an email chain.",
       source: "Issue #1"
     },
-    {
-      title: "The Inbox Triage Agent",
-      department: "Customer Service",
-      type: "Agent recipe",
-      tool: "Cowork",
-      purpose: "Sorts the shared inbox by urgency and drafts replies for review.",
-      prompt: `Act as a customer service triage assistant for Harwin. For each new email in the shared customer service mailbox:
 
-1. Categorise by type: Order status / Technical query / Quality complaint / Pricing or quote / Returns/RMA / Other
-2. Categorise by urgency: 🔴 Urgent (customer line down, escalation, complaint) / 🟡 Standard (response needed today) / 🟢 Low (FYI, acknowledged)
-3. For Standard and Low priority, draft a reply using Harwin's tone (professional, empathetic, helpful) with placeholders [LIKE THIS] for any specific data I need to check
-4. For Urgent, do NOT draft a reply — flag with a Teams notification to the on-duty rep
-5. Move emails into Outlook folders matching the type categories
-
-NEVER auto-send. All drafts await human review. Do NOT make up technical specifications, pricing, or delivery commitments. If a query asks for those, the draft should say "checking with [team] and will respond by [time]" instead.`,
-      setup: [
-        "In Cowork, connect your shared customer service mailbox (Outlook).",
-        "Paste the prompt.",
-        "Set it to run every 30 minutes during business hours.",
-        "For week 1, review every draft before sending, and tune as needed."
-      ],
-      saves: "About 1.5 hours a day, and nothing urgent slips through",
-      note: "Reads customer emails. This must be set up with IT, and every draft is reviewed by a person before sending.",
-      source: "Issue #2, May 2026"
-    },
-
-    /* ---------- Issue #7 ---------- */
     {
       title: "Assumptions first, then write",
       department: "Everyone",
