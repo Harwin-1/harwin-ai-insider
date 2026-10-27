@@ -543,23 +543,23 @@ Keep it under 120 words. Tone: empathetic and solution-focused.`,
      ------------------------------------------------------------------------ */
   useCases: [
     {
-      title: "Rep commission reconciliation",
-      department: "Finance / Accounts",
+      title: "Sales Repository on the web",
+      department: "Sales & Marketing",
       status: "Live",
       tool: "Automation",
-      summary: "Matching invoices to part numbers and rep territories for North America commissions used to be done by hand every period. It is now a script, and the first automated run surfaced underpayments that traced back to part number mismatches, the kind of thing that is almost impossible to spot by eye across thousands of lines.",
-      before: "Matched by hand each period",
-      after: "Scripted, with mismatches flagged",
+      summary: "The 32 ready-made Sales Repository reports used to run inside Access, and if two colleagues hit the same report at once everyone waited. It is now a web page: open it in your browser, pick a report, export to Excel.",
+      before: "23 seconds per report; 2.5 minutes each with three people at once",
+      after: "1 second; 2 seconds each with three people",
       source: "Issue #7, Nov 2026 (Report Rescue)"
     },
     {
-      title: "Bookings & Billings pack",
+      title: "Daily bookings and billings email",
       department: "Finance / Accounts",
       status: "Live",
       tool: "Automation",
-      summary: "The monthly Bookings and Billings Excel pack now builds itself from a standard template and a Python script. Same layout every month, no copy-paste, and the numbers tie back to the warehouse.",
-      before: "Built by hand each month",
-      after: "Hands-free",
+      summary: "The quarter-to-date bookings, billings and margin pack builds itself at 07:00 and goes to 28 people at 08:00. Four checks run first: source tables are fresh, row counts match, report totals agree with the database, and the file opened properly. If anything does not add up, the pack is rebuilt and checked again before it goes out.",
+      before: "Built and sent by hand",
+      after: "Built at 07:00, checked, sent at 08:00",
       source: "Issue #7, Nov 2026 (Report Rescue)"
     },
     {

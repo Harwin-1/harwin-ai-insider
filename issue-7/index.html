@@ -1049,20 +1049,30 @@
       <div class="spotlight-banner">⏱️ Report Rescue</div>
       <div class="card-body">
 
-        <div class="spotlight-title">This month: the commission pack</div>
-        <p class="spotlight-intro">Last month we launched Report Rescue and asked which report eats your week. Nominations are still open (details below). This month's example is one from the Data team's own backlog.</p>
+        <div class="spotlight-title">Two reports that look after themselves</div>
+        <p class="spotlight-intro">Last month we asked which report eats your week. Nominations are still open (details below). This month, two examples that are already live, and a lesson from each.</p>
 
         <div class="rr-item">
-          <div class="feature-title">Rep commission reconciliation <span class="feature-pill">Automated</span></div>
-          <div class="feature-desc">Working out North America rep commissions used to mean matching invoices to part numbers and rep territories by hand, every period. It's now a script. The first automated run over this year's data turned up <strong>underpayments that traced back to part number mismatches</strong>: the kind of thing that's almost impossible to spot by eye across thousands of lines, and exactly the "enter it the same way every time" habit from last issue.</div>
+          <div class="feature-title">The Sales Repository, now on the web <span class="feature-pill">Faster</span></div>
+          <div class="rr-row">
+            <div class="rr-cell rr-before"><strong>Before</strong><br>23 seconds for one report, 2.5 minutes each when three people ran it together</div>
+            <div class="rr-arrow" aria-hidden="true">→</div>
+            <div class="rr-cell rr-after"><strong>Now</strong><br>1 second, and 2 seconds each with three people</div>
+          </div>
+          <div class="feature-desc">The Sales Repository (the 32 ready-made reports we mentioned last issue) used to run inside Access. If two colleagues hit the same report at once, everyone waited. It's now a web page: open it in your browser, pick a report, export to Excel.<br><br><strong>The lesson:</strong> if you're building a spreadsheet from scratch, check the Repository first. It probably exists already. And if you rebuild the same report every week or every month, tell me: I can add it to the Repository so it's one click for you and for everyone else who needs it.</div>
         </div>
 
         <div class="rr-item">
-          <div class="feature-title">Bookings &amp; Billings pack <span class="feature-pill new">Hands-free</span></div>
-          <div class="feature-desc">The monthly Bookings and Billings Excel pack now builds itself from a standard template and a Python script. Same layout every month, no copy-paste, and the numbers tie back to the warehouse.</div>
+          <div class="feature-title">The daily bookings and billings email <span class="feature-pill new">Self-checking</span></div>
+          <div class="rr-row">
+            <div class="rr-cell rr-before"><strong>Before</strong><br>Built and sent by hand</div>
+            <div class="rr-arrow" aria-hidden="true">→</div>
+            <div class="rr-cell rr-after"><strong>Now</strong><br>Built at 07:00, checked, sent at 08:00</div>
+          </div>
+          <div class="feature-desc">Twenty-eight people get the quarter-to-date bookings, billings and margin pack every morning. It builds itself, but it doesn't send itself blindly. Four checks run first: the source tables are fresh, the row counts match, the report totals agree with the database, and the file opened properly. If anything doesn't add up, the pack is rebuilt and checked again before it goes out, so a wrong number never reaches your inbox.<br><br><strong>The lesson:</strong> a report that "ran successfully" can still be wrong. The checks are what make it trustworthy. If a number ever looks odd to you, say so. You're the fifth check.</div>
         </div>
 
-        <div class="time-saved">⏱️ The best part isn't the time saved. It's the errors that get caught</div>
+        <div class="time-saved">⏱️ Faster is good. Checked is what makes it trustworthy</div>
 
         <div class="reader-spotlight-card" style="margin-top:22px;">
           <h4>✋ Got a report that eats your week?</h4>
@@ -1084,7 +1094,7 @@
           </a>
         </div>
 
-        <div class="feature-howto" style="margin-top:18px;"><strong>Data assistant update:</strong> still in build. The data dictionary behind it now covers <strong>157 tables and 135 views</strong> in our warehouse, each with a plain-English description. That's the foundation that lets an assistant answer <em>"which orders slipped last month?"</em> without guessing which table to look in. First look for a small pilot group once it's ready.</div>
+        <div class="feature-howto" style="margin-top:18px;"><strong>Data assistant update:</strong> Harwin GPT, the plain-English assistant for our data, is now tested every morning against a fixed set of 61 real questions. It currently gets 56 of them right (93%), with a typical answer in under 10 seconds. The remaining questions are the ones we're using to improve it. A first look for a small pilot group once it clears 95%.</div>
 
       </div>
     </div>
