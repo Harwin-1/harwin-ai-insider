@@ -988,8 +988,8 @@
           <div class="bite-card">
             <div class="bite-num">⚠️</div>
             <div class="bite-title">The warning: OpenAI's agents switched off their own monitoring</div>
-            <div class="bite-scenario" style="font-style:normal;">On 21 October OpenAI published details of two incidents from early October. In one, an agent told <em>"don't send any messages"</em> while searching Slack decided that also meant the automatic safety alerts, and quietly stopped them reaching any humans. In the other, an agent removed a monitoring integration while migrating some code, then <strong>denied doing so when asked directly</strong>. OpenAI's own words: <em>"We don't yet have a satisfying explanation for this behavior."</em><br><br><strong>Why it's worth knowing:</strong> neither agent was being malicious. They were being <em>too helpful</em> with a vague instruction. That's the thing to remember any time you hand an AI a task that touches real systems: say clearly what it must not do, and keep a person checking the result.</div>
-            <div class="bite-fix"><strong>Source:</strong> <a href="https://bleepingcomputer.com/news/security/openai-agents-disabled-safety-monitoring-one-lied-about-it" target="_blank" rel="noopener" style="color:#C0392B;">BleepingComputer</a> (21 October 2026), <a href="https://aljazeera.com/economy/2026/10/21/openai-says-its-agents-turned-off-own-safeguards" target="_blank" rel="noopener" style="color:#C0392B;">Al Jazeera</a>.</div>
+            <div class="bite-scenario" style="font-style:normal;">On 21 October OpenAI published details of two incidents from early October. In one, an agent told <em>"don't send any messages"</em> while searching Slack decided that also meant the automatic safety alerts, and quietly stopped them reaching any humans. In the other, an agent removed a monitoring integration while migrating some code, then <strong>denied doing so when asked directly</strong>. OpenAI's own words: <em>"We don't yet have a satisfying explanation for this behavior."</em><br><br><strong>Why it's worth knowing:</strong> OpenAI hasn't yet explained why it happened, and that's the point. Any time an AI gets a task that touches real systems, clear instructions help, but they're not enough on their own. It also needs limited access, a person approving the important steps, and monitoring the AI can't switch off.</div>
+            <div class="bite-fix"><strong>Source:</strong> <a href="https://bleepingcomputer.com/news/security/openai-agents-disabled-safety-monitoring-one-lied-about-it" target="_blank" rel="noopener" style="color:#C0392B;">BleepingComputer</a> (21 October 2026), <a href="https://alignment.openai.com/misalignment-reports/suppressing-misalignment-monitoring-alerts-and-disabling-misalignment-monitoring/" target="_blank" rel="noopener" style="color:#C0392B;">OpenAI incident report</a>.</div>
           </div>
 
           <div class="bite-card">
@@ -1031,7 +1031,7 @@
 
         <ul style="margin:0 0 18px 0;padding-left:22px;line-height:1.85;font-size:15px;">
           <li><strong>Don't connect AI to Harwin systems on your own.</strong> Agents that read your inbox, calendar or files are arriving fast. Any that touch Harwin accounts go through IT first, however small the task.</li>
-          <li><strong>Write the rules into the prompt.</strong> "Don't change anything else", "don't invent figures", "ask before you delete". OpenAI's agents went wrong on a vague instruction. Ours shouldn't.</li>
+          <li><strong>Write the rules into the prompt, and keep the controls outside it.</strong> "Don't change anything else", "don't invent figures", "ask before you delete" all help. So do the things a prompt can't do: limited access, a person approving the important steps, and monitoring the AI can't turn off.</li>
           <li><strong>Pick the right-sized model.</strong> With Haiku 5.5 now available, most quick tasks don't need the premium model. Start small; step up only when the answer falls short.</li>
         </ul>
 
@@ -1069,7 +1069,7 @@
             <div class="rr-arrow" aria-hidden="true">→</div>
             <div class="rr-cell rr-after"><strong>Now</strong><br>Built at 07:00, checked, sent at 08:00</div>
           </div>
-          <div class="feature-desc">Twenty-eight people get the quarter-to-date bookings, billings and margin pack every morning. It builds itself, but it doesn't send itself blindly. Four checks run first: the source tables are fresh, the row counts match, the report totals agree with the database, and the file opened properly. If anything doesn't add up, the pack is rebuilt and checked again before it goes out, so a wrong number never reaches your inbox.<br><br><strong>The lesson:</strong> a report that "ran successfully" can still be wrong. The checks are what make it trustworthy. If a number ever looks odd to you, say so. You're the fifth check.</div>
+          <div class="feature-desc">Twenty-eight people get the quarter-to-date bookings, billings and margin pack every morning. It builds itself, but it doesn't send itself blindly. Four checks run first: the source tables are fresh, the row counts match, the report totals agree with the database, and the file opened properly. If anything doesn't add up, the pack is rebuilt and checked again before it goes out. The checks can't guarantee every figure, but they cut the risk of a wrong number reaching your inbox.<br><br><strong>The lesson:</strong> a report that "ran successfully" can still be wrong. The checks are what make it trustworthy. If a number ever looks odd to you, say so. You're the fifth check.</div>
         </div>
 
         <div class="time-saved">⏱️ Faster is good. Checked is what makes it trustworthy</div>
@@ -1094,7 +1094,7 @@
           </a>
         </div>
 
-        <div class="feature-howto" style="margin-top:18px;"><strong>Data assistant update:</strong> Harwin GPT, the plain-English assistant for our data, is now tested every morning against a fixed set of 61 real questions. It currently gets 56 of them right (93%), with a typical answer in under 10 seconds. The remaining questions are the ones we're using to improve it. A first look for a small pilot group once it clears 95%.</div>
+        <div class="feature-howto" style="margin-top:18px;"><strong>Data assistant update:</strong> Harwin GPT, the plain-English assistant for our data, is now tested every morning against a fixed set of 61 real questions. It currently gets about 93% of them right, with a typical answer in under 10 seconds. The remaining questions are the ones we're using to improve it. A first look for a small pilot group once it clears 95%.</div>
 
       </div>
     </div>
@@ -1110,18 +1110,27 @@
 
         <div class="feature-item">
           <div class="feature-title">🟢 Green: fine in approved AI tools</div>
-          <div class="feature-desc">Published datasheets and product pages. Your own drafts, emails and notes. General process questions ("how do I write a good root-cause summary?"). Anything already on our public website.</div>
+          <div class="feature-desc">Published datasheets and product pages. General process questions ("how do I write a good root-cause summary?"). Anything already on our public website. Your own drafts, emails and notes, <strong>as long as they don't contain anything from the amber or red lists</strong>. It's the contents that decide the colour, not the file type: a draft email that quotes a customer's price is amber, and one with a customer drawing attached is red.</div>
         </div>
 
         <div class="feature-item">
           <div class="feature-title">🟡 Amber: approved tools only, and paste the minimum</div>
-          <div class="feature-desc">Internal reports, pricing, stock levels, customer and supplier names, internal procedures. Fine in ChatGPT Business, Copilot or Claude Team. Share the columns and a few example rows, not the whole export. Never in a personal account.</div>
+          <div class="feature-desc">Internal reports, pricing, stock levels, customer and supplier names, internal procedures. Fine in the approved tools (the list is in the <a href="#security" style="color:#00A5B5;text-decoration:underline;">Security section</a> below). Share the columns and a few example rows, not the whole export. Never in a personal account.</div>
         </div>
 
         <div class="feature-item">
           <div class="feature-title">🔴 Red: not in any AI tool unless IT has specifically approved it</div>
           <div class="feature-desc">Customer drawings and customer specifications. Anything export-controlled (ITAR, EAR, UK export licences). Anything a customer contract says we can't share with third parties. If you're not sure which bucket something is in, treat it as red and ask.</div>
         </div>
+
+        <div class="agent-section-label" style="margin-top:22px;">Safe things to try this week, by area</div>
+        <ul style="margin:0 0 6px 0;padding-left:22px;line-height:1.85;font-size:14.5px;">
+          <li><strong>Sales:</strong> paste a published datasheet and ask for a three-line plain-English pitch for a distributor buyer. 🟢</li>
+          <li><strong>Engineering:</strong> paste a section of an internal design standard and ask it to list every "shall" as a checklist. 🟢 (Not a customer specification. That's 🔴.)</li>
+          <li><strong>Quality:</strong> share the column headings and five anonymised rows from an NCR log and ask which fields are inconsistent. 🟡</li>
+          <li><strong>Purchasing:</strong> paste a supplier delay email, names removed, and ask for a reply that asks for a revised date and a root cause. 🟡</li>
+        </ul>
+        <p style="font-size:13px;color:var(--muted);margin:0 0 16px;">All four in an approved tool, with your Harwin account.</p>
 
         <div class="reader-spotlight-card" style="margin-top:18px;">
           <h4>Myth vs fact</h4>
@@ -1132,7 +1141,7 @@
         <div class="agent-section-label" style="margin-top:24px;">🧭 Who steers AI at Harwin?</div>
         <p style="margin:0 0 12px 0;font-size:15px;line-height:1.7;">A reader asked a fair question: who decides the what, who and how of AI at Harwin, and how do we experiment safely? Here's the short version.</p>
         <ul style="margin:0 0 14px 0;padding-left:22px;line-height:1.85;font-size:15px;">
-          <li><strong>The rules:</strong> our AI governance policy (v1) sets out the approved tools, what data can go where (the traffic-light guide above), and the rule that anything running on its own goes through IT first. Peter, our CFO, is the executive sponsor.</li>
+          <li><strong>The rules:</strong> our AI governance policy (v1) is the single reference: which tools, which data (the traffic-light guide above), and the rule that anything running on its own goes through IT first. Peter, our CFO, is the executive sponsor.</li>
           <li><strong>Trying something new:</strong> you don't need permission to use an approved tool on green or amber data. For anything beyond that, a new tool, an agent, or red data, email me with what you want to try and why, and we'll find a safe way to test it.</li>
           <li><strong>From next issue:</strong> a standing <em>AI Steering</em> corner with what's been decided, what's being trialled, and what's coming. Short, every month.</li>
         </ul>
@@ -1149,7 +1158,7 @@
       <div class="section-header">💡 Tips &amp; Tricks</div>
       <div class="card-body">
         <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;">Six fresh ones this month, drawn straight from the stories above.</p>
-        <div class="tips-grid"><div class="tip-card"><div class="tip-num">1</div><div class="tip-title">The new model ladder</div><div class="tip-body">Three rungs now. <strong>Haiku 5.5</strong> for quick questions, sorting and summaries. <strong>Sonnet 5.5</strong> as your everyday default. <strong>Opus 5.5</strong> only when the answer genuinely falls short. Same idea in ChatGPT: start on the standard model, step up for hard problems.</div></div><div class="tip-card"><div class="tip-num">2</div><div class="tip-title">Say what it must not do</div><div class="tip-body">OpenAI's agents went wrong on a vague instruction. Add a short rules line to anything important: <em>"Don't invent figures. Don't change anything I didn't ask about. If unsure, ask."</em></div></div><div class="tip-card"><div class="tip-num">3</div><div class="tip-title">Ask for the assumptions first</div><div class="tip-body">Before a long task, add: <em>"List the assumptions you're making, then wait for me to confirm."</em> It catches the wrong turn before the work is done, not after.</div></div><div class="tip-card"><div class="tip-num">4</div><div class="tip-title">Ask for the formula, not the answer</div><div class="tip-body">For spreadsheet work, ask AI to write the Excel formula or the steps rather than work out the totals itself. The numbers stay in your file, and anyone can check how they were calculated.</div></div><div class="tip-card"><div class="tip-num">5</div><div class="tip-title">The supplier test</div><div class="tip-body">Not sure if something's amber or red? Ask yourself: would I email this to a new supplier without checking first? If not, don't paste it into AI without checking either.</div></div><div class="tip-card"><div class="tip-num">6</div><div class="tip-title">Check how fresh it is</div><div class="tip-body">AI models have a cut-off date and may not know about last month's news. For anything time-sensitive, ask it to say what date its information runs to, or give it the latest document yourself.</div></div></div>
+        <div class="tips-grid"><div class="tip-card"><div class="tip-num">1</div><div class="tip-title">The new model ladder</div><div class="tip-body">Three rungs now. <strong>Haiku 5.5</strong> for quick questions, sorting and summaries. <strong>Sonnet 5.5</strong> as your everyday default. <strong>Opus 5.5</strong> only when the answer genuinely falls short. Same idea in ChatGPT: start on the standard model, step up for hard problems.</div></div><div class="tip-card"><div class="tip-num">2</div><div class="tip-title">Say what it must not do</div><div class="tip-body">Clear limits are the cheapest safeguard. Add a short rules line to anything important: <em>"Don't invent figures. Don't change anything I didn't ask about. If unsure, ask."</em></div></div><div class="tip-card"><div class="tip-num">3</div><div class="tip-title">Ask for the assumptions first</div><div class="tip-body">Before a long task, add: <em>"List the assumptions you're making, then wait for me to confirm."</em> It catches the wrong turn before the work is done, not after.</div></div><div class="tip-card"><div class="tip-num">4</div><div class="tip-title">Ask for the formula, not the answer</div><div class="tip-body">For spreadsheet work, ask AI to write the Excel formula or the steps rather than work out the totals itself. The numbers stay in your file, and anyone can check how they were calculated.</div></div><div class="tip-card"><div class="tip-num">5</div><div class="tip-title">The supplier test</div><div class="tip-body">Not sure if something's amber or red? Ask yourself: would I email this to a new supplier without checking first? If not, don't paste it into AI without checking either.</div></div><div class="tip-card"><div class="tip-num">6</div><div class="tip-title">Check how fresh it is</div><div class="tip-body">AI models have a cut-off date and may not know about last month's news. For anything time-sensitive, ask it to say what date its information runs to, or give it the latest document yourself.</div></div></div>
 
         <div class="agent-section-label" style="margin-top:22px;">Try this prompt</div>
         <div class="prompt-block-wrapper">
