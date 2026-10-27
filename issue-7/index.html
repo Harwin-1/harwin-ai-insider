@@ -1205,7 +1205,7 @@
 
     <div class="qotm">
       <div class="qotm-label">Question of the month</div>
-      <div class="qotm-q">Which of the six tips will you actually try this month?</div>
+      <div class="qotm-q">Which of this issue's six tips will you try?</div>
       <div class="chip-row">
         <button class="chip" onclick="submitPoll(this,1)">1 · The model ladder</button>
         <button class="chip" onclick="submitPoll(this,2)">2 · Say what it must not do</button>
@@ -1216,7 +1216,7 @@
         <button class="chip" onclick="submitPoll(this,0)">None of them</button>
       </div>
       <div id="qotm-confirm"></div>
-      <div class="anon-note">One tap, anonymous. The results go in next month's issue.</div>
+      <div class="anon-note">One tap, anonymous. We'll share the results in December.</div>
     </div>
 
     <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;color:var(--dark-blue);margin-bottom:8px;">How useful was this issue?</p>
@@ -1424,7 +1424,7 @@ async function submitPoll(btn, n) {
   pollSent = true;
   const confirmEl = document.getElementById('qotm-confirm');
   confirmEl.textContent = 'Saving…';
-  const payload = { issue: ISSUE_NUMBER, type: 'poll', question: 'Which tip will you try?', answer: n, answerLabel: btn.textContent.trim(), userAgent: navigator.userAgent };
+  const payload = { issue: ISSUE_NUMBER, type: 'poll', question: 'Which of this issue\'s six tips will you try?', answer: n, answerLabel: btn.textContent.trim(), userAgent: navigator.userAgent };
   try {
     if (POWER_AUTOMATE_URL && POWER_AUTOMATE_URL.length > 0) {
       await fetch(POWER_AUTOMATE_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
