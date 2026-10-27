@@ -906,6 +906,27 @@
   #draft-banner { display: none; position: sticky; top: 0; z-index: 200; background: #FFF1A8; color: #5C4A00;
     font-size: 13px; font-weight: 700; text-align: center; padding: 8px 16px; }
   #draft-banner a { color: inherit; }
+  /* === IN-PAGE COMMENT + QUESTION OF THE MONTH (Issue #7) === */
+  #comment-box { display:none; max-width:520px; margin:16px auto 0; text-align:left; }
+  #comment-box.show { display:block; animation: fadeIn .3s ease; }
+  #comment-box label { display:block; font-family:'Outfit',sans-serif; font-size:14px; font-weight:600; color:var(--dark-blue); margin-bottom:6px; }
+  #comment-box textarea { width:100%; box-sizing:border-box; min-height:64px; padding:10px 12px; border:2px solid var(--border); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:14px; resize:vertical; }
+  #comment-box textarea:focus { outline:none; border-color:#00A5B5; }
+  .comment-row { display:flex; gap:10px; margin-top:10px; align-items:center; flex-wrap:wrap; }
+  .comment-row select { flex:1; min-width:160px; padding:9px 10px; border:2px solid var(--border); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:13px; background:var(--white); color:var(--body-text); }
+  .comment-send { padding:10px 18px; background:#00A5B5; color:#fff; border:none; border-radius:10px; font-family:'Outfit',sans-serif; font-weight:700; font-size:14px; cursor:pointer; }
+  .comment-send:hover { background:#008A97; }
+  .comment-send:disabled { background:#9CC9CE; cursor:default; }
+  .anon-note { font-size:12px; color:var(--muted); margin-top:6px; }
+  .qotm { background:#FFF7ED; border:1px solid #FED7AA; border-radius:14px; padding:18px 20px; margin:0 auto 22px; max-width:640px; text-align:left; }
+  .qotm-label { font-family:'Outfit',sans-serif; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#C2410C; margin-bottom:6px; }
+  .qotm-q { font-family:'Outfit',sans-serif; font-size:17px; font-weight:700; color:var(--dark-blue); margin-bottom:12px; }
+  .chip-row { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip { padding:8px 14px; border:2px solid var(--border); border-radius:999px; background:var(--white); font-family:'DM Sans',sans-serif; font-size:13.5px; cursor:pointer; transition:all .2s ease; color:var(--body-text); }
+  .chip:hover { border-color:#E87722; }
+  .chip.picked { border-color:#E87722; background:#FFF3E8; font-weight:700; }
+  #qotm-confirm { font-size:13.5px; color:var(--dark-blue); margin-top:10px; min-height:18px; }
+  @keyframes fadeIn { from {opacity:0; transform:translateY(4px);} to {opacity:1; transform:none;} }
 </style>
 </head>
 <body>
@@ -1170,7 +1191,23 @@
 <div class="container">
   <div class="feedback-section" id="feedback">
     <div class="feedback-title">📬 Your Feedback Shapes This Newsletter</div>
-    <div class="feedback-sub">A quick star rating takes one tap — that's all we need. If you've got more to share, the form's right below.</div>
+    <div class="feedback-sub">Two taps, no name needed. Answer the question of the month, rate the issue, and if you want to add a line, there's a box for it.</div>
+
+    <div class="qotm">
+      <div class="qotm-label">Question of the month</div>
+      <div class="qotm-q">Which of the six tips will you actually try this month?</div>
+      <div class="chip-row">
+        <button class="chip" onclick="submitPoll(this,1)">1 · The model ladder</button>
+        <button class="chip" onclick="submitPoll(this,2)">2 · Say what it must not do</button>
+        <button class="chip" onclick="submitPoll(this,3)">3 · Assumptions first</button>
+        <button class="chip" onclick="submitPoll(this,4)">4 · Formula, not answer</button>
+        <button class="chip" onclick="submitPoll(this,5)">5 · The supplier test</button>
+        <button class="chip" onclick="submitPoll(this,6)">6 · Check how fresh it is</button>
+        <button class="chip" onclick="submitPoll(this,0)">None of them</button>
+      </div>
+      <div id="qotm-confirm"></div>
+      <div class="anon-note">One tap, anonymous. The results go in next month's issue.</div>
+    </div>
 
     <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;color:var(--dark-blue);margin-bottom:8px;">How useful was this issue?</p>
     <div class="star-row">
@@ -1181,6 +1218,28 @@
       <button class="star-rate-btn" onclick="submitRating(5)" title="5 — Loved it!">⭐</button>
     </div>
     <p id="rating-confirm"></p>
+
+    <div id="comment-box">
+      <label for="comment-text">One line on why? <span style="font-weight:400;color:var(--muted);">(optional)</span></label>
+      <textarea id="comment-text" maxlength="500" placeholder="Too long, too short, want more on X, loved the tips…"></textarea>
+      <div class="comment-row">
+        <select id="comment-dept" aria-label="Your department (optional)">
+          <option value="">Department (optional)</option>
+          <option>Sales &amp; Marketing</option>
+          <option>Engineering / R&amp;D</option>
+          <option>Finance / Accounts</option>
+          <option>Operations / Supply Chain</option>
+          <option>Quality / Compliance</option>
+          <option>HR / People</option>
+          <option>Customer Service</option>
+          <option>IT &amp; Data</option>
+          <option>Executive / Leadership</option>
+          <option>Other</option>
+        </select>
+        <button class="comment-send" id="comment-send" onclick="submitComment()">Send</button>
+      </div>
+      <div class="anon-note">Anonymous. No name or email is collected.</div>
+    </div>
 
     <div class="feedback-divider"></div>
 
@@ -1207,8 +1266,8 @@
     <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v2Gf6nDl8UWzcU4oaYAFwhZV4gHkAJpOivNOaZnVk2tURUlMQ1RZSlBGNko4QkhVUjk4WUI0SzYxSy4u" target="_blank" rel="noopener" class="action-link">
       <span class="action-icon">📊</span>
       <div>
-        <div class="action-text-main">General feedback</div>
-        <div class="action-text-sub">Suggestions on topics, format, or what you'd like to see next month</div>
+        <div class="action-text-main">Prefer a form?</div>
+        <div class="action-text-sub">One question, anonymous. What would you like next month to cover?</div>
       </div>
       <span class="action-arrow">→</span>
     </a>
@@ -1321,6 +1380,49 @@ async function submitRating(n) {
     confirmEl.style.opacity = '1';
   }
   showToast('Rating saved: ' + n + '/5 ⭐');
+  const box = document.getElementById('comment-box');
+  if (box) { box.classList.add('show'); setTimeout(() => { const t = document.getElementById('comment-text'); if (t) t.focus(); }, 300); }
+}
+
+// === IN-PAGE COMMENT (posts to the same Power Automate flow) ===
+async function submitComment() {
+  const text = (document.getElementById('comment-text').value || '').trim();
+  const dept = document.getElementById('comment-dept').value || '';
+  const btn = document.getElementById('comment-send');
+  if (!text) { showToast('Type a line first'); return; }
+  btn.disabled = true; btn.textContent = 'Sending…';
+  const payload = { issue: ISSUE_NUMBER, type: 'comment', rating: currentRating || '', label: currentRating ? ratingLabels[currentRating] : '', comment: text, department: dept, userAgent: navigator.userAgent };
+  try {
+    if (POWER_AUTOMATE_URL && POWER_AUTOMATE_URL.length > 0) {
+      await fetch(POWER_AUTOMATE_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    }
+    btn.textContent = 'Sent ✓';
+    showToast('Thanks, comment sent');
+    document.getElementById('comment-text').disabled = true;
+  } catch (err) {
+    btn.disabled = false; btn.textContent = 'Send';
+    showToast('Could not send, try again');
+  }
+}
+
+// === QUESTION OF THE MONTH (one tap, anonymous) ===
+let pollSent = false;
+async function submitPoll(btn, n) {
+  if (pollSent) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('picked'));
+  btn.classList.add('picked');
+  pollSent = true;
+  const confirmEl = document.getElementById('qotm-confirm');
+  confirmEl.textContent = 'Saving…';
+  const payload = { issue: ISSUE_NUMBER, type: 'poll', question: 'Which tip will you try?', answer: n, answerLabel: btn.textContent.trim(), userAgent: navigator.userAgent };
+  try {
+    if (POWER_AUTOMATE_URL && POWER_AUTOMATE_URL.length > 0) {
+      await fetch(POWER_AUTOMATE_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    }
+    confirmEl.textContent = '✅ Noted. Thanks!';
+  } catch (err) {
+    confirmEl.textContent = '✅ Thanks!';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
