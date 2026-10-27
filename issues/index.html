@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harwin AI Insider: all issues</title>
+<style>
+  :root{
+    --navy:#0F2B4C; --navy-2:#1E3A5F; --teal:#00A5B5; --teal-dark:#008796; --cyan:#00C4D6;
+    --orange:#E87722; --bg:#F4F6F8; --card:#FFFFFF; --line:#E2E8F0;
+    --ink:#1F2937; --ink-2:#4B5563; --ink-3:#6B7280; --wash:#E6F7F8; --green-bg:#E7F6EC; --green:#1B7A3D;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+  a{color:var(--teal-dark)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+  header{background:var(--navy);color:#fff}
+  header .wrap{padding:26px 20px 24px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:1.8px;color:var(--cyan);text-transform:uppercase}
+  h1{margin:6px 0 4px;font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.4px}
+  .tagline{color:var(--cyan);font-style:italic;font-size:15px}
+  .crumbs{font-size:13px;margin-top:12px}
+  .crumbs a{color:#B9C6D6}
+  main{padding:22px 0 30px}
+  .tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:22px}
+  @media (max-width:640px){.tools{grid-template-columns:1fr}}
+  .tool{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink)}
+  .tool:hover{border-color:var(--teal)}
+  .tool .ic{font-size:24px}
+  .tool b{display:block;color:var(--navy);font-size:15px}
+  .tool span{font-size:13px;color:var(--ink-2)}
+  .label{font-size:11px;font-weight:700;letter-spacing:1.2px;color:var(--ink-3);text-transform:uppercase;margin:0 0 10px}
+  .issue{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;padding:16px 18px;margin-bottom:12px;text-decoration:none;color:var(--ink)}
+  .issue:hover{border-color:var(--teal);box-shadow:0 2px 8px rgba(0,165,181,.12)}
+  .issue.latest{border-left-color:var(--orange)}
+  .num{flex:0 0 auto;width:54px;height:54px;border-radius:12px;background:var(--wash);color:var(--teal-dark);font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
+  .latest .num{background:#FDEFE2;color:#A4500F}
+  .issue h2{margin:0 0 2px;font-size:17px;line-height:1.3;color:var(--navy)}
+  .date{font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
+  .pill{display:inline-block;margin-left:8px;font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--green-bg);color:var(--green);vertical-align:middle}
+  .inside{font-size:13.5px;color:var(--ink-2);margin:0}
+  .arrow{flex:0 0 auto;align-self:center;color:var(--ink-3);font-size:20px}
+  footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--ink-3);font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Harwin AI Insider</div>
+    <h1>All issues</h1>
+    <div class="tagline">Smarter prompts. Sharper work. Every month.</div>
+    <div class="crumbs"><a href="../library/">AI Library</a> &middot; <a href="../can-i-paste/">Can I paste this?</a> &middot; <a href="../issue-7/">Latest issue</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="label">Tools</p>
+  <div class="tools">
+    <a class="tool" href="../library/"><span class="ic">📚</span><div><b>AI Library</b><span>Every prompt and use case from every issue, searchable by department.</span></div></a>
+    <a class="tool" href="../can-i-paste/"><span class="ic">🚦</span><div><b>Can I paste this?</b><span>Pick the information and the tool, get green, amber or red in two taps.</span></div></a>
+  </div>
+
+  <p class="label">Issues, newest first</p>
+
+  <a class="issue latest" href="../issue-7/">
+    <div class="num">#7</div>
+    <div>
+      <h2>When AI Starts Acting on Its Own <span class="pill">Latest</span></h2>
+      <div class="date">1 November 2026</div>
+      <p class="inside">OpenAI's agents switched off their own monitoring. Claude Haiku 5.5 and Claude Duet. AI found a bug in most of the web. Where a model comes from now matters. Report Rescue: the Sales Repository on the web and the self-checking daily email. The traffic-light data guide. Six tips and a new model ladder.</p>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <a class="issue" href="../issue-6/">
+    <div class="num">#6</div>
+    <div>
+      <h2>AI Is Moving to Where Our Work Already Happens</h2>
+      <div class="date">1 October 2026</div>
+      <p class="inside">AI inside the database. Claude Opus 5.5. When the buyer is an AI. AI in defence manufacturing. Report Rescue launches: manufacturing planning from 24 hours to 5 minutes. Five data governance habits.</p>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <a class="issue" href="../issue-5/">
+    <div class="num">#5</div>
+    <div>
+      <h2>The Good, the Bad, and the Human in the Loop</h2>
+      <div class="date">1 August 2026</div>
+      <p class="inside">The month in AI and what it means for us. AI note-takers in meetings: when they help and when they don't. Tips and tricks.</p>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <a class="issue" href="../issue-4/">
+    <div class="num">#4</div>
+    <div>
+      <h2>Make AI Pay Its Way</h2>
+      <div class="date">1 July 2026</div>
+      <p class="inside">Is it worth doing at all? Prompts that actually work. New features worth knowing. Tips and tricks.</p>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <a class="issue" href="../issue-3/">
+    <div class="num">#3</div>
+    <div>
+      <h2>Agents Bite Back</h2>
+      <div class="date">1 June 2026</div>
+      <p class="inside">Using AI safely at Harwin: the basics. Seven ways agents bite back. The quiet power of chatbots. Agent or chatbot? A decision card.</p>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <a class="issue" href="../issue-2/">
+    <div class="num">#2</div>
+    <div>
+      <h2>From Prompts to Agents</h2>
+      <div class="date">1 May 2026</div>
+      <p class="inside">Department prompts for Sales, Engineering, Finance, Operations, HR, Data, Quality and Customer Service. What's new this month. Best app to use where. Tips for running agents.</p>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <a class="issue" href="../">
+    <div class="num">#1</div>
+    <div>
+      <h2>Welcome to the Very First Issue</h2>
+      <div class="date">April 2026</div>
+      <p class="inside">Prompt of the month. Department prompts. Do's and don'ts for getting started. The feature you're missing: ChatGPT Agent. A real Harwin use case. Reader spotlight.</p>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+</main>
+
+<footer><div class="wrap">Harwin AI Insider &middot; Internal use only &middot; Curated by Nav, Data &amp; Analytics</div></footer>
+</body>
+</html>
