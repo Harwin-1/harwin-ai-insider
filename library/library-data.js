@@ -543,16 +543,6 @@ Keep it under 120 words. Tone: empathetic and solution-focused.`,
      ------------------------------------------------------------------------ */
   useCases: [
     {
-      title: "Sales Repository on the web",
-      department: "Sales & Marketing",
-      status: "Live",
-      tool: "Automation",
-      summary: "The 32 ready-made Sales Repository reports used to run inside Access, and if two colleagues hit the same report at once everyone waited. It is now a web page: open it in your browser, pick a report, export to Excel.",
-      before: "23 seconds per report; 2.5 minutes each with three people at once",
-      after: "1 second; 2 seconds each with three people",
-      source: "Issue #7, Nov 2026 (Report Rescue)"
-    },
-    {
       title: "Daily bookings and billings email",
       department: "Finance / Accounts",
       status: "Live",
