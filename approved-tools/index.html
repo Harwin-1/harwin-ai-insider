@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approved AI tools at Harwin | Harwin AI Insider</title>
+<style>
+  :root{--navy:#0F2B4C;--teal:#00A5B5;--teal-dark:#008796;--cyan:#00C4D6;--orange:#E87722;--bg:#F4F6F8;--card:#FFFFFF;--line:#E2E8F0;
+  --ink:#1F2937;--ink-2:#4B5563;--ink-3:#6B7280;--wash:#E6F7F8;--g-bg:#E7F6EC;--g:#1B7A3D;--a-bg:#FFF6E9;--a:#9A5B00;--r-bg:#FDECEC;--r:#B42318}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+  a{color:var(--teal-dark)} button,select,input,textarea{font:inherit}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+  header{background:var(--navy);color:#fff} header .wrap{padding:26px 20px 24px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:1.8px;color:var(--cyan);text-transform:uppercase}
+  h1{margin:6px 0 4px;font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.4px}
+  .tagline{color:var(--cyan);font-style:italic;font-size:15px}
+  .crumbs{font-size:13px;margin-top:12px} .crumbs a{color:#B9C6D6}
+  main{padding:22px 0 30px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:16px}
+  .step{font-size:11px;font-weight:700;letter-spacing:1.2px;color:var(--ink-3);text-transform:uppercase;margin-bottom:8px}
+  .q{font-size:17px;font-weight:700;color:var(--navy);margin:0 0 12px}
+  .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px} @media (max-width:640px){.opts{grid-template-columns:1fr}}
+  .opt{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;text-align:left;cursor:pointer;color:var(--ink);line-height:1.35}
+  .opt small{display:block;color:var(--ink-3);font-size:12.5px;margin-top:2px} .opt:hover{border-color:var(--teal)}
+  .opt[aria-pressed="true"]{border-color:var(--navy);background:var(--wash)}
+  label.f{display:block;font-weight:700;color:var(--navy);font-size:14px;margin:12px 0 4px} label.f small{font-weight:400;color:var(--ink-3)}
+  input[type=text],input[type=number],select,textarea{width:100%;border:2px solid var(--line);border-radius:8px;padding:9px 11px;background:#fff;color:var(--ink)}
+  textarea{min-height:150px;resize:vertical} input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal)}
+  .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px} @media (max-width:640px){.row{grid-template-columns:1fr}}
+  .btn{display:inline-block;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none}
+  .btn.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)} .btn.teal{background:var(--teal)}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .out{background:var(--wash);border-left:4px solid var(--teal);border-radius:0 8px 8px 0;padding:14px 16px;white-space:pre-wrap;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.6;color:var(--navy)}
+  .result{border-radius:12px;padding:20px 22px;border:2px solid var(--line);background:#fff;margin-bottom:16px}
+  .result h2{margin:0 0 6px;font-size:21px;color:var(--navy)}
+  .big{font-size:40px;font-weight:800;color:var(--orange);line-height:1}
+  .stat{background:var(--bg);border-radius:10px;padding:14px;text-align:center} .stat small{display:block;color:var(--ink-3);font-size:12.5px;margin-top:4px}
+  .fine{font-size:13px;color:var(--ink-3);margin-top:14px}
+  .pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 9px;border-radius:999px;background:var(--wash);color:var(--teal-dark);vertical-align:middle}
+  .pill.new{background:#FFF1E6;color:var(--orange)}
+  footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--ink-3);font-size:12px;text-align:center}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 16px;border-radius:8px;font-size:13.5px;opacity:0;transition:opacity .2s;pointer-events:none} .toast.show{opacity:1}
+  @media print{header,.crumbs,.btns,footer,.noprint{display:none!important} body{background:#fff} .panel{border:1px solid #ccc}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eyebrow">Harwin AI Insider</div>
+  <h1>Approved AI tools at Harwin</h1>
+  <div class="tagline">One page: what you can use, what you can't, and who to ask. Print it or pin it.</div>
+  <div class="crumbs"><a href="../tools/">All tools</a> &middot; <a href="../library/">AI Library</a> &middot; <a href="../can-i-paste/">Can I paste this?</a> &middot; <a href="../issues/">All issues</a></div>
+</div></header>
+<main><div class="wrap">
+
+<div class="panel" style="border-left:6px solid #22A24E">
+  <div class="step" style="color:var(--g)">✅ Approved for Harwin work, with your Harwin account</div>
+  <p style="margin:6px 0"><b>ChatGPT Business</b>: everyday questions, drafting, Deep Research.</p>
+  <p style="margin:6px 0"><b>Microsoft Copilot (M365)</b>: inside Outlook, Word, Excel and Teams. Free Copilot Chat now has hidden daily limits.</p>
+  <p style="margin:6px 0"><b>Claude Team</b>: long documents, careful reading, slides and styled documents.</p>
+</div>
+<div class="panel" style="border-left:6px solid #F59E0B">
+  <div class="step" style="color:var(--a)">⚠️ Check with IT first</div>
+  <p style="margin:6px 0"><b>Any other AI tool</b>: Gemini, Perplexity, browser extensions, local models, anything new and free.</p>
+  <p style="margin:6px 0"><b>Agents and connectors</b>: anything that reads your email, calendar or files, or runs on its own. This includes sharing an agent you've built.</p>
+  <p style="margin:6px 0">Log a ticket: <a href="mailto:itsupport@harwin.com">itsupport@harwin.com</a></p>
+</div>
+<div class="panel" style="border-left:6px solid #DC2626">
+  <div class="step" style="color:var(--r)">❌ Never</div>
+  <p style="margin:6px 0"><b>Personal accounts</b> (Claude Pro, ChatGPT Plus, free Copilot) for any Harwin data, however small the task.</p>
+  <p style="margin:6px 0"><b>Customer drawings, customer specifications or export-controlled data</b> in any AI tool, including approved ones, unless IT has specifically approved it.</p>
+</div>
+<div class="panel">
+  <div class="step">The three rules</div>
+  <p style="margin:6px 0"><b>1. Approved accounts only.</b> <b>2. Strip out what the AI doesn't need.</b> <b>3. AI drafts, a person decides.</b></p>
+  <p style="margin:10px 0 0;font-size:14px;color:var(--ink-2)">Not sure about a specific piece of information? <a href="../can-i-paste/">Can I paste this?</a> gives you green, amber or red in two taps.</p>
+</div>
+<div class="btns noprint"><button class="btn" onclick="window.print()">🖨️ Print this card</button></div>
+
+<p class="fine">🔒 This page runs entirely in your browser. Nothing you type or pick here is sent, saved or seen by anyone.</p>
+</div></main>
+<footer><div class="wrap">Harwin AI Insider &middot; Internal use only &middot; Curated by Nav, Data &amp; Analytics</div></footer>
+<div class="toast" id="toast"></div>
+<script>
+function copyText(id){var t=document.getElementById(id).innerText;navigator.clipboard.writeText(t).then(function(){toast('Copied')});}
+function toast(m){var e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(function(){e.classList.remove('show')},1600);}
+</script>
+</body></html>

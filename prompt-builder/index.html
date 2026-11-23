@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompt builder | Harwin AI Insider</title>
+<style>
+  :root{--navy:#0F2B4C;--teal:#00A5B5;--teal-dark:#008796;--cyan:#00C4D6;--orange:#E87722;--bg:#F4F6F8;--card:#FFFFFF;--line:#E2E8F0;
+  --ink:#1F2937;--ink-2:#4B5563;--ink-3:#6B7280;--wash:#E6F7F8;--g-bg:#E7F6EC;--g:#1B7A3D;--a-bg:#FFF6E9;--a:#9A5B00;--r-bg:#FDECEC;--r:#B42318}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+  a{color:var(--teal-dark)} button,select,input,textarea{font:inherit}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+  header{background:var(--navy);color:#fff} header .wrap{padding:26px 20px 24px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:1.8px;color:var(--cyan);text-transform:uppercase}
+  h1{margin:6px 0 4px;font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.4px}
+  .tagline{color:var(--cyan);font-style:italic;font-size:15px}
+  .crumbs{font-size:13px;margin-top:12px} .crumbs a{color:#B9C6D6}
+  main{padding:22px 0 30px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:16px}
+  .step{font-size:11px;font-weight:700;letter-spacing:1.2px;color:var(--ink-3);text-transform:uppercase;margin-bottom:8px}
+  .q{font-size:17px;font-weight:700;color:var(--navy);margin:0 0 12px}
+  .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px} @media (max-width:640px){.opts{grid-template-columns:1fr}}
+  .opt{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;text-align:left;cursor:pointer;color:var(--ink);line-height:1.35}
+  .opt small{display:block;color:var(--ink-3);font-size:12.5px;margin-top:2px} .opt:hover{border-color:var(--teal)}
+  .opt[aria-pressed="true"]{border-color:var(--navy);background:var(--wash)}
+  label.f{display:block;font-weight:700;color:var(--navy);font-size:14px;margin:12px 0 4px} label.f small{font-weight:400;color:var(--ink-3)}
+  input[type=text],input[type=number],select,textarea{width:100%;border:2px solid var(--line);border-radius:8px;padding:9px 11px;background:#fff;color:var(--ink)}
+  textarea{min-height:150px;resize:vertical} input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal)}
+  .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px} @media (max-width:640px){.row{grid-template-columns:1fr}}
+  .btn{display:inline-block;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none}
+  .btn.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)} .btn.teal{background:var(--teal)}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .out{background:var(--wash);border-left:4px solid var(--teal);border-radius:0 8px 8px 0;padding:14px 16px;white-space:pre-wrap;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.6;color:var(--navy)}
+  .result{border-radius:12px;padding:20px 22px;border:2px solid var(--line);background:#fff;margin-bottom:16px}
+  .result h2{margin:0 0 6px;font-size:21px;color:var(--navy)}
+  .big{font-size:40px;font-weight:800;color:var(--orange);line-height:1}
+  .stat{background:var(--bg);border-radius:10px;padding:14px;text-align:center} .stat small{display:block;color:var(--ink-3);font-size:12.5px;margin-top:4px}
+  .fine{font-size:13px;color:var(--ink-3);margin-top:14px}
+  .pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 9px;border-radius:999px;background:var(--wash);color:var(--teal-dark);vertical-align:middle}
+  .pill.new{background:#FFF1E6;color:var(--orange)}
+  footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--ink-3);font-size:12px;text-align:center}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 16px;border-radius:8px;font-size:13.5px;opacity:0;transition:opacity .2s;pointer-events:none} .toast.show{opacity:1}
+  @media print{header,.crumbs,.btns,footer,.noprint{display:none!important} body{background:#fff} .panel{border:1px solid #ccc}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eyebrow">Harwin AI Insider</div>
+  <h1>Prompt builder</h1>
+  <div class="tagline">Fill in a few boxes. Get a clear, well-structured prompt to copy into any approved tool.</div>
+  <div class="crumbs"><a href="../tools/">All tools</a> &middot; <a href="../library/">AI Library</a> &middot; <a href="../can-i-paste/">Can I paste this?</a> &middot; <a href="../issues/">All issues</a></div>
+</div></header>
+<main><div class="wrap">
+
+<div class="panel">
+  <label class="f" style="margin-top:0">1 · What do you want?</label><input type="text" id="task" placeholder="e.g. a reply to a supplier asking for a revised delivery date">
+  <label class="f">2 · Who is it for?</label><input type="text" id="aud" placeholder="e.g. a purchasing manager at a supplier">
+  <label class="f">3 · Background the AI needs <small>(optional, no names or prices)</small></label><textarea id="ctx" style="min-height:80px" placeholder="e.g. PO is 10 days late, second time this quarter"></textarea>
+  <div class="row">
+    <div><label class="f">4 · Format</label><select id="fmt"><option value="">Let it decide</option><option>a short email</option><option>5 bullet points</option><option>a one-page summary</option><option>a table</option><option>step-by-step instructions</option><option>an Excel formula with an explanation</option></select></div>
+    <div><label class="f">Tone</label><select id="tone"><option value="">Neutral</option><option>polite but direct</option><option>friendly</option><option>formal</option><option>plain English for a non-specialist</option></select></div>
+    <div><label class="f">Length</label><select id="len"><option value="">Any</option><option>under 100 words</option><option>under 200 words</option><option>one page maximum</option></select></div>
+  </div>
+  <label class="f">5 · Rules</label>
+  <label style="display:block;margin:4px 0"><input type="checkbox" id="r1" checked> Don't invent figures, names or dates</label>
+  <label style="display:block;margin:4px 0"><input type="checkbox" id="r2" checked> If something's missing, write [NEEDED] instead of guessing</label>
+  <label style="display:block;margin:4px 0"><input type="checkbox" id="r3"> List your assumptions first and wait for me to confirm</label>
+  <label style="display:block;margin:4px 0"><input type="checkbox" id="r4"> Use British English</label>
+</div>
+<div class="panel"><div class="step">Your prompt</div><div class="out" id="out"></div>
+<div class="btns"><button class="btn teal" onclick="copyText('out')">Copy prompt</button></div></div>
+
+<p class="fine">🔒 This page runs entirely in your browser. Nothing you type or pick here is sent, saved or seen by anyone.</p>
+</div></main>
+<footer><div class="wrap">Harwin AI Insider &middot; Internal use only &middot; Curated by Nav, Data &amp; Analytics</div></footer>
+<div class="toast" id="toast"></div>
+<script>
+function copyText(id){var t=document.getElementById(id).innerText;navigator.clipboard.writeText(t).then(function(){toast('Copied')});}
+function toast(m){var e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(function(){e.classList.remove('show')},1600);}
+
+function v(id){return document.getElementById(id).value.trim();}
+function build(){
+ var p='I need '+(v('task')||'[WHAT YOU WANT]')+'.';
+ p+=' It is for '+(v('aud')||'[WHO IT IS FOR]')+' at an electronic connector manufacturer.';
+ if(v('ctx')) p+='\n\nBackground:\n'+v('ctx');
+ var f=[]; if(v('fmt'))f.push('Format: '+v('fmt')+'.'); if(v('tone'))f.push('Tone: '+v('tone')+'.'); if(v('len'))f.push('Length: '+v('len')+'.');
+ if(f.length) p+='\n\n'+f.join(' ');
+ var r=[]; if(r1.checked)r.push('Do not invent figures, names or dates.'); if(r2.checked)r.push('If you need something I have not given you, write [NEEDED] in its place.'); if(r4.checked)r.push('Use British English.');
+ if(r.length) p+='\n\nRules: '+r.join(' ');
+ if(r3.checked) p+='\n\nBefore you write anything, list the assumptions you are making in 3 to 5 bullet points, then stop and wait for me to confirm.';
+ document.getElementById('out').textContent=p;
+}
+document.querySelectorAll('input,select,textarea').forEach(function(e){e.addEventListener('input',build);e.addEventListener('change',build);});
+build();
+</script>
+</body></html>
