@@ -4,13 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Prompt builder | Harwin AI Insider</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{--navy:#0F2B4C;--teal:#00A5B5;--teal-dark:#008796;--cyan:#00C4D6;--orange:#E87722;--bg:#F4F6F8;--card:#FFFFFF;--line:#E2E8F0;
   --ink:#1F2937;--ink-2:#4B5563;--ink-3:#6B7280;--wash:#E6F7F8;--g-bg:#E7F6EC;--g:#1B7A3D;--a-bg:#FFF6E9;--a:#9A5B00;--r-bg:#FDECEC;--r:#B42318}
-  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "DM Sans","Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+  h1,h2,.q,.step,.btn,.eyebrow{font-family:"Outfit","DM Sans",Arial,sans-serif}
   a{color:var(--teal-dark)} button,select,input,textarea{font:inherit}
   .wrap{max-width:860px;margin:0 auto;padding:0 20px}
-  header{background:var(--navy);color:#fff} header .wrap{padding:26px 20px 24px}
+  header{background:linear-gradient(135deg,#0A1628 0%,#0F2B4C 100%);color:#fff;border-bottom:3px solid var(--teal)} header .wrap{padding:28px 20px 24px}
   .eyebrow{font-size:11px;font-weight:700;letter-spacing:1.8px;color:var(--cyan);text-transform:uppercase}
   h1{margin:6px 0 4px;font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.4px}
   .tagline{color:var(--cyan);font-style:italic;font-size:15px}
@@ -52,6 +55,8 @@
 </div></header>
 <main><div class="wrap">
 
+<div class="panel"><div class="step">Start from a template <span style="text-transform:none;letter-spacing:0;font-weight:400">(or fill it in yourself below)</span></div>
+<div id="presets" style="display:flex;flex-wrap:wrap;gap:8px"></div></div>
 <div class="panel">
   <label class="f" style="margin-top:0">1 · What do you want?</label><input type="text" id="task" placeholder="e.g. a reply to a supplier asking for a revised delivery date">
   <label class="f">2 · Who is it for?</label><input type="text" id="aud" placeholder="e.g. a purchasing manager at a supplier">
@@ -59,7 +64,7 @@
   <div class="row">
     <div><label class="f">4 · Format</label><select id="fmt"><option value="">Let it decide</option><option>a short email</option><option>5 bullet points</option><option>a one-page summary</option><option>a table</option><option>step-by-step instructions</option><option>an Excel formula with an explanation</option></select></div>
     <div><label class="f">Tone</label><select id="tone"><option value="">Neutral</option><option>polite but direct</option><option>friendly</option><option>formal</option><option>plain English for a non-specialist</option></select></div>
-    <div><label class="f">Length</label><select id="len"><option value="">Any</option><option>under 100 words</option><option>under 200 words</option><option>one page maximum</option></select></div>
+    <div><label class="f">Length</label><select id="len"><option value="">Any</option><option>under 100 words</option><option>under 150 words</option><option>under 200 words</option><option>one page maximum</option></select></div>
   </div>
   <label class="f">5 · Rules</label>
   <label style="display:block;margin:4px 0"><input type="checkbox" id="r1" checked> Don't invent figures, names or dates</label>
@@ -72,12 +77,26 @@
 
 <p class="fine">🔒 This page runs entirely in your browser. Nothing you type or pick here is sent, saved or seen by anyone.</p>
 </div></main>
-<footer><div class="wrap">Harwin AI Insider &middot; Internal use only &middot; Curated by Nav, Data &amp; Analytics</div></footer>
+<footer><div class="wrap"><a href="mailto:nsingh@harwin.com?subject=Prompt%20builder%20%E2%80%94%20feedback" style="font-weight:700">💬 Was this useful? Tell Nav</a><br><span style="display:inline-block;margin-top:6px">Harwin AI Insider &middot; Internal use only &middot; Curated by Nav, Data &amp; Analytics</span></div></footer>
 <div class="toast" id="toast"></div>
 <script>
 function copyText(id){var t=document.getElementById(id).innerText;navigator.clipboard.writeText(t).then(function(){toast('Copied')});}
 function toast(m){var e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(function(){e.classList.remove('show')},1600);}
 
+var P={
+ supplier:{l:'📦 Supplier chase email',task:'a polite but firm email asking a supplier for a revised delivery date and the reason for the delay',aud:'a supplier account manager',ctx:'[PO REF] is [N] days late. [ANY HISTORY, NO NAMES OR PRICES]',fmt:'a short email',tone:'polite but direct',len:'under 150 words'},
+ customer:{l:'🤝 Customer reply',task:'a reply to a customer query',aud:'a customer buyer',ctx:'Their question: [PASTE, NAMES REMOVED]. What I can tell them: [FACTS]',fmt:'a short email',tone:'friendly',len:'under 200 words'},
+ summary:{l:'📄 Summarise a document',task:'a summary of the document I will paste below, with any dates, deadlines and decisions needed from me',aud:'me, a [YOUR ROLE]',ctx:'',fmt:'5 bullet points',tone:'plain English for a non-specialist',len:'one page maximum'},
+ excel:{l:'📊 Excel formula',task:'an Excel formula that [WHAT IT SHOULD CALCULATE]',aud:'me, working in Excel',ctx:'Column headings and 3 example rows (made-up values): [PASTE]',fmt:'an Excel formula with an explanation',tone:'',len:''},
+ notes:{l:'📝 Meeting actions',task:'a list of decisions, actions with owners and due dates, and open questions from my meeting notes below',aud:'the meeting attendees',ctx:'[PASTE NOTES]',fmt:'a table',tone:'',len:'one page maximum'},
+ explain:{l:'🧑‍🏫 Explain it simply',task:'a plain-English explanation of the clause or standard below: what it requires us to do and the risk if we ignore it',aud:'a smart non-specialist',ctx:'[PASTE THE CLAUSE]',fmt:'5 bullet points',tone:'plain English for a non-specialist',len:'under 200 words'}
+};
+var MAP={longdoc:'summary',excel:'excel',outlook:'summary',draft:'customer',slides:'summary',research:'explain',notes:'notes',rehearse:'explain',quick:'explain',image:null,diagram:'notes',readimg:'explain',data:'excel'};
+function setSel(id,val){var e=document.getElementById(id);for(var i=0;i<e.options.length;i++){if(e.options[i].text===val||e.options[i].value===val){e.selectedIndex=i;return;}}e.selectedIndex=0;}
+function apply(k){var x=P[k];if(!x)return;document.getElementById('task').value=x.task;document.getElementById('aud').value=x.aud;document.getElementById('ctx').value=x.ctx;setSel('fmt',x.fmt);setSel('tone',x.tone);setSel('len',x.len);
+ document.querySelectorAll('#presets .opt').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k===k?'true':'false');});build();}
+document.getElementById('presets').innerHTML=Object.keys(P).map(function(k){return '<button class="opt" style="width:auto" data-k="'+k+'" aria-pressed="false">'+P[k].l+'</button>';}).join('');
+document.querySelectorAll('#presets .opt').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.k);});});
 function v(id){return document.getElementById(id).value.trim();}
 function build(){
  var p='I need '+(v('task')||'[WHAT YOU WANT]')+'.';
@@ -91,6 +110,7 @@ function build(){
  document.getElementById('out').textContent=p;
 }
 document.querySelectorAll('input,select,textarea').forEach(function(e){e.addEventListener('input',build);e.addEventListener('change',build);});
+var pre=new URLSearchParams(location.search).get('preset'); if(pre){apply(P[pre]?pre:MAP[pre]);}
 build();
 </script>
 </body></html>

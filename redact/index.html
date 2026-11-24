@@ -4,13 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Redaction spot-check | Harwin AI Insider</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{--navy:#0F2B4C;--teal:#00A5B5;--teal-dark:#008796;--cyan:#00C4D6;--orange:#E87722;--bg:#F4F6F8;--card:#FFFFFF;--line:#E2E8F0;
   --ink:#1F2937;--ink-2:#4B5563;--ink-3:#6B7280;--wash:#E6F7F8;--g-bg:#E7F6EC;--g:#1B7A3D;--a-bg:#FFF6E9;--a:#9A5B00;--r-bg:#FDECEC;--r:#B42318}
-  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "DM Sans","Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+  h1,h2,.q,.step,.btn,.eyebrow{font-family:"Outfit","DM Sans",Arial,sans-serif}
   a{color:var(--teal-dark)} button,select,input,textarea{font:inherit}
   .wrap{max-width:860px;margin:0 auto;padding:0 20px}
-  header{background:var(--navy);color:#fff} header .wrap{padding:26px 20px 24px}
+  header{background:linear-gradient(135deg,#0A1628 0%,#0F2B4C 100%);color:#fff;border-bottom:3px solid var(--teal)} header .wrap{padding:28px 20px 24px}
   .eyebrow{font-size:11px;font-weight:700;letter-spacing:1.8px;color:var(--cyan);text-transform:uppercase}
   h1{margin:6px 0 4px;font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.4px}
   .tagline{color:var(--cyan);font-style:italic;font-size:15px}
@@ -55,21 +58,24 @@
 <div class="panel">
   <div class="step">Step 1</div><p class="q">Paste the text you're about to give an AI tool</p>
   <textarea id="src" placeholder="Paste an email, notes, a report extract…"></textarea>
+  <label class="f">Also catch these words <small>(optional: customer, project or supplier names, separated by commas. They stay on your screen.)</small></label>
+  <input type="text" id="own" placeholder="e.g. Acme Aerospace, Project Falcon">
   <div class="btns"><button class="btn" onclick="check()">Check it</button><button class="btn alt" onclick="document.getElementById('src').value='';document.getElementById('res').style.display='none'">Clear</button></div>
 </div>
 <div class="panel" id="res" style="display:none">
+  <div id="ec" style="display:none;background:var(--r-bg);border:2px solid #F3A5A0;border-radius:10px;padding:12px 14px;margin-bottom:14px;color:var(--r)"><b>🔴 Stop: this looks export-related.</b> We spotted <span id="ecw"></span>. Export-controlled information must not go into any AI tool unless IT has specifically approved it. Removing words isn't enough. Check with your manager or IT first.</div>
   <div class="step">Step 2</div><p class="q" id="summary"></p>
   <div id="legend" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px"></div>
   <div class="out" id="marked" style="white-space:pre-wrap;font-family:inherit;font-size:14.5px;background:#fff;border-left-color:var(--orange)"></div>
   <div class="step" style="margin-top:18px">Step 3</div><p class="q" style="font-size:15px">Your text with placeholders, ready to copy</p>
   <div class="out" id="clean"></div>
   <div class="btns"><button class="btn teal" onclick="copyText('clean')">Copy the cleaned text</button></div>
-  <p class="fine"><b>This is a spot-check, not a guarantee.</b> It finds common patterns: emails, phone numbers, prices, postcodes, order and part numbers, and names after greetings. It can't spot a customer name on its own, or know that something is export-controlled. Read it through yourself before pasting. If in doubt, use <a href="../can-i-paste/">Can I paste this?</a></p>
+  <p class="fine"><b>This is a spot-check, not a guarantee.</b> It finds common patterns: emails, phone numbers, prices, postcodes, order and part numbers, and names after greetings. It only catches customer or project names you type into the box above, and the export warning only looks for obvious words. Read it through yourself before pasting. If in doubt, use <a href="../can-i-paste/">Can I paste this?</a></p>
 </div>
 
 <p class="fine">🔒 This page runs entirely in your browser. Nothing you type or pick here is sent, saved or seen by anyone.</p>
 </div></main>
-<footer><div class="wrap">Harwin AI Insider &middot; Internal use only &middot; Curated by Nav, Data &amp; Analytics</div></footer>
+<footer><div class="wrap"><a href="mailto:nsingh@harwin.com?subject=Redaction%20spot-check%20%E2%80%94%20feedback" style="font-weight:700">💬 Was this useful? Tell Nav</a><br><span style="display:inline-block;margin-top:6px">Harwin AI Insider &middot; Internal use only &middot; Curated by Nav, Data &amp; Analytics</span></div></footer>
 <div class="toast" id="toast"></div>
 <script>
 function copyText(id){var t=document.getElementById(id).innerText;navigator.clipboard.writeText(t).then(function(){toast('Copied')});}
@@ -85,8 +91,15 @@ var RULES=[
  {k:'Name after greeting',c:'#B42318',bg:'#FDECEC',ph:'[NAME]',re:/\b(?:Dear|Hi|Hello|Thanks|Regards|Cheers|Mr|Mrs|Ms|Dr)\.?,?\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)/g,group:1}
 ];
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+var EXPORT=/\b(ITAR|EAR99|EAR|export[- ]controll?ed|export licen[cs]e|dual[- ]use|ECCN|USML|controlled goods|military list)\b/gi;
 function check(){
   var t=document.getElementById('src').value; if(!t.trim()){return;}
+  RULES=RULES.filter(function(r){return !r.own;});
+  var own=document.getElementById('own').value.split(',').map(function(x){return x.trim();}).filter(function(x){return x.length>1;});
+  if(own.length) RULES.unshift({k:'Your words',c:'#B42318',bg:'#FDECEC',ph:'[NAME]',re:new RegExp('\\b(?:'+own.map(reEsc).join('|')+')\\b','gi'),own:true});
+  var ex=t.match(EXPORT); var ec=document.getElementById('ec');
+  if(ex){var u=[];ex.forEach(function(w){if(u.indexOf(w.toUpperCase())<0)u.push(w.toUpperCase());});document.getElementById('ecw').textContent='"'+u.join('", "')+'"';ec.style.display='block';} else ec.style.display='none';
   var hits=[];
   RULES.forEach(function(r,ri){r.re.lastIndex=0;var m;while((m=r.re.exec(t))){var s=m.index,v=m[0];if(r.group){var g=m[r.group];s=m.index+m[0].lastIndexOf(g);v=g;}hits.push({s:s,e:s+v.length,r:ri});}});
   hits.sort(function(a,b){return a.s-b.s||b.e-a.e;});
